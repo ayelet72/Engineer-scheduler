@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 //hii
 namespace stage0
 {
-    partial class Program8939
+    partial class Stage0
     {
 
         private static void Main(string[] args)

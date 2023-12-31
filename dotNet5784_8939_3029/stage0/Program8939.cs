@@ -4,7 +4,6 @@
 using System.Text;
 using System.Threading.Tasks;
 
-//hii
 namespace stage0
 {
     partial class Stage0

@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-///hii 
-////
+﻿
 namespace DO;
 /// <summary>
 /// Engineer involved in projects with milestones
@@ -26,7 +20,9 @@ public record Engineer
     bool Active = true
 )
 {
-    public Engineer() : this(0,"","",0) { } //empty ctor for stage 3
+    public Engineer() : this(0,"","",0) { }      //empty ctor for stage 3
+
+
 
     /// <summary>
     /// RegistrationDate - registration date of the current student record

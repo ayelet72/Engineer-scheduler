@@ -12,6 +12,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DalFacade", "DalFacade\DalFacade.csproj", "{26AD42CF-9C28-4845-B710-0CBAB3796277}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DalList", "DalList\DalList.csproj", "{528A26C5-CB95-4732-9640-497139A9D433}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DalTest", "DalTest\DalTest.csproj", "{FA206DD1-E869-4187-9C8B-15D7DCCAFD78}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -26,6 +30,14 @@ Global
 		{26AD42CF-9C28-4845-B710-0CBAB3796277}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{26AD42CF-9C28-4845-B710-0CBAB3796277}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{26AD42CF-9C28-4845-B710-0CBAB3796277}.Release|Any CPU.Build.0 = Release|Any CPU
+		{528A26C5-CB95-4732-9640-497139A9D433}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{528A26C5-CB95-4732-9640-497139A9D433}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{528A26C5-CB95-4732-9640-497139A9D433}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{528A26C5-CB95-4732-9640-497139A9D433}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FA206DD1-E869-4187-9C8B-15D7DCCAFD78}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FA206DD1-E869-4187-9C8B-15D7DCCAFD78}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FA206DD1-E869-4187-9C8B-15D7DCCAFD78}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FA206DD1-E869-4187-9C8B-15D7DCCAFD78}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

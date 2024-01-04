@@ -22,19 +22,19 @@ public record Engineer
 {
     public Engineer() : this(0,"","",0) { }      //empty ctor for stage 3
 
-
+    public int Id { get; set; }
 
     /// <summary>
     /// RegistrationDate - registration date of the current student record
     /// </summary>
     //public Engineer(int id, string email, string name, double cost):this(id,email,name,cost)
-   // {
-        //this.ID = id;
-        //this.EMail = email;
-        //this.Name = name;
-        //this.Cost = cost;
+    // {
+    //this.ID = id;
+    //this.EMail = email;
+    //this.Name = name;
+    //this.Cost = cost;
 
-    
-   // } //get only
+
+    // } //get only
 }
 

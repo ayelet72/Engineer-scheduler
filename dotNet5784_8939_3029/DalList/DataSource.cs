@@ -6,13 +6,21 @@ namespace Dal;
     {
     internal static class Config
     {
-        internal const int startProjectId = 1000;       // ??
-        private static int nextProjectId = startProjectId;
-        internal static int NextProjectId { get => nextProjectId++; }
+        internal const int StartProjectId = 1;
+        private static int nextProjectId = StartProjectId;
+        internal static int NextProjectId { get => NextProjectId++; }
+
+        internal const int StartTaskId = 1;
+        private static int NextTaskId = StartTaskId;
+        internal static int NextTaskId { get => NextTaskId++; }
+
+        internal const int StartTaskId = 1;
+        private static int NextTaskId = StartTaskId;
+        internal static int NextTaskId { get => NextTaskId++; }
     }
     internal static List<DO.Engineer> Engineers { get; } = new();
-        internal static List<DO.Dependency> Dependencies { get; } = new();
-        internal static List<DO.Config> Configs { get; } = new();
+    internal static List<DO.Dependency> Dependencies { get; } = new();
+    internal static List<DO.Config> Configs { get; } = new();
 
 }   
 

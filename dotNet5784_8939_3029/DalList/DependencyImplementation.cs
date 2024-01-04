@@ -7,8 +7,9 @@ using System.Collections.Generic;
 
 public class DependencyImplementation : IDependency
 {
-    public int Creat(Dependency item)
+    public int Create(Dependency item)
     {
+        int id= DataSource.Config.
         throw new NotImplementedException();
     }
 

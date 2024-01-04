@@ -8,18 +8,7 @@ public class EngineerImplementation : IEngineer        //internal
 {
     public int Creat(Engineer item)     // אליעזר?
     {
-        //int newId = DataSource.Config.NextProjectId;
-        //IEngineer objCopy = (IEngineer)obj.Clone();
-        //// Assuming T has a property named "Id"
-        //typeof(IEngineer).GetProperty("Id").SetValue(objCopy, newId);
-
-        //DataSource.Config.NextRunningId++;
-        //DataSource.Config.ObjectsList.Add(objCopy);
-
-        //return newId;
-        ////int newId=
-        //Engineers
-        //throw new NotImplementedException();
+        throw new NotImplementedException();
     }
 
     public void Delete(int id)

@@ -9,27 +9,34 @@ public class DependencyImplementation : IDependency
 {
     public int Create(Dependency item)
     {
-        int id= DataSource.Config.
-        throw new NotImplementedException();
+        int id = DataSource.Config.UpdateDependencyId;
+        DataSource.Dependencies.Add(item with { ID = id });         // adding the item with the updated running key
+        return item.ID;
     }
+
 
     public void Delete(int id)
     {
-        throw new NotImplementedException();
+        if (Read(id) == null)
+            throw new Exception($"Dependency with ID={id} alreadyDeleted");
+        DataSource.Dependencies.Remove(Read(id));
     }
 
     public Dependency? Read(int id)
     {
-        throw new NotImplementedException();
+        return DataSource.Dependencies.Find(item => item.ID == id);
+ 
     }
 
-    public List<Dependency> ReadAll()
+    public List<Dependency?> ReadAll()
     {
-        throw new NotImplementedException();
+        return new List<Dependency?>(DataSource.Dependencies);
+        //throw new NotImplementedException();
     }
 
     public void Update(Dependency item)
     {
-        throw new NotImplementedException();
+        Delete(item.ID);
+        DataSource.Dependencies.Add(item);
     }
 }

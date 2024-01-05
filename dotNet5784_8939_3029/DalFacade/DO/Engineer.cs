@@ -21,9 +21,6 @@ public record Engineer
 )
 {
     public Engineer() : this(0,"","",0) { }      //empty ctor for stage 1
-    public Engineer(int id, string email, string name, EngineerExperience level) : this(id, email, name,0d, level)
-    {
-    }
 
     public int Id { get; set; }
 

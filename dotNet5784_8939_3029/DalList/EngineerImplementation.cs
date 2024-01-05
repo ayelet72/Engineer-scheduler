@@ -8,18 +8,14 @@ public class EngineerImplementation : IEngineer        //internal
 {
     public int Create(Engineer item)     // אליעזר?
     {
-        if(Read(item.ID)!=null)
-             throw new Exception($"Engineer with ID={item.ID} alreadyExist");
+        if (Read(item.ID) != null)
+            throw new Exception($"Engineer with ID={item.ID} alreadyExist");
         DataSource.Engineers.Add(item);
         return item.ID;
     }
 
-    public void Delete(int id)
-    {
-        if (Read(id) == null)
-            throw new Exception($"Engineer with ID={id} alreadyDeleted");
-        DataSource.Engineers.Remove(Read(id));
-    }
+    public void Delete(int id) => throw new Exception("Cannot be deleted");
+    
 
     public Engineer? Read(int id)
     {

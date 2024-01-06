@@ -88,8 +88,8 @@ public static class Initialization
     public static void Do(IEngineer? engineer, ITask? task, IDependency? dependency)
     {
         s_dalEngineer = engineer ?? throw new NullReferenceException("DAL can not be null!");
-        
-        s_dalTask = task?? throw new NullReferenceException("DAL can not be null!");
+
+        s_dalTask = task ?? throw new NullReferenceException("DAL can not be null!");
         s_dalDependency = dependency ?? throw new NullReferenceException("DAL can not be null!");
 
         createEngineers();

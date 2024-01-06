@@ -6,9 +6,9 @@ namespace DalTest
 {
     public class Program
     {
-        private static IEngineer? s_dalEngineer= new EngineerImplementation();           //stage 1
+        private static IEngineer? s_dalEngineer = new EngineerImplementation();           //stage 1
         private static ITask? s_dalTask = new TaskImplementation();                      //stage 1
-        private static IDependency? s_dalDependency= new DependencyImplementation();    //stage 1
+        private static IDependency? s_dalDependency = new DependencyImplementation();    //stage 1
         public static void MainMenu()
         {
             Console.WriteLine("Select a PDS you want to check:");
@@ -30,14 +30,14 @@ namespace DalTest
         }
         public static void AddPDS()
         {
-            
+
 
         }
         private static void Main(string[] args)
         {
             Initialization.Do(s_dalEngineer, s_dalTask, s_dalDependency);
-            int choice;
-           
+            int choice=0;
+
             switch (choice)
             {
                 case 1:
@@ -64,7 +64,7 @@ namespace DalTest
             }
         }
 
-        
+
 
     }
 }

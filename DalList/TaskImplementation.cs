@@ -21,7 +21,7 @@ public class TaskImplementation : ITask
     {
         if (Read(id) == null)
             throw new Exception($"Task with ID={id} alreadyDeleted");
-        DataSource.Taskes.Remove(Read(id));
+        DataSource.Taskes.Remove(Read(id)!);
     }
 
     public Task? Read(int id)
@@ -31,9 +31,10 @@ public class TaskImplementation : ITask
         throw new NotImplementedException();
     }
 
-    public List<Task?> ReadAll()
+    public List<Task> ReadAll()
     {
-        return new List<Task?>(DataSource.Taskes);
+
+        return new List<Task>(DataSource.Taskes);
         //throw new NotImplementedException();
       
     }

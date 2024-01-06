@@ -19,7 +19,7 @@ public class DependencyImplementation : IDependency
     {
         if (Read(id) == null)
             throw new Exception($"Dependency with ID={id} alreadyDeleted");
-        DataSource.Dependencies.Remove(Read(id));
+        DataSource.Dependencies.Remove(Read(id)!);
     }
 
     public Dependency? Read(int id)

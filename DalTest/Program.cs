@@ -6,7 +6,7 @@ using Dal;
 
 namespace DalTest
 {
-    using DO;
+   
 
     public class Program
     {
@@ -210,77 +210,100 @@ namespace DalTest
         //TimeSpan? RequiredEffortTime=null,
         //string? Deliverables=null,
         //string? Remarks=null
-        public static Task InputTaskData()
-        {
-
+        public static DO.Task InputTaskData()
+        { 
             int newIdEngineer = int.Parse(Console.ReadLine()!);
-            string Alias = Console.ReadLine()!;
-            string Description = Console.ReadLine()!;
-            DateTime? dateTime = int.Parse(Console.ReadLine()!);
-            Task task = new DO.Task(newId, newEmail, newName, newCost);
+            string alias = Console.ReadLine()!;
+            string description = Console.ReadLine()!;
+            //DO.EngineerExperience complexity;
+
+            DO.Task task = new DO.Task(0,newIdEngineer,EngineerExperience.Beginner, alias, description,false, DateTime.Now);
             return task;
         }
         public static void AddTask()
         {
+            Console.WriteLine("enter idEngineer, alias, desription of the new Task");
+            Console.WriteLine(s_dalTask!.Create(InputTaskData()!));
 
 
         }
         public static void ReadTask()
         {
-
+            int newId = int.Parse(Console.ReadLine()!);
+            Console.WriteLine(s_dalTask!.Read(newId));
 
         }
         public static void ReadAllTask()
         {
-
+            foreach (DO.Task task in s_dalTask!.ReadAll())
+            {
+                Console.WriteLine(task);
+            }
 
         }
         public static void UpdateTask()
         {
+            Console.WriteLine("enter idEngineer, alias,description of the update task");
+            DO.Task UpdateTask = InputTaskData()!;
+            Console.WriteLine(s_dalTask!.Read(UpdateTask.Id)!);     //printing the previous Task with the same id in the list
+            s_dalTask.Update(UpdateTask);           //updating the Task with the same id in the list and adding the update Task to the end  of list
 
 
         }
         public static void DeleteTask()
         {
 
-
+            Console.WriteLine("enter id of the Task you want to delete");
+            int deleteId = int.Parse(Console.ReadLine()!);
+            s_dalTask!.Delete(deleteId);
         }
 
-
+        //        int ID,
+        //int DependentTask,
+        //int DependsOnTask
         public static Dependency? InputDependencyData()
         {
 
-            int newIdEngineer = int.Parse(Console.ReadLine()!);
-            string newEmail = Console.ReadLine()!;
-            string newName = Console.ReadLine()!;
-            int newCost = int.Parse(Console.ReadLine()!);
-            Dependency dependency = new Dependency(newId, newEmail, newName, newCost);
+            int dependentTask = int.Parse(Console.ReadLine()!);
+            int dependsOnTask = int.Parse(Console.ReadLine()!);
+            Dependency dependency = new Dependency(0,dependentTask, dependsOnTask);
             return dependency;
         }
         public static void AddDependency()
         {
 
-
+            Console.WriteLine("enter id of dependentTask and id of dependsOnTask of the new dependency");
+            Console.WriteLine(s_dalDependency!.Create(InputDependencyData()!));
         }
         public static void ReadDependency()
         {
-
+            int newId = int.Parse(Console.ReadLine()!);
+            Console.WriteLine(s_dalDependency!.Read(newId));
 
         }
         public static void ReadAllDependency()
         {
-
+            foreach (Dependency dependency in s_dalDependency!.ReadAll())       //איך מדפיס ולתקן בהתאם
+            {
+                Console.WriteLine(dependency);
+            }
 
         }
         public static void UpdateDependency()
         {
 
+            Console.WriteLine("enter id dependet task and id depends on task of the update Dependency");
+            Dependency UpdateDependency = InputDependencyData()!;
+            Console.WriteLine(s_dalTask!.Read(UpdateDependency.ID)!);     //printing the previous Dependency with the same id in the list
+            s_dalDependency!.Update(UpdateDependency);           //updating the Dependency with the same id in the list and adding the update Dependency to the end  of list
 
         }
         public static void DeleteDependency()
         {
 
-
+            Console.WriteLine("enter id of the Dependency you want to delete");
+            int deleteId = int.Parse(Console.ReadLine()!);
+            s_dalDependency!.Delete(deleteId);
         }
     }
 }

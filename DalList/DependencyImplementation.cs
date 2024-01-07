@@ -28,9 +28,9 @@ public class DependencyImplementation : IDependency
  
     }
 
-    public List<Dependency?> ReadAll()
+    public List<Dependency> ReadAll()
     {
-        return new List<Dependency?>(DataSource.Dependencies);
+        return new List<Dependency>(DataSource.Dependencies);
         //throw new NotImplementedException();
     }
 

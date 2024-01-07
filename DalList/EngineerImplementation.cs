@@ -14,7 +14,12 @@ public class EngineerImplementation : IEngineer        //internal
         return item.ID;
     }
 
-    public void Delete(int id) => throw new Exception("Cannot be deleted");
+    public void Delete(int id)
+    {
+        if (Read(id) == null)
+            throw new Exception($"Engineer with ID={id} alreadyDeleted");
+        DataSource.Engineers.Remove(Read(id)!);
+    }
     
 
     public Engineer? Read(int id)
@@ -23,9 +28,9 @@ public class EngineerImplementation : IEngineer        //internal
         //throw new NotImplementedException();
     }
 
-    public List<Engineer?> ReadAll()
+    public List<Engineer> ReadAll()
     {
-        return new List<Engineer?>(DataSource.Engineers);
+        return new List<Engineer>(DataSource.Engineers);
         //throw new NotImplementedException();
     }
 

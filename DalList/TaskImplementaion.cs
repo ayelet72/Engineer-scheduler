@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
 namespace Dal;
 using DO;
 using DalApi;
+using System.Collections.Generic;
 
 public class TaskImplementation : ITask
 {
@@ -36,7 +32,7 @@ public class TaskImplementation : ITask
 
         return new List<Task>(DataSource.Taskes);
         //throw new NotImplementedException();
-      
+
     }
 
     public void Update(Task item)

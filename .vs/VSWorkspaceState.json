@@ -1,7 +1,8 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\DalTest"
   ],
-  "SelectedNode": "\\dotNet5784_8939_3029.sln",
+  "SelectedNode": "\\DalTest\\Program.cs",
   "PreviewInSolutionExplorer": false
 }

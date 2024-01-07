@@ -1,8 +1,8 @@
 ﻿using DalApi;
 using DO;
 using Dal;
-using System.Collections.Specialized;
-using System.Reflection.Emit;
+
+
 
 namespace DalTest
 {
@@ -126,7 +126,7 @@ namespace DalTest
 
                     case 2:
                         //Console.WriteLine
-                            AddDependency();
+                        AddDependency();
                         break;
                     case 3:
                         ReadDependency();
@@ -148,11 +148,11 @@ namespace DalTest
 
 
             }
-            
+
         }
         public static Engineer? InputEngineerData()
         {
-            
+
             int newId = int.Parse(Console.ReadLine()!);
             string newEmail = Console.ReadLine()!;
             string newName = Console.ReadLine()!;
@@ -165,16 +165,16 @@ namespace DalTest
             Console.WriteLine("enter id, email,name and cost of the new engineer");
             Console.WriteLine(s_dalEngineer!.Create(InputEngineerData()!));
         }
-        
+
         public static void ReadEngineer()
         {
             int newId = int.Parse(Console.ReadLine()!);
-          Console.WriteLine( s_dalEngineer!.Read(newId));
-            
+            Console.WriteLine(s_dalEngineer!.Read(newId));
+
         }
         public static void ReadAllEngineer()
         {
-            foreach(Engineer engineer in s_dalEngineer!.ReadAll())
+            foreach (Engineer engineer in s_dalEngineer!.ReadAll())
             {
                 Console.WriteLine(engineer);
             }
@@ -191,7 +191,7 @@ namespace DalTest
         public static void DeleteEngineer()
         {
             Console.WriteLine("enter id of the engineer you want to delete");
-            int deleteId= int.Parse(Console.ReadLine()!);
+            int deleteId = int.Parse(Console.ReadLine()!);
             s_dalEngineer!.Delete(deleteId);
         }
 
@@ -208,15 +208,14 @@ namespace DalTest
         //TimeSpan? RequiredEffortTime=null,
         //string? Deliverables=null,
         //string? Remarks=null
-
         public static Task InputTaskData()
         {
-                        
+
             int newIdEngineer = int.Parse(Console.ReadLine()!);
-            string newEmail = Console.ReadLine()!;
-            string newName = Console.ReadLine()!;
-            int newCost = int.Parse(Console.ReadLine()!);
-            Task task = new Task(newId, newEmail, newName, newCost);
+            string Alias = Console.ReadLine()!;
+            string Description = Console.ReadLine()!;
+            DateTime? dateTime = int.Parse(Console.ReadLine()!);
+            DO.Task task = new DO.Task(newId, newEmail, newName, newCost);
             return task;
         }
         public static void AddTask()
@@ -283,6 +282,8 @@ namespace DalTest
         }
     }
 }
+
+
 
 
 

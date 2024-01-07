@@ -6,6 +6,7 @@ using Dal;
 
 namespace DalTest
 {
+    using DO;
     public class Program
     {
         private static IEngineer? s_dalEngineer = new EngineerImplementation();           //stage 1
@@ -215,7 +216,7 @@ namespace DalTest
             string Alias = Console.ReadLine()!;
             string Description = Console.ReadLine()!;
             DateTime? dateTime = int.Parse(Console.ReadLine()!);
-            DO.Task task = new DO.Task(newId, newEmail, newName, newCost);
+            Task task = new DO.Task(newId, newEmail, newName, newCost);
             return task;
         }
         public static void AddTask()

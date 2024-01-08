@@ -1,5 +1,7 @@
 ﻿
 
+using System.Runtime.InteropServices;
+
 namespace DO;
 
     public record  Task
@@ -21,5 +23,9 @@ namespace DO;
 
 )
 {
-    public Task() : this(0, 0, 0) { } //empty ctor
+    public Task() : this(0, 0, 0) 
+    {
+        CreateAtDate = DateTime.Now; 
+    } 
+    
 }

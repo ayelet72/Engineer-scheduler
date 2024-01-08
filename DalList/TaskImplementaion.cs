@@ -17,7 +17,7 @@ using System.Collections.Generic;
         public void Delete(int id)
         {
             if (Read(id) == null)
-                throw new Exception($"Task with ID={id} alreadyDeleted");
+                throw new DalNotExistsException($"Task with ID={id} alreadyDeleted");
             DataSource.Taskes.Remove(Read(id)!);
         }
 
@@ -25,15 +25,14 @@ using System.Collections.Generic;
         {
             return DataSource.Taskes.Find(item => item.Id == id);
 
-            throw new NotImplementedException();
+            
         }
 
         public List<Task> ReadAll()
         {
 
             return new List<Task>(DataSource.Taskes);
-            //throw new NotImplementedException();
-
+           
         }
 
         public void Update(Task item)

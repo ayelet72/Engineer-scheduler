@@ -213,8 +213,10 @@ namespace DalTest
 
         public static void ReadEngineer()
         {
-            int newId = int.Parse(Console.ReadLine()!);
-            Console.WriteLine(s_dalEngineer!.Read(newId));
+            string newId = Console.ReadLine()!;
+            int.TryParse(newId, out int newIdNum);
+        
+            Console.WriteLine(s_dalEngineer!.Read(newIdNum));
 
         }
         public static void ReadAllEngineer()
@@ -284,8 +286,11 @@ namespace DalTest
         }
         public static void ReadTask()
         {
-            int newId = int.Parse(Console.ReadLine()!);
-            Console.WriteLine(s_dalTask!.Read(newId));
+            string newId = Console.ReadLine()!;
+            int.TryParse(newId, out int newIdNum);
+
+            Console.WriteLine(s_dalTask!.Read(newIdNum));
+
 
         }
         public static void ReadAllTask()
@@ -316,10 +321,12 @@ namespace DalTest
         {
 
             Console.WriteLine("enter id of the Task you want to delete");
-            int deleteId = int.Parse(Console.ReadLine()!);
+            string deleteId = Console.ReadLine()!;
+            int.TryParse(deleteId, out int newdeleteId);
+     
             try
             {
-                s_dalTask!.Delete(deleteId);
+                s_dalTask!.Delete(newdeleteId);
             }
             catch(Exception mesg)
             {
@@ -334,10 +341,12 @@ namespace DalTest
         //int DependsOnTask
         public static Dependency? InputDependencyData()
         {
-
-            int dependentTask = int.Parse(Console.ReadLine()!);
-            int dependsOnTask = int.Parse(Console.ReadLine()!);
-            Dependency dependency = new Dependency(0,dependentTask, dependsOnTask);
+            string dependentTask = Console.ReadLine()!;
+            int.TryParse(dependentTask, out int convertDependentTask);
+            string dependsOnTask = Console.ReadLine()!;
+            int.TryParse(dependsOnTask, out int convertDependsOnTask);
+            
+            Dependency dependency = new Dependency(0, convertDependentTask, convertDependsOnTask);
             return dependency;
         }
         public static void AddDependency()
@@ -356,8 +365,10 @@ namespace DalTest
         }
     public static void ReadDependency()
         {
-            int newId = int.Parse(Console.ReadLine()!);
-            Console.WriteLine(s_dalDependency!.Read(newId));
+            string newId = Console.ReadLine()!;
+            int.TryParse(newId, out int newIdNum);
+
+            Console.WriteLine(s_dalDependency!.Read(newIdNum));
 
         }
         public static void ReadAllDependency()
@@ -388,7 +399,9 @@ namespace DalTest
         {
 
             Console.WriteLine("enter id of the Dependency you want to delete");
+
             int deleteId = int.Parse(Console.ReadLine()!);
+
             try
             {
                 s_dalDependency!.Delete(deleteId);

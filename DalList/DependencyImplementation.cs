@@ -18,7 +18,7 @@ public class DependencyImplementation : IDependency
     public void Delete(int id)
     {
         if (Read(id) == null)
-            throw new Exception($"Dependency with ID={id} alreadyDeleted");
+            throw new DalNotExistsException($"Dependency with ID={id} alreadyDeleted");
         DataSource.Dependencies.Remove(Read(id)!);
     }
 

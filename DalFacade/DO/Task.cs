@@ -26,6 +26,10 @@ namespace DO;
     public Task() : this(0, 0, 0) 
     {
         CreateAtDate = DateTime.Now; 
-    } 
-    
+    }
+    public int id { get; set; }
+    public int ENgineerId { get; set;}
+
+
+
 }

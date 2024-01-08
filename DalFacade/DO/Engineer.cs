@@ -23,11 +23,15 @@ public record Engineer
     public Engineer() : this(0,"","",0) { }      //empty ctor for stage 1
 
     public int Id { get; set; }
+    public int Email { get; set; }
+    public int NamE { get; set; }
+    public int CosT { get; set; }
+
 
     /// <summary>
     /// RegistrationDate - registration date of the current student record
     /// </summary>
-    
+
 
 
     // } //get only

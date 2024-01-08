@@ -22,9 +22,32 @@ public static class Initialization
         EngineerExperience[] levelEngineer = { EngineerExperience.Advanced, EngineerExperience.Beginner, EngineerExperience.AdvancedBeginner, EngineerExperience.Expert, EngineerExperience.Intermediate };
 
         for (int i = 0; i < 5; i++)
-        {
+        { 
+            //Beginner,AdvancedBeginner,Intermediate, Advanced ,Expert
+
             int numID = s_rand.Next(100000000, 999999999);
-            int numCost = s_rand.Next(100, 1000);
+            int numCost=0;
+            if (levelEngineer[i]== EngineerExperience.Expert)
+            {
+                 numCost = s_rand.Next(800, 1000);
+            }
+            if (levelEngineer[i] == EngineerExperience.Beginner)
+            {
+                 numCost = s_rand.Next(100, 200);
+            }
+            if (levelEngineer[i] == EngineerExperience.AdvancedBeginner)
+            {
+                 numCost = s_rand.Next(200, 400);
+            }
+
+            if (levelEngineer[i] == EngineerExperience.Advanced)
+            {
+                numCost = s_rand.Next(600, 800);
+            }
+            if (levelEngineer[i] == EngineerExperience.Intermediate)
+            {
+                numCost = s_rand.Next(400, 600);
+            }
             Engineer NewEngineer = new Engineer(numID, emailEngineer[i], nameEngineer[i], numCost, levelEngineer[i]);
             s_dalEngineer!.Create(NewEngineer);
         }

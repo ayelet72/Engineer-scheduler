@@ -24,8 +24,11 @@ public class EngineerImplementation : IEngineer        //internal
 
     public Engineer? Read(int id)
     {
-        return DataSource.Engineers.Find(item => item.ID == id);
-        //throw new NotImplementedException();
+        if (DataSource.Engineers != null)
+            return DataSource.Engineers.Find(item => item.ID == id);
+        else
+            return null;
+
     }
 
     public List<Engineer> ReadAll()

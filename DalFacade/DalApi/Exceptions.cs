@@ -12,7 +12,7 @@ namespace DalApi
         //[Serializable]
         public class DalExistsException : Exception
         {
-            
+
 
             public DalExistsException(string? message) : base(message)
             {
@@ -30,7 +30,7 @@ namespace DalApi
     [Serializable]
     public class DalNotExistsException : Exception
     {
-      
+
 
         public DalNotExistsException(string? message) : base(message)
         {
@@ -44,3 +44,20 @@ namespace DalApi
         {
         }
     }
+    [Serializable]
+    public class DalDeletionImpossible : Exception
+    {
+
+        public DalDeletionImpossible(string? message) : base(message)
+        {
+        }
+
+        public DalDeletionImpossible(string? message, Exception? innerException) : base(message, innerException)
+        {
+        }
+
+        protected DalDeletionImpossible(SerializationInfo info, StreamingContext context) : base(info, context)
+        {
+        }
+    }
+}

@@ -1,4 +1,7 @@
-﻿using DalApi;
+﻿//Hadar Cohen 213953029
+
+
+using DalApi;
 using DO;
 using Dal;
 using System.Collections.Specialized;
@@ -215,7 +218,6 @@ namespace DalTest
         {
             string newId = Console.ReadLine()!;
             int.TryParse(newId, out int newIdNum);
-        
             Console.WriteLine(s_dalEngineer!.Read(newIdNum));
 
         }
@@ -321,24 +323,23 @@ namespace DalTest
         {
 
             Console.WriteLine("enter id of the Task you want to delete");
-            string deleteId = Console.ReadLine()!;
-            int.TryParse(deleteId, out int newdeleteId);
-     
+            string newId = Console.ReadLine()!;
+            int.TryParse(newId, out int newdeleteId);
+
+
             try
             {
                 s_dalTask!.Delete(newdeleteId);
             }
-            catch(Exception mesg)
+            catch (Exception mesg)
             {
                 Console.WriteLine(mesg);
             }
-            
+
 
         }
 
-        //        int ID,
-        //int DependentTask,
-        //int DependsOnTask
+      
         public static Dependency? InputDependencyData()
         {
             string dependentTask = Console.ReadLine()!;
@@ -399,12 +400,14 @@ namespace DalTest
         {
 
             Console.WriteLine("enter id of the Dependency you want to delete");
+            string newId = Console.ReadLine()!;
+            int.TryParse(newId, out int newdeleteId);
 
-            int deleteId = int.Parse(Console.ReadLine()!);
+           
 
             try
             {
-                s_dalDependency!.Delete(deleteId);
+                s_dalDependency!.Delete(newdeleteId);
             }
             catch(Exception mesg)
             {

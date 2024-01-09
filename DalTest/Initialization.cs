@@ -57,34 +57,31 @@ public static class Initialization
     {
 
 
-        string[] Alias = {  "#Task1", "#Task2", "#Task3", "#Task4", "#Task5", "#Task6", "#Task7",
-                            "#Task8", "#Task9", "#Task10", "#Task11", "#Task12", "#Task13", "#Task14", "#Task15",
-                            "#Task16", "#Task17", "#Task18", "#Task19", "#Task20" };
-
-        string[] Description = {"User Registration and Authentication", "Expense Entry Form",
+        string[] description = {"User Registration and Authentication", "Expense Entry Form",
                                 "Expense Categories", "Expense List View", "Data Storage", "Monthly Expense Report",
                                 "Expense Chart", "Budget Setting", "Expense Notifications", "Currency Localization",
                                 "Export Data", "Search and Filtering", "User Profile" , "Expense Editing and Deletion",
                                 "Data Security Measures", "Responsive Design", "Offline Mode", "Feedback and Ratings",
                                 "Expense Analytics", "Testing and Bug Fixes" };
 
-        EngineerExperience[] LevelComplexity = {EngineerExperience.Advanced, EngineerExperience.Beginner,
-                                                EngineerExperience.AdvancedBeginner,EngineerExperience.Advanced,
-                                                EngineerExperience.Expert, EngineerExperience.Intermediate,
-                                                EngineerExperience.Expert,EngineerExperience.Beginner,
-                                                EngineerExperience.Intermediate,EngineerExperience.AdvancedBeginner,
-                                                EngineerExperience.Advanced,  EngineerExperience.Expert,
-                                                EngineerExperience.Intermediate,EngineerExperience.Advanced,
-                                                EngineerExperience.Beginner,EngineerExperience.Expert,
-                                                EngineerExperience.Intermediate, EngineerExperience.AdvancedBeginner,
-                                                EngineerExperience.Advanced, EngineerExperience.AdvancedBeginner };
-
+        EngineerExperience experience;
+        DateTime dateTime;
 
         for (int i = 0; i < 20; i++)
         {
-            DateTime dateTime = DateTime.Now.AddDays(-s_rand.Next(60) - 20);        //יש התנגשות ביו שלב המשימה לבין התאריך. זה תקין?
-            Task NewTask = new Task(0, 0, LevelComplexity[i], Alias[i], Description[i], false, dateTime);
-            s_dalTask!.Create(NewTask);
+             dateTime = DateTime.Now.AddDays(-s_rand.Next(60) - 20);
+            experience = (EngineerExperience)s_rand.Next(5);
+            s_dalTask!.Create(new Task(
+                Id:0,
+                EngineerId:0,
+                Complexity: experience,
+                Alias: $"Task #{i}",
+                Description: description[i],
+                CreateAtDate: dateTime
+                ));
+     
+
+
         }
     }
     private static void createDependcies()

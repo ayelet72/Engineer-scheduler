@@ -10,15 +10,14 @@ using System.Collections.Generic;
         public int Create(Task item)
         {
             int id = DataSource.Config.UpdateTaskId;
-            DataSource.Taskes.Add(item with { Id = id });         // adding the item with the updated running key
+            DataSource.Taskes.Add(item with { Id = id, CreateAtDate=item.CreateAtDate });         // adding the item with the updated running key
             return item.Id;
         }
 
         public void Delete(int id)
         {
-            if (Read(id) == null)
-                throw new DalNotExistsException($"Task with ID={id} alreadyDeleted");
-            DataSource.Taskes.Remove(Read(id)!);
+                throw new DalDeletionImpossible($"Impossible to delete");
+            
         }
 
         public Task? Read(int id)
@@ -38,7 +37,8 @@ using System.Collections.Generic;
         public void Update(Task item)
         {
 
-            Delete(item.Id);
+        if (DataSource.Taskes.RemoveAll(i => i.Id == item.Id) == 0)
+            throw new DalNotExistsException($"Task with ID={item.Id} doesn't exsit");
             DataSource.Taskes.Add(item);
         }
     }

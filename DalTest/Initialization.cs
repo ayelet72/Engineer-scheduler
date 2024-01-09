@@ -5,25 +5,22 @@ using DO;
 using DalApi;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
-public static class Initialization
+public static class Initialization //Building the lists of items for Stage 1:
 {
     private static IEngineer? s_dalEngineer;            //stage 1
     private static IDependency? s_dalDependency;        //stage 1
     private static ITask? s_dalTask;                    //stage 1
 
-    private static readonly Random s_rand = new();
+    private static readonly Random s_rand = new(); 
 
     private static void createEngineers()
     {
-
-
         string[] nameEngineer = { "Mosh", "Dan", "Jake", "Gil", "Noa" };
         string[] emailEngineer = { "mosh@jct.com", "dan@jct.com", "jake@jct.com", "gil@jct.com", "noa@jct.com" };
         EngineerExperience[] levelEngineer = { EngineerExperience.Advanced, EngineerExperience.Beginner, EngineerExperience.AdvancedBeginner, EngineerExperience.Expert, EngineerExperience.Intermediate };
 
         for (int i = 0; i < 5; i++)
         { 
-            //Beginner,AdvancedBeginner,Intermediate, Advanced ,Expert
 
             int numID = s_rand.Next(100000000, 999999999);
             int numCost=0;
@@ -56,7 +53,6 @@ public static class Initialization
     private static void createTaskes()
     {
 
-
         string[] description = {"User Registration and Authentication", "Expense Entry Form",
                                 "Expense Categories", "Expense List View", "Data Storage", "Monthly Expense Report",
                                 "Expense Chart", "Budget Setting", "Expense Notifications", "Currency Localization",
@@ -84,7 +80,7 @@ public static class Initialization
 
         }
     }
-    private static void createDependcies()
+    private static void createDependcies() 
     {
         Tuple<int, int>[] pairsArray = new Tuple<int, int>[]
         {

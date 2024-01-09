@@ -23,7 +23,7 @@ namespace DO;
 
 )
 {
-    public Task() : this(0, 0, 0) 
+    public Task() : this(0, 0, 0) //empty ctor for stage 1
     {
         CreateAtDate = DateTime.Now; 
     }

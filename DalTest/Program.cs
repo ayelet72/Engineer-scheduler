@@ -10,8 +10,6 @@ using System.Collections.Specialized;
 
 namespace DalTest
 {
-   
-
     public class Program
     {
         private static IEngineer? s_dalEngineer = new EngineerImplementation();           //stage 1
@@ -27,7 +25,7 @@ namespace DalTest
                 int choice;
                 MainMenu();
 
-                do
+                do  //choos the Item you want to work with:
                 {
                     choice = int.Parse(Console.ReadLine()!);
                     switch (choice)
@@ -60,15 +58,8 @@ namespace DalTest
                 Console.WriteLine(mesg);
             }
           
-                
-
-
-                
-                
-            
-           
         }
-        public static void MainMenu()
+        public static void MainMenu() //choosing item
         {
             Console.WriteLine("Select a PDS you want to check:");
             Console.WriteLine("0. Exit main menu");
@@ -77,7 +68,7 @@ namespace DalTest
             Console.WriteLine("3. Dependency");
 
         }
-        public static void SubMenu(string pds)
+        public static void SubMenu(string pds) // choosing the function you want to activate on the chosen item.
         {
             Console.WriteLine("1. Exit main menu");
             Console.WriteLine("2. Add new item");
@@ -85,7 +76,7 @@ namespace DalTest
             Console.WriteLine("4. ReadAll items");
             Console.WriteLine("5. Update item");
             Console.WriteLine("6. Delete item");
-            if (pds == "Engineer")
+            if (pds == "Engineer") 
             {
                 int choice;
                 do
@@ -119,7 +110,6 @@ namespace DalTest
                 } while (choice != 1) ;
                 
             }
-
 
 
             else if (pds == "Task")
@@ -184,7 +174,8 @@ namespace DalTest
             }
 
         }
-        public static Engineer? InputEngineerData()
+        public static Engineer? InputEngineerData() 
+            //input function -> to receive all Engineer parameters 
         {
             
             string newId = Console.ReadLine()!;
@@ -199,7 +190,7 @@ namespace DalTest
             Engineer engineer = new Engineer(newIdNum, newEmail, newName, newCostNum, selectedLevel);
             return engineer;
         }
-        public static void AddEngineer()
+        public static void AddEngineer() //add item
         {
             Console.WriteLine("enter id, email,name and cost of the new engineer");
             try
@@ -214,7 +205,7 @@ namespace DalTest
 
         }
 
-        public static void ReadEngineer()
+        public static void ReadEngineer() //search item 
         {
             string newId = Console.ReadLine()!;
             int.TryParse(newId, out int newIdNum);
@@ -229,7 +220,7 @@ namespace DalTest
             }
 
         }
-        public static void UpdateEngineer()
+        public static void UpdateEngineer() // update item, and printing the data befor updating 
         {
             Console.WriteLine("enter id, email,name and cost of the update engineer");
             Engineer UpdateEngineer = InputEngineerData()!;
@@ -243,7 +234,7 @@ namespace DalTest
                 Console.WriteLine(mesg);
             }
         }
-        public static void DeleteEngineer()
+        public static void DeleteEngineer()     // delete item
         {
             Console.WriteLine("enter id of the engineer you want to delete");
             int deleteId = int.Parse(Console.ReadLine()!);
@@ -260,6 +251,7 @@ namespace DalTest
 
     
         public static DO.Task InputTaskData()
+           // input function -> to receive all Task parameters 
         { 
             int newIdEngineer = int.Parse(Console.ReadLine()!);
             string alias = Console.ReadLine()!;
@@ -271,7 +263,7 @@ namespace DalTest
             DO.Task task = new DO.Task(0,newIdEngineer, selectedLevelCom, alias, description,false, DateTime.Now);
             return task;
         }
-        public static void AddTask()
+        public static void AddTask() //add item
         {
             Console.WriteLine("enter idEngineer, alias, desription of the new Task");
             try
@@ -286,7 +278,7 @@ namespace DalTest
 
 
         }
-        public static void ReadTask()
+        public static void ReadTask()  //search item 
         {
             string newId = Console.ReadLine()!;
             int.TryParse(newId, out int newIdNum);
@@ -303,7 +295,7 @@ namespace DalTest
             }
 
         }
-        public static void UpdateTask()
+        public static void UpdateTask()  //update item, and printing the data befor updating
         {
             Console.WriteLine("enter idEngineer, alias,description of the update task");
             DO.Task UpdateTask = InputTaskData()!;
@@ -319,13 +311,12 @@ namespace DalTest
             }
             
         }
-        public static void DeleteTask()
+        public static void DeleteTask() //delete item 
         {
 
             Console.WriteLine("enter id of the Task you want to delete");
             string newId = Console.ReadLine()!;
             int.TryParse(newId, out int newdeleteId);
-
 
             try
             {
@@ -335,12 +326,11 @@ namespace DalTest
             {
                 Console.WriteLine(mesg);
             }
-
-
         }
 
       
         public static Dependency? InputDependencyData()
+             //     input function -> to receive all Engineer parameters 
         {
             string dependentTask = Console.ReadLine()!;
             int.TryParse(dependentTask, out int convertDependentTask);
@@ -350,7 +340,7 @@ namespace DalTest
             Dependency dependency = new Dependency(0, convertDependentTask, convertDependsOnTask);
             return dependency;
         }
-        public static void AddDependency()
+        public static void AddDependency() //add item
         {
 
             Console.WriteLine("enter id of dependentTask and id of dependsOnTask of the new dependency");
@@ -364,7 +354,7 @@ namespace DalTest
                 Console.WriteLine(mesg);
             }
         }
-    public static void ReadDependency()
+        public static void ReadDependency() //search item
         {
             string newId = Console.ReadLine()!;
             int.TryParse(newId, out int newIdNum);
@@ -372,7 +362,7 @@ namespace DalTest
             Console.WriteLine(s_dalDependency!.Read(newIdNum));
 
         }
-        public static void ReadAllDependency()
+        public static void ReadAllDependency() 
         {
             foreach (Dependency dependency in s_dalDependency!.ReadAll())       //איך מדפיס ולתקן בהתאם
             {
@@ -380,7 +370,7 @@ namespace DalTest
             }
 
         }
-        public static void UpdateDependency()
+        public static void UpdateDependency() //update item, and printing the data befor updating
         {
 
             Console.WriteLine("enter id dependet task and id depends on task of the update Dependency");
@@ -396,7 +386,7 @@ namespace DalTest
                 Console.WriteLine(mesg);
             }
         }
-        public static void DeleteDependency()
+        public static void DeleteDependency()//delete item
         {
 
             Console.WriteLine("enter id of the Dependency you want to delete");

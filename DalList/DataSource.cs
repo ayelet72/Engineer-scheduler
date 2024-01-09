@@ -1,7 +1,7 @@
 ﻿
 namespace Dal;
 
-// במה startProjectid מאותחל
+
     internal static class DataSource
     {
     internal static class Config

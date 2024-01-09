@@ -14,7 +14,7 @@ int DependsOnTask
 )
 
 {
-    public Dependency() : this(0,0,0) { }       //empty ctor for stage 3
+    public Dependency() : this(0,0,0) { }       //empty ctor for stage 1
     public int Id { get; set; }
     public int DEpendentTask { get; set;}
     public int DEpendsOnTask { get;set;}

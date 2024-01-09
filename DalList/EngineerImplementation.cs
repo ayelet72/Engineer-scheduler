@@ -5,9 +5,10 @@ using System.Collections.Generic;
 using DalApi;
 using static DalApi.Exceptions;
 
-public class EngineerImplementation : IEngineer        //internal
+public class EngineerImplementation : IEngineer
+//Building Engineer CRUD methods:for stage 1:
 {
-    public int Create(Engineer item)     // אליעזר?
+    public int Create(Engineer item)     
     {
         if (Read(item.ID) != null)
             throw new DalExistsException($"Engineer with ID={item.ID} alreadyExist");

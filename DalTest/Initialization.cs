@@ -5,7 +5,7 @@ using DO;
 using DalApi;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
-public static class Initialization //Building the lists of items for Stage 1:
+public static class Initialization //Building the lists of items for Stage 1: 
 {
     private static IEngineer? s_dalEngineer;            //stage 1
     private static IDependency? s_dalDependency;        //stage 1

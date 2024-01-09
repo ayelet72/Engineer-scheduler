@@ -365,7 +365,7 @@ namespace DalTest
         }
         public static void ReadAllDependency() 
         {
-            foreach (Dependency dependency in s_dalDependency!.ReadAll())       //איך מדפיס ולתקן בהתאם
+            foreach (Dependency dependency in s_dalDependency!.ReadAll())      
             {
                 Console.WriteLine(dependency);
             }

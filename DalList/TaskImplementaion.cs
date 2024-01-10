@@ -4,7 +4,7 @@ using DO;
 using DalApi;
 using System.Collections.Generic;
 
-public class TaskImplementation : ITask
+internal class TaskImplementation : ITask
      //Building Task CRUD methods:for stage 1:
 {
         public int Create(Task item)
@@ -21,14 +21,24 @@ public class TaskImplementation : ITask
 
         public Task? Read(int id)
         {
-            return DataSource.Taskes.Find(item => item.Id == id);
+            //return DataSource.Taskes.Find(item => item.Id == id);             stage1
+            return DataSource.Taskes.FirstOrDefault(item=>item.Id == id);
         }
-
-        public List<Task> ReadAll()
+        public Task? Read(Func<Task, bool> filter)
+        {
+           
+            return DataSource.Taskes.FirstOrDefault(item => filter(item));
+        }
+        public IEnumerable<Task> ReadAll(Func<Task, bool>? filter = null)
         {
 
-            return new List<Task>(DataSource.Taskes);
-           
+        //return new List<Task>(DataSource.Taskes);             //stage1
+        if (filter == null)
+            return DataSource.Taskes.Select(item => item);
+        else
+            return DataSource.Taskes.Where(filter);
+
+
         }
 
         public void Update(Task item)

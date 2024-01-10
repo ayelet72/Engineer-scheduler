@@ -22,10 +22,8 @@ public record Engineer
 {
     public Engineer() : this(0,"","",0) { }      //empty ctor for stage 1
 
-    public int Id { get; set; }
-    public int Email { get; set; }
-    public int NamE { get; set; }
-    public int CosT { get; set; }
+    //public int Id { get; set; }
+
 
 
     /// <summary>

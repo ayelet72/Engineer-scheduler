@@ -7,9 +7,11 @@ using static System.Runtime.InteropServices.JavaScript.JSType;
 
 public static class Initialization //Building the lists of items for Stage 1: 
 {
-    private static IEngineer? s_dalEngineer;            //stage 1
-    private static IDependency? s_dalDependency;        //stage 1
-    private static ITask? s_dalTask;                    //stage 1
+    //private static IEngineer? s_dalEngineer;            //stage 1
+    //private static IDependency? s_dalDependency;        //stage 1
+    //private static ITask? s_dalTask;                    //stage 1
+
+    private static IDal? s_dal;                         // stage 2
 
     private static readonly Random s_rand = new(); 
 
@@ -46,7 +48,7 @@ public static class Initialization //Building the lists of items for Stage 1:
                 numCost = s_rand.Next(400, 600);
             }
             Engineer NewEngineer = new Engineer(numID, emailEngineer[i], nameEngineer[i], numCost, levelEngineer[i]);
-            s_dalEngineer!.Create(NewEngineer);
+            s_dal!.Engineer.Create(NewEngineer);
         }
     }
 
@@ -65,9 +67,9 @@ public static class Initialization //Building the lists of items for Stage 1:
 
         for (int i = 0; i < 20; i++)
         {
-             dateTime = DateTime.Now.AddDays(-s_rand.Next(60) - 20);
+            dateTime = DateTime.Now.AddDays(-s_rand.Next(60) - 20);
             experience = (EngineerExperience)s_rand.Next(5);
-            s_dalTask!.Create(new Task(
+            s_dal!.Task.Create(new Task(
                 Id:0,
                 EngineerId:0,
                 Complexity: experience,
@@ -98,20 +100,19 @@ public static class Initialization //Building the lists of items for Stage 1:
         for (int i = 0; i < 40; i++)
         {
             Dependency NewDependency = new Dependency(0, pairsArray[i].Item1, pairsArray[i].Item2); ;
-            s_dalDependency!.Create(NewDependency);
+            s_dal!.Dependency.Create(NewDependency);
         }
     }
-    public static void Do(IEngineer? engineer, ITask? task, IDependency? dependency)
+    public static void Do(IDal? dal )  // stage 2
     {
-        s_dalEngineer = engineer ?? throw new NullReferenceException("DAL can not be null!");
+        //s_dalEngineer = engineer ?? throw new NullReferenceException("DAL can not be null!");
+        //s_dalTask = task ?? throw new NullReferenceException("DAL can not be null!");
+        //s_dalDependency = dependency ?? throw new NullReferenceException("DAL can not be null!");
 
-        s_dalTask = task ?? throw new NullReferenceException("DAL can not be null!");
-        s_dalDependency = dependency ?? throw new NullReferenceException("DAL can not be null!");
-
+        s_dal = dal ?? throw new NullReferenceException("DAL Project can not be null!"); //stage 2
         createEngineers();
         createTaskes();
         createDependcies();
-
 
     }
 }

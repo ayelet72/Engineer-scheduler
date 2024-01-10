@@ -6,7 +6,7 @@ using DalApi;
 using System.Collections.Generic;
 
 
-public class DependencyImplementation : IDependency
+internal class DependencyImplementation : IDependency
     //Building Dependency CRUD methods:for stage 1:
 {
     public int Create(Dependency item)
@@ -19,21 +19,35 @@ public class DependencyImplementation : IDependency
 
     public void Delete(int id)
     {
-        if (Read(id) == null)
-            throw new DalNotExistsException($"Dependency with ID={id} alreadyDeleted");
-        DataSource.Dependencies.Remove(Read(id)!);
+        //if (Read(id) == null)
+        //    throw new DalNotExistsException($"Dependency with ID={id} alreadyDeleted");
+        //DataSource.Dependencies.Remove(Read(id)!);
+
+        var itemToDelete = DataSource.Dependencies.Single(item => item.ID == id);           //stage 2
+        DataSource.Dependencies.Remove(itemToDelete);
     }
 
     public Dependency? Read(int id)
     {
-        return DataSource.Dependencies.Find(item => item.ID == id);
- 
+        // return DataSource.Dependencies.Find(item => item.ID == id);           stage1
+        return DataSource.Dependencies.FirstOrDefault(item => item.Id == id);
+
+    }
+    public Dependency? Read(Func<Dependency, bool> filter)
+    {
+
+        return DataSource.Dependencies.FirstOrDefault(item => filter(item));
     }
 
-    public List<Dependency> ReadAll()
+    public IEnumerable<Dependency> ReadAll(Func<Dependency, bool>? filter = null)
     {
-        return new List<Dependency>(DataSource.Dependencies);
+
+        //return new List<Dependency>(DataSource.Dependencies);
         //throw new NotImplementedException();
+        if (filter == null)
+            return DataSource.Dependencies.Select(item => item);
+        else
+            return DataSource.Dependencies.Where(filter);
     }
 
     public void Update(Dependency item)

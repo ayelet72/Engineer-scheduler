@@ -13,16 +13,17 @@ namespace DalTest
 {
     public class Program
     {
-        private static IEngineer? s_dalEngineer = new EngineerImplementation();           //stage 1
-        private static ITask? s_dalTask = new TaskImplementation();                      //stage 1
-        private static IDependency? s_dalDependency = new DependencyImplementation();    //stage 1
+        //private static IEngineer? s_dalEngineer = new EngineerImplementation();           //stage 1
+        //private static ITask? s_dalTask = new TaskImplementation();                      //stage 1
+        //private static IDependency? s_dalDependency = new DependencyImplementation();    //stage 1
 
-
+        static readonly IDal s_dal = new DalList(); //stage 2
         private static void Main(string[] args)
         {
             try
             {
-                Initialization.Do(s_dalEngineer, s_dalTask, s_dalDependency);
+                //Initialization.Do(s_dalEngineer, s_dalTask, s_dalDependency);           stage 1
+                Initialization.Do(s_dal);                                               //stage 2
                 int choice;
                 MainMenu();
 
@@ -187,16 +188,32 @@ namespace DalTest
             int.TryParse(newCost, out int newCostNum);
             string level= Console.ReadLine()!;
             Enum.TryParse<EngineerExperience>(level, out EngineerExperience selectedLevel);     //Bonus: converter from string to Enum
+            int intValue = Convert.ToInt32(selectedLevel);
+            while (intValue > 4 || intValue < 0)
+            {
+                Console.WriteLine("ERROR");
+                level = Console.ReadLine()!;
+                Enum.TryParse<EngineerExperience>(level, out  selectedLevel);     //Bonus: converter from string to Enum
+                intValue = Convert.ToInt32(selectedLevel);
+
+            }
 
             Engineer engineer = new Engineer(newIdNum, newEmail, newName, newCostNum, selectedLevel);
             return engineer;
+
+            //throw new LevelDoesntExist($"Level Engineer doesnt exsit");
+
+            
         }
+
+        
+
         public static void AddEngineer() //add item
         {
             Console.WriteLine("enter id, email,name and cost of the new engineer");
             try
             { 
-                Console.WriteLine(s_dalEngineer!.Create(InputEngineerData()!));
+                Console.WriteLine(s_dal!.Engineer.Create(InputEngineerData()!));
             
             }
             catch (Exception mesg)
@@ -210,12 +227,12 @@ namespace DalTest
         {
             string newId = Console.ReadLine()!;
             int.TryParse(newId, out int newIdNum);
-            Console.WriteLine(s_dalEngineer!.Read(newIdNum));
+            Console.WriteLine(s_dal!.Engineer.Read(newIdNum));
 
         }
         public static void ReadAllEngineer()
         {
-            foreach (Engineer engineer in s_dalEngineer!.ReadAll())
+            foreach (Engineer engineer in s_dal!.Engineer.ReadAll())
             {
                 Console.WriteLine(engineer);
             }
@@ -225,10 +242,10 @@ namespace DalTest
         {
             Console.WriteLine("enter id, email,name and cost of the update engineer");
             Engineer UpdateEngineer = InputEngineerData()!;
-            Console.WriteLine(s_dalEngineer!.Read(UpdateEngineer.ID)!);     //printing the previous engineer with the same id in the list
+            Console.WriteLine(s_dal!.Engineer.Read(UpdateEngineer.ID)!);     //printing the previous engineer with the same id in the list
             try
             {
-                s_dalEngineer.Update(UpdateEngineer);           //updating the engineer with the same id in the list and adding the update enginner to the end  of list
+                s_dal!.Engineer.Update(UpdateEngineer);           //updating the engineer with the same id in the list and adding the update enginner to the end  of list
             }
             catch(Exception mesg)
             {
@@ -241,7 +258,7 @@ namespace DalTest
             int deleteId = int.Parse(Console.ReadLine()!);
             try
             {
-                s_dalEngineer!.Delete(deleteId);
+                s_dal!.Engineer.Delete(deleteId);
             }
             catch(Exception mesg)
             {
@@ -269,7 +286,7 @@ namespace DalTest
             Console.WriteLine("enter idEngineer, alias, desription of the new Task");
             try
             {
-                Console.WriteLine(s_dalTask!.Create(InputTaskData()!));
+                Console.WriteLine(s_dal!.Task.Create(InputTaskData()!));
             }
             catch(Exception mesg)
             {
@@ -284,13 +301,13 @@ namespace DalTest
             string newId = Console.ReadLine()!;
             int.TryParse(newId, out int newIdNum);
 
-            Console.WriteLine(s_dalTask!.Read(newIdNum));
+            Console.WriteLine(s_dal!.Task.Read(newIdNum));
 
 
         }
         public static void ReadAllTask()
         {
-            foreach (DO.Task task in s_dalTask!.ReadAll())
+            foreach (DO.Task task in s_dal!.Task.ReadAll())
             {
                 Console.WriteLine(task);
             }
@@ -300,10 +317,10 @@ namespace DalTest
         {
             Console.WriteLine("enter idEngineer, alias,description of the update task");
             DO.Task UpdateTask = InputTaskData()!;
-            Console.WriteLine(s_dalTask!.Read(UpdateTask.Id)!);     //printing the previous Task with the same id in the list
+            Console.WriteLine(s_dal!.Task.Read(UpdateTask.Id)!);     //printing the previous Task with the same id in the list
             try
             {
-                s_dalTask.Update(UpdateTask);           //updating the Task with the same id in the list and adding the update Task to the end  of list
+                s_dal!.Task.Update(UpdateTask);           //updating the Task with the same id in the list and adding the update Task to the end  of list
 
             }
             catch (Exception mesg)
@@ -321,7 +338,7 @@ namespace DalTest
 
             try
             {
-                s_dalTask!.Delete(newdeleteId);
+                s_dal!.Task.Delete(newdeleteId);
             }
             catch (Exception mesg)
             {
@@ -347,7 +364,7 @@ namespace DalTest
             Console.WriteLine("enter id of dependentTask and id of dependsOnTask of the new dependency");
             try
             {
-                Console.WriteLine(s_dalDependency!.Create(InputDependencyData()!));
+                Console.WriteLine(s_dal!.Dependency.Create(InputDependencyData()!));
             }
 
             catch (Exception mesg)
@@ -360,12 +377,12 @@ namespace DalTest
             string newId = Console.ReadLine()!;
             int.TryParse(newId, out int newIdNum);
 
-            Console.WriteLine(s_dalDependency!.Read(newIdNum));
+            Console.WriteLine(s_dal!.Dependency.Read(newIdNum));
 
         }
         public static void ReadAllDependency() 
         {
-            foreach (Dependency dependency in s_dalDependency!.ReadAll())      
+            foreach (Dependency dependency in s_dal!.Dependency.ReadAll())      
             {
                 Console.WriteLine(dependency);
             }
@@ -376,10 +393,10 @@ namespace DalTest
 
             Console.WriteLine("enter id dependet task and id depends on task of the update Dependency");
             Dependency UpdateDependency = InputDependencyData()!;
-            Console.WriteLine(s_dalTask!.Read(UpdateDependency.ID)!);     //printing the previous Dependency with the same id in the list
+            Console.WriteLine(s_dal!.Task.Read(UpdateDependency.ID)!);     //printing the previous Dependency with the same id in the list
             try
             {
-                s_dalDependency!.Update(UpdateDependency);           //updating the Dependency with the same id in the list and adding the update Dependency to the end  of list
+                s_dal!.Dependency.Update(UpdateDependency);           //updating the Dependency with the same id in the list and adding the update Dependency to the end  of list
             }
 
             catch (Exception mesg)
@@ -398,7 +415,7 @@ namespace DalTest
 
             try
             {
-                s_dalDependency!.Delete(newdeleteId);
+                s_dal!.Dependency.Delete(newdeleteId);
             }
             catch(Exception mesg)
             {

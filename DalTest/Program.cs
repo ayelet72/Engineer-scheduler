@@ -2,6 +2,10 @@
 //Ayelet Hashachar Abayev 323098939
 
 
+
+//להמשיך לשים לב למחלקת ולבנאי של המשימות
+
+
 using DalApi;
 using DO;
 using Dal;
@@ -283,7 +287,7 @@ namespace DalTest
         }
         public static void AddTask() //add item
         {
-            Console.WriteLine("enter idEngineer, alias, desription of the new Task");
+            Console.WriteLine("enter idEngineer, alias, description and level complexity of the new Task");
             try
             {
                 Console.WriteLine(s_dal!.Task.Create(InputTaskData()!));

@@ -27,8 +27,7 @@ namespace DO;
     {
         CreateAtDate = DateTime.Now; 
     }
-    public int id { get; set; }
-    public int ENgineerId { get; set;}
+   
 
 
 

@@ -9,10 +9,10 @@ internal class TaskImplementation : ITask
 {
     public int Create(Task item)
     {
-        int id = DataSource.Config.UpdateTaskId;
+        int id = DataSource.Config.NextTaskId;
 
         // adding the item with the updated running key
-        DataSource.Taskes.Add(item with { Id = id, CreateAtDate = item.CreateAtDate });
+        DataSource.Tasks.Add(item with { Id = id, CreateAtDate = item.CreateAtDate });
 
         return id;
     }
@@ -22,31 +22,31 @@ internal class TaskImplementation : ITask
         if (Read(id) == null)
             throw new DalNotExistsException($"Task with ID={id} doesn't exsit");
 
-        DataSource.Taskes.RemoveAll(x => x.Id == id);
+        DataSource.Tasks.RemoveAll(x => x.Id == id);
     }
 
     public Task? Read(int id)
     {
-        //return DataSource.Taskes.Find(item => item.Id == id);             stage1
-        return DataSource.Taskes.FirstOrDefault(item => item.Id == id);
+        //return DataSource.Tasks.Find(item => item.Id == id);             stage1
+        return DataSource.Tasks.FirstOrDefault(item => item.Id == id);
     }
     public Task? Read(Func<Task, bool> filter)
     {
-        return DataSource.Taskes.FirstOrDefault(item => filter(item));
+        return DataSource.Tasks.FirstOrDefault(item => filter(item));
     }
     public IEnumerable<Task> ReadAll(Func<Task, bool>? filter = null)
     {
         IEnumerable<Task> result;
-        //return new List<Task>(DataSource.Taskes);             //stage1
+        //return new List<Task>(DataSource.Tasks);             //stage1
 
-        //DataSource.Taskes.Select(item => item);
+        //DataSource.Tasks.Select(item => item);
         if (filter == null)
-            result = from item in DataSource.Taskes
+            result = from item in DataSource.Tasks
                      select item;
 
-        //DataSource.Taskes.Where(filter);
+        //DataSource.Tasks.Where(filter);
         else
-            result = from item in DataSource.Taskes
+            result = from item in DataSource.Tasks
                      where filter(item)
                      select item;
 
@@ -60,7 +60,7 @@ internal class TaskImplementation : ITask
             throw new DalNotExistsException($"Task with ID={item.Id} doesn't exsit");
 
 
-        DataSource.Taskes.RemoveAll(i => i.Id == item.Id);
-        DataSource.Taskes.Add(item);
+        DataSource.Tasks.RemoveAll(i => i.Id == item.Id);
+        DataSource.Tasks.Add(item);
     }
 }

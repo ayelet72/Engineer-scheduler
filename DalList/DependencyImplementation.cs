@@ -11,7 +11,7 @@ internal class DependencyImplementation : IDependency
 {
     public int Create(Dependency item)
     {
-        int id = DataSource.Config.UpdateDependencyId;
+        int id = DataSource.Config.NextDependencyId;
         DataSource.Dependencies.Add(item with { ID = id });     // adding the item with the updated running key
         return item.ID;
     }

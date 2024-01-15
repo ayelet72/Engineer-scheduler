@@ -74,5 +74,23 @@ namespace DO;
         {
         }
     }
+
+    [Serializable]
+    public class DalXMLFileLoadCreateException : Exception
+    {
+       
+
+        public DalXMLFileLoadCreateException(string? message) : base(message)
+        {
+        }
+
+        public DalXMLFileLoadCreateException(string? message, Exception? innerException) : base(message, innerException)
+        {
+        }
+
+        protected DalXMLFileLoadCreateException(SerializationInfo info, StreamingContext context) : base(info, context)
+        {
+        }
+    }
 }
 

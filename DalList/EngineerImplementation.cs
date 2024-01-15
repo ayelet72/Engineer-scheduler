@@ -44,10 +44,22 @@ internal class EngineerImplementation : IEngineer
     public IEnumerable<Engineer> ReadAll(Func<Engineer,bool>? filter=null)
 
     {
+        IEnumerable<Engineer> result;
+        //return new List<Task>(DataSource.Engineers);             //stage1
+
+        //DataSource.Engineers.Select(item => item);
         if (filter == null)
-            return DataSource.Engineers.Select(item => item);
+            result = from item in DataSource.Engineers
+                     select item;
+
+        //DataSource.Engineers.Where(filter);
         else
-            return DataSource.Engineers.Where(filter);
+            result = from item in DataSource.Engineers
+                     where filter(item)
+                     select item;
+
+
+        return result;
 
     }
 

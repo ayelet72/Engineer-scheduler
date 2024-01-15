@@ -42,12 +42,23 @@ internal class DependencyImplementation : IDependency
     public IEnumerable<Dependency> ReadAll(Func<Dependency, bool>? filter = null)
     {
 
-        //return new List<Dependency>(DataSource.Dependencies);
-        //throw new NotImplementedException();
+        IEnumerable<Dependency> result;
+        //return new List<Task>(DataSource.Engineers);             //stage1
+
+        //DataSource.Dependencies.Select(item => item);
         if (filter == null)
-            return DataSource.Dependencies.Select(item => item);
+            result = from item in DataSource.Dependencies
+                     select item;
+
+        //DataSource.Dependencies.Where(filter);
         else
-            return DataSource.Dependencies.Where(filter);
+            result = from item in DataSource.Dependencies
+                     where filter(item)
+                     select item;
+
+
+        return result;
+
     }
 
     public void Update(Dependency item)

@@ -10,6 +10,7 @@ using DalApi;
 using DO;
 using Dal;
 using System.Collections.Specialized;
+using System.Reflection.Emit;
 
 
 
@@ -82,7 +83,7 @@ namespace DalTest
             Console.WriteLine("4. ReadAll items");
             Console.WriteLine("5. Update item");
             Console.WriteLine("6. Delete item");
-            if (pds == "Engineer") 
+            if (pds == "Engineer")
             {
                 int choice;
                 do
@@ -113,68 +114,80 @@ namespace DalTest
                             Console.WriteLine("ERROR");
                             break;
                     }
-                } while (choice != 1) ;
-                
+                } while (choice != 1);
+
             }
 
 
             else if (pds == "Task")
             {
                 int choice;
-                choice = int.Parse(Console.ReadLine()!);
-                switch (choice)
+                do
                 {
+                    choice = int.Parse(Console.ReadLine()!);
+                    switch (choice)
+                    {
 
-                    case 2:
+                        case 2:
 
-                        AddTask();
-                        break;
-                    case 3:
-                        ReadTask();
-                        break;
-                    case 4:
-                        ReadAllTask();
-                        break;
-                    case 5:
-                        UpdateTask();
-                        break;
-                    case 6:
-                        DeleteTask();
-                        break;
-                    default:
-                        Console.WriteLine("exit sub menu");
+                            AddTask();
+                            break;
+                        case 3:
+                            ReadTask();
+                            break;
+                        case 4:
+                            ReadAllTask();
+                            break;
+                        case 5:
+                            UpdateTask();
+                            break;
+                        case 6:
+                            DeleteTask();
+                            break;
+                        case 1:
+                            Console.WriteLine("exit sub menu");
+                            break;
+                        default:
+                            Console.WriteLine("ERROR");
+                            break;
+                    }
 
-                        break;
-                }
+                }while(choice != 1);
             }
             else
             {
                 int choice;
-                choice = int.Parse(Console.ReadLine()!);
-                switch (choice)
+                do
                 {
+                    choice = int.Parse(Console.ReadLine()!);
+                    switch (choice)
+                    {
 
-                    case 2:
+                        case 2:
 
-                        AddDependency();
-                        break;
-                    case 3:
-                        ReadDependency();
-                        break;
-                    case 4:
-                        ReadAllDependency();
-                        break;
-                    case 5:
-                        UpdateDependency();
-                        break;
-                    case 6:
-                        DeleteDependency();
-                        break;
-                    default:
-                        Console.WriteLine("exit sub menu");
+                            AddDependency();
+                            break;
+                        case 3:
+                            ReadDependency();
+                            break;
+                        case 4:
+                            ReadAllDependency();
+                            break;
+                        case 5:
+                            UpdateDependency();
+                            break;
+                        case 6:
+                            DeleteDependency();
+                            break;
+                        case 1:
+                            Console.WriteLine("exit sub menu");
+                            break;
+                        default:
+                            Console.WriteLine("ERROR");
+                            break;
+                    } 
+                } while (choice != 1);
 
-                        break;
-                }
 
 
             }
@@ -280,6 +293,16 @@ namespace DalTest
             string description = Console.ReadLine()!;
             string levelCom = Console.ReadLine()!;
             Enum.TryParse<DO.EngineerExperience>(levelCom, out DO.EngineerExperience selectedLevelCom);
+            int intValue = Convert.ToInt32(selectedLevelCom);
+            while (intValue > 4 || intValue < 0)
+            {
+                Console.WriteLine("ERROR");
+                levelCom = Console.ReadLine()!;
+                Enum.TryParse<EngineerExperience>(levelCom, out selectedLevelCom);     //Bonus: converter from string to Enum
+                intValue = Convert.ToInt32(selectedLevelCom);
+
+            }
+           
 
 
             DO.Task task = new DO.Task(0,newIdEngineer, selectedLevelCom, alias, description,false, DateTime.Now);
@@ -319,7 +342,16 @@ namespace DalTest
         }
         public static void UpdateTask()  //update item, and printing the data befor updating
         {
-            Console.WriteLine("enter idEngineer, alias,description of the update task");
+            Console.WriteLine("enter id");
+            int idInput= int.Parse(Console.ReadLine()!); 
+            if(s_dal!.Task.Read(idInput)==null)
+            {
+
+
+            }
+
+            Console.WriteLine("enter id, idEngineer, alias,description of the update task");
+
             DO.Task UpdateTask = InputTaskData()!;
             Console.WriteLine(s_dal!.Task.Read(UpdateTask.Id)!);     //printing the previous Task with the same id in the list
             try

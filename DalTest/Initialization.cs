@@ -67,7 +67,8 @@ public static class Initialization //Building the lists of items for Stage 1:
 
         for (int i = 0; i < 20; i++)
         {
-            dateTime = DateTime.Now.AddDays(-s_rand.Next(60) - 20);
+
+            dateTime = DateTime.Now.AddDays(-60 + 3*i);
             experience = (EngineerExperience)s_rand.Next(5);
             s_dal!.Task.Create(new Task(
                 Id:0,

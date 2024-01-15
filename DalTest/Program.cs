@@ -29,7 +29,7 @@ namespace DalTest
             try
             {
                 //Initialization.Do(s_dalEngineer, s_dalTask, s_dalDependency);           stage 1
-                Initialization.Do(s_dal);                                               //stage 2
+                                                           //stage 2
                 int choice;
                 MainMenu();
 
@@ -50,6 +50,12 @@ namespace DalTest
                         case 3:
                             string pdsName3 = "Dependency";
                             SubMenu(pdsName3);
+                            break;
+                        case 4:
+                            Console.Write("Would you like to create Initial data? (Y/N)"); //stage 3
+                            string? ans = Console.ReadLine() ?? throw new FormatException("Wrong input"); //stage 3
+                            if (ans == "Y") //stage 3
+                                Initialization.Do(s_dal); //stage 2                              
                             break;
                         case 0:
                             Console.WriteLine("bye");
@@ -74,6 +80,7 @@ namespace DalTest
             Console.WriteLine("1. Engineer");
             Console.WriteLine("2. Task");
             Console.WriteLine("3. Dependency");
+            Console.WriteLine("4. Initialization Data");
 
         }
         public static void SubMenu(string pds) // choosing the function you want to activate on the chosen item.

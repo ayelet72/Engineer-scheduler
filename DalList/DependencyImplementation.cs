@@ -13,7 +13,7 @@ internal class DependencyImplementation : IDependency
     {
         int id = DataSource.Config.NextDependencyId;
         DataSource.Dependencies.Add(item with { ID = id });     // adding the item with the updated running key
-        return item.ID;
+        return id;
     }
 
 
@@ -24,13 +24,15 @@ internal class DependencyImplementation : IDependency
         //DataSource.Dependencies.Remove(Read(id)!);
 
         var itemToDelete = DataSource.Dependencies.Single(item => item.ID == id);           //stage 2
+        if(itemToDelete==null)
+            throw new DalNotExistsException($"Dependency with ID={id} alreadyDeleted");
         DataSource.Dependencies.Remove(itemToDelete);
     }
 
     public Dependency? Read(int id)
     {
         // return DataSource.Dependencies.Find(item => item.ID == id);           stage1
-        return DataSource.Dependencies.FirstOrDefault(item => item.Id == id);
+        return DataSource.Dependencies.FirstOrDefault(item => item.ID == id);
 
     }
     public Dependency? Read(Func<Dependency, bool> filter)

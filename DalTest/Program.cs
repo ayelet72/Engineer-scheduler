@@ -250,6 +250,7 @@ namespace DalTest
 
         public static void ReadEngineer() //search item 
         {
+            Console.WriteLine("Enter item id");
             string newId = Console.ReadLine()!;
             int.TryParse(newId, out int newIdNum);
             Console.WriteLine(s_dal!.Engineer.Read(newIdNum));
@@ -333,6 +334,7 @@ namespace DalTest
         }
         public static void ReadTask()  //search item 
         {
+            Console.WriteLine("Enter item id");
             string newId = Console.ReadLine()!;
             int.TryParse(newId, out int newIdNum);
 
@@ -411,6 +413,8 @@ namespace DalTest
                 Console.WriteLine(s_dal!.Dependency.Create(InputDependencyData()!));
             }
 
+
+
             catch (Exception mesg)
             {
                 Console.WriteLine(mesg);
@@ -418,6 +422,7 @@ namespace DalTest
         }
         public static void ReadDependency() //search item
         {
+            Console.WriteLine("Enter item id");
             string newId = Console.ReadLine()!;
             int.TryParse(newId, out int newIdNum);
 

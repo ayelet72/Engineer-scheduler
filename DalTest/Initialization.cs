@@ -104,13 +104,15 @@ public static class Initialization //Building the lists of items for Stage 1:
             s_dal!.Dependency.Create(NewDependency);
         }
     }
-    public static void Do(IDal? dal )  // stage 2
+    //public static void Do(IDal? dal )  // stage 2
+    public static void Do() //stage 4
     {
         //s_dalEngineer = engineer ?? throw new NullReferenceException("DAL can not be null!");
         //s_dalTask = task ?? throw new NullReferenceException("DAL can not be null!");
         //s_dalDependency = dependency ?? throw new NullReferenceException("DAL can not be null!");
 
-        s_dal = dal ?? throw new NullReferenceException("DAL Project can not be null!"); //stage 2
+        //s_dal = dal ?? throw new NullReferenceException("DAL Project can not be null!"); //stage 2
+        s_dal = DalApi.Factory.Get; //stage 4
         createEngineers();
         createTaskes();
         createDependcies();

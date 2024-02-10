@@ -14,7 +14,46 @@ static class XMLTools
         if (!Directory.Exists(s_xml_dir))
             Directory.CreateDirectory(s_xml_dir);
     }
+    internal static void InitNextId(string configPath, string nextId, string startId)
+    {
+        string filePath = $"{s_xml_dir + configPath}.xml";
+        XElement? configXml;
+        try
+        {
+            configXml = XElement.Load(filePath);
+            string startVal=configXml.Element(startId)!.Value;
+            configXml.Element(nextId)!.SetValue(startVal);
+            configXml.Save(filePath);
+        }
 
+        catch (Exception ex)
+        {
+            throw new DalXMLFileLoadCreateException($"fail to load xml file:{s_xml_dir + configPath},{ex.Message}");
+
+
+
+        }
+    }
+    //internal static void InitNextId(string configPath, string nextId, string startId)
+    //{
+    //    string filePath = $"{s_xml_dir + configPath}.xml";
+    //    XElement? configXml;
+    //    try
+    //    {
+    //        configXml = XElement.Load(filePath);
+    //        string startVal = configXml.Element(startId)!.Value;
+    //        configXml.Element(nextId)!.SetValue(startVal);
+    //        configXml.Save(filePath);
+    //    }
+
+    //    catch (Exception ex)
+    //    {
+    //        throw new DalXMLFileLoadCreateException($"fail to load xml file:{s_xml_dir + configPath},{ex.Message}");
+
+
+
+    //    }
+    //}
     #region Extension Fuctions
     public static T? ToEnumNullable<T>(this XElement element, string name) where T : struct, Enum =>
         Enum.TryParse<T>((string?)element.Element(name), out var result) ? (T?)result : null;
@@ -96,6 +135,34 @@ static class XMLTools
         {
             throw new DalXMLFileLoadCreateException($"fail to load xml file: {filePath}, {ex.Message}");
         }
+    }
+
+    internal static DateTime? GetStartProject(string s_data_config_xml, string elementName)
+    {
+        XElement element = XMLTools.LoadListFromXMLElement(s_data_config_xml);
+        element = element.Element(elementName) ?? throw new Exception();
+        DateTime.TryParse(element.Value.ToString()==""? null: element.Value.ToString(), out  DateTime startProject);
+        return startProject ;
+    }
+
+    internal static void  SetStartProject(string s_data_config_xml,string elementName ,DateTime? StartProject)
+    {
+        XElement element = XMLTools.LoadListFromXMLElement(s_data_config_xml);
+        element.Element("StartProject")!.SetValue(StartProject.ToString());
+        SaveListToXMLElement(element, s_data_config_xml);
+    }
+    internal static void SetEndProject(string s_data_config_xml, string elementName, DateTime? EndProject)
+    {
+        XElement element = XMLTools.LoadListFromXMLElement(s_data_config_xml);
+        element.Element("EndProject")!.SetValue(EndProject.ToString());
+        SaveListToXMLElement(element, s_data_config_xml);
+    }
+    internal static DateTime? GetEndProject(string s_data_config_xml, string elementName)
+    {
+        XElement element = XMLTools.LoadListFromXMLElement(s_data_config_xml);
+        element = element.Element(elementName) ?? throw new Exception();
+        DateTime.TryParse(element.Value.ToString() == "" ? null : element.Value.ToString(), out DateTime endProject);
+        return endProject;
     }
     #endregion
 }

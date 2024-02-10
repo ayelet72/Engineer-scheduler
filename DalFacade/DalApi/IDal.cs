@@ -1,16 +1,16 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+namespace DalApi;
 
-namespace DalApi
+public interface IDal
 {
-    public interface IDal
-    {
-        IEngineer Engineer { get; }
-        ITask Task { get; }
-        IDependency Dependency { get; }
+    //DateTime? StartDate { set; get; }
+    //DateTime? EndDate { set; get; }
 
-    }
+    IEngineer Engineer { get; }
+    ITask Task { get; }
+    IDependency Dependency { get; }
+    DateTime? StartProject { set;get; }
+    DateTime? EndProject { set; get; }
+    
+    void Reset();
 }

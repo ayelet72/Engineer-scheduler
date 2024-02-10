@@ -3,14 +3,36 @@ namespace Dal;
 using DalApi;
 using DO;
 
-    sealed internal class DalList : IDal
+sealed internal class DalList : IDal
+{
+
+    public DateTime? StartProject
     {
-        public static IDal Instance { get; } = new DalList();
-        private DalList() { }
-        public IEngineer Engineer => new EngineerImplementation();    //throw new NotImplementedException(); 
-
-        public ITask Task => new TaskImplementation();//throw new NotImplementedException();
-
-        public IDependency Dependency => new DependencyImplementation();//throw new NotImplementedException();
+        set => DataSource.Config.Startproject = value;
+        get => DataSource.Config.Startproject;
     }
+    public DateTime? EndProject
+    {
+        set => DataSource.Config.EndProject = value;
+        get => DataSource.Config.EndProject;
+    }
+
+    public static IDal Instance { get; } = new DalList();
+    private DalList() { }
+    public IEngineer Engineer => new EngineerImplementation();
+
+    public ITask Task => new TaskImplementation();
+
+    public IDependency Dependency => new DependencyImplementation();
+
+    public void Reset()
+    {
+        DataSource.Dependencies.Clear();
+        DataSource.Tasks.Clear();
+        DataSource.Engineers.Clear();
+
+        DataSource.Config.ResetDependencyID();
+        DataSource.Config.ResetTaskID();
+    }
+}
 

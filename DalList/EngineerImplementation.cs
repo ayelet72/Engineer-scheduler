@@ -3,7 +3,6 @@ namespace Dal;
 using DO;
 using System.Collections.Generic;
 using DalApi;
-using static DO.Exceptions;
 using System.Linq;
 
 internal class EngineerImplementation : IEngineer

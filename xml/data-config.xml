@@ -1,5 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<config>
-  <NextTaskId>61</NextTaskId>
-  <NextDependencyId>120</NextDependencyId>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <InitTaskID>1</InitTaskID>
+  <InitDependencyID>1</InitDependencyID>
+  <NextTaskId>2</NextTaskId>
+  <NextDependencyId>1</NextDependencyId>
+  <EndProject></EndProject>
+  <!--<EndProject xsi:nil="true" />-->
+  <StartProject></StartProject>
+  <!--<StartProject xsi:nil="true" />-->
 </config>

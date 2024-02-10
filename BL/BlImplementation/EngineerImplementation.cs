@@ -2,50 +2,195 @@
 
 using BlApi;
 using BO;
+using System.Reflection;
+using System.Reflection.Emit;
+using System.Xml.Linq;
 
-namespace BlImplementation;
+
 
 internal class EngineerImplementation : IEngineer
 {
     private DalApi.IDal _dal = DalApi.Factory.Get;
-    public void AddEngineer(BO.Engineer engineer)
+    // a function that creates an engineer
+    public int Create(BO.Engineer boEngineer)
     {
-        throw new NotImplementedException();
-    }
+        if (boEngineer.Id > 0 && boEngineer.Name != null&& boEngineer.Email!=null&& boEngineer.Cost>0)
+        {
+            try {
+                    int numId = _dal.Engineer.Create(new DO.Engineer()
+                    {
 
-    public int Create(Engineer boEngineer)
+                        ID = boEngineer.Id,
+                        Name = boEngineer.Name,
+                        EMail = boEngineer.Email,
+                        Level = boEngineer.Level,
+                        Cost = boEngineer.Cost
+                    }
+                    );
+
+                return numId;  
+            }
+            catch (DO.DalExistsException ex)
+            {
+                throw new BO.BlAlreadyExistsException($"Engineer with ID={boEngineer.Id} already exists", ex);
+            }
+            
+        }
+        throw new BO.BlInvalidDataException($"Engineer with ID={boEngineer.Id} invalid");
+
+    }
+    // a function that deletes an engineer
+    public void Delete(int id)
     {
-        DO.Engineer doEngineer = new DO.Engineer
-        (boEngineer.Id, boEngineer.Email!, boEngineer.Name!, boEngineer.Cost, boEngineer.Level);
+        BO.Engineer boEngineer = Read(id);
+        DO.Engineer doEngineer = _dal.Engineer.Read(id)!;
+
+        //Engineer that is active or already finish a task cannot be deleted
+        if (boEngineer.Task != null || doEngineer.Active==true)
+            throw new BO.BlCannotBeDeletedException($"Engineer with ID={boEngineer.Id} cannot be deleted");
+
+        //delete engineer from that data base
         try
         {
-            int id = _dal.Engineer.Create(doEngineer);
-            return id;
+            _dal.Engineer.Delete(id);
         }
-        catch (DO.DalExistsException ex)
+        catch(DO.DalNotExistsException ex)
         {
-            throw new BO.BlAlreadyExistsException($"Student with ID={boStudent.Id} already exists", ex);
+            throw new BlDoesNotExistException($"Engineer with id={id} isn't exsit", ex);
         }
-
+        
     }
-
-    public void DeleteEngineer(int id)
+    // a function that updates the engineer
+    public void Update(BO.Engineer boEngineer)
     {
-        throw new NotImplementedException();
+        if (_dal.Engineer.Read(boEngineer.Id) == null)
+            throw new BO.BlDoesNotExistException($"Engineer with ID={boEngineer.Id} does Not exist");
+
+        if (boEngineer.Name != null && boEngineer.Email != null && boEngineer.Cost > 0 && 
+            (_dal.Engineer.Read(boEngineer.Id)!).Level< boEngineer.Level && (int)boEngineer.Level<5&&
+            _dal.Task.Read(boEngineer.Task!.Id)!=null)        
+        {
+            DO.Task? task = _dal.Task.Read(boEngineer.Task.Id);
+
+            //if there is an update in the Task of the Engineer, update the task only if it haven't done yet
+            try {
+                if (task != null && task.CompleteDate == null)
+                {
+
+                    _dal.Task.Update(task with
+                    {
+                        Alias = (boEngineer.Task).Alias,
+                        EngineerId = boEngineer.Id,
+                        Complexity = boEngineer.Level
+                    }
+                   );
+
+                    // if the manager or the engineer assigned a task for the engineer active=true.
+                    _dal.Engineer.Update(new DO.Engineer()
+                    {
+
+                        ID = boEngineer.Id,
+                        Name = boEngineer.Name,
+                        EMail = boEngineer.Email,
+                        Level = boEngineer.Level,
+                        Cost = boEngineer.Cost,
+                        Active = true
+                    }
+                    );
+                }
+                // if the manager or the engineer didn't assign a task for the engineer keep the original active.
+                _dal.Engineer.Update(new DO.Engineer()
+                {
+
+                    ID = boEngineer.Id,
+                    Name = boEngineer.Name,
+                    EMail = boEngineer.Email,
+                    Level = boEngineer.Level,
+                    Cost = boEngineer.Cost,
+                    Active = _dal.Engineer.Read(boEngineer.Id)!.Active
+                }
+                );
+            }
+            catch (DO.DalNotExistsException ex)
+            {
+                throw new BlDoesNotExistException($"Doesn't exsit", ex);
+            }
+
+
+
+
+        }
+            throw new BO.BlInvalidDataException($"Engineer with ID={boEngineer.Id} invalid");
+
+        
+
+
+    }
+    // a function that returns a BO engineer
+    public BO.Engineer Read(int id)
+    {
+        DO.Engineer? doEngineer = _dal.Engineer.Read(id);
+        if (doEngineer == null)
+            throw new BO.BlDoesNotExistException($"Engineer with ID={id} does Not exist");
+
+        return new BO.Engineer()
+        {
+            Id = id,
+            Name = doEngineer.Name,
+            Email=doEngineer.EMail,
+            Level=doEngineer.Level,
+            Cost=doEngineer.Cost
+        };
+
+    }
+    // a function that returns an IEnumerable engineers
+    public IEnumerable<BO.Engineer> ReadAll(Func<DO.Engineer, bool>? filter = null)
+    {
+        if (filter == null)
+            return (from item in _dal.Engineer.ReadAll()
+                    select new BO.Engineer
+                    {
+                        Id =item.ID,
+                        Name = item.Name,
+                        Email = item.EMail,
+                        Level = item.Level,
+                        Cost = item.Cost,
+                        Task = _dal.Task.ReadAll()
+                                    .Where(item => item.EngineerId == item.Id)
+                                    .Select(item => new BO.TaskInEngineer
+                                    {
+                                        Id = item.Id,
+                                        Alias = item.Alias
+                                    })
+                                    .FirstOrDefault()
+                    });
+
+        //return an IEnumerable<BO.Engineer> filtered by a filter
+        else
+            return (from item in _dal.Engineer.ReadAll()
+                    where filter(item)
+                    select new BO.Engineer
+                    {
+                        Id = item.ID,
+                        Name = item.Name,
+                        Email = item.EMail,
+                        Level = item.Level,
+                        Cost = item.Cost,
+                        Task = _dal.Task.ReadAll()
+                                    .Where(item => item.EngineerId == item.Id)
+                                    .Select(item => new BO.TaskInEngineer
+                                    {
+                                        Id = item.Id,
+                                        Alias = item.Alias
+                                    })
+                                    .FirstOrDefault()
+                    });
     }
 
-    public BO.Engineer? RequestId(int id)
-    {
-        throw new NotImplementedException();
-    }
+      
 
-    public IEnumerable<BO.Engineer> RequestList(List<DO.Engineer> engineers)
-    {
-        throw new NotImplementedException();
-    }
-
-    public void UpdateEngineer(BO.Engineer engineer)
-    {
-        throw new NotImplementedException();
-    }
 }
+
+    
+
+        

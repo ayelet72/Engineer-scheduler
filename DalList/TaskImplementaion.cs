@@ -27,13 +27,13 @@ internal class TaskImplementation : ITask
 
     public Task? Read(int id)
     {
-        //return DataSource.Tasks.Find(item => item.Id == id);             stage1
         return DataSource.Tasks.FirstOrDefault(item => item.Id == id);
     }
     public Task? Read(Func<Task, bool> filter)
     {
         return DataSource.Tasks.FirstOrDefault(item => filter(item));
     }
+
     public IEnumerable<Task> ReadAll(Func<Task, bool>? filter = null)
     {
         IEnumerable<Task> result;

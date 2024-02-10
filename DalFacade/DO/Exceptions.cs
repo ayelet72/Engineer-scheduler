@@ -4,26 +4,26 @@ using System.Runtime.Serialization;
 namespace DO;
 
 
-    public class Exceptions
+    
+    [Serializable]
+    public class DalExistsException : Exception
     {
-        //[Serializable]
-        public class DalExistsException : Exception
+        
+
+        public DalExistsException(string? message) : base(message)
         {
+        }
 
+        public DalExistsException(string? message, Exception? innerException) : base(message, innerException)
+        {
+        }
 
-            public DalExistsException(string? message) : base(message)
-            {
-            }
-
-            public DalExistsException(string? message, Exception? innerException) : base(message, innerException)
-            {
-            }
-
-            protected DalExistsException(SerializationInfo info, StreamingContext context) : base(info, context)
-            {
-            }
+        protected DalExistsException(SerializationInfo info, StreamingContext context) : base(info, context)
+        {
         }
     }
+
+    
     [Serializable]
     public class DalNotExistsException : Exception
     {

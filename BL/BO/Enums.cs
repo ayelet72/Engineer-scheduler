@@ -1,7 +1,5 @@
 ﻿
-
 namespace BO;
-
 
 public enum Status
 {

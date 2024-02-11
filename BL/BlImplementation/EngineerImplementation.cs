@@ -6,14 +6,14 @@ using System.Reflection;
 using System.Reflection.Emit;
 using System.Xml.Linq;
 
-
-
 internal class EngineerImplementation : IEngineer
 {
     private DalApi.IDal _dal = DalApi.Factory.Get;
-    // a function that creates an engineer
+   
     public int Create(BO.Engineer boEngineer)
+    // a function that creates an engineer
     {
+        
         if (boEngineer.Id > 0 && boEngineer.Name != null&& boEngineer.Email!=null&& boEngineer.Cost>0)
         {
             try {
@@ -39,8 +39,9 @@ internal class EngineerImplementation : IEngineer
         throw new BO.BlInvalidDataException($"Engineer with ID={boEngineer.Id} invalid");
 
     }
-    // a function that deletes an engineer
+    // a function that creates an engineer
     public void Delete(int id)
+    // a function that deletes an engineer
     {
         BO.Engineer boEngineer = Read(id);
         DO.Engineer doEngineer = _dal.Engineer.Read(id)!;
@@ -49,7 +50,7 @@ internal class EngineerImplementation : IEngineer
         if (boEngineer.Task != null || doEngineer.Active==true)
             throw new BO.BlCannotBeDeletedException($"Engineer with ID={boEngineer.Id} cannot be deleted");
 
-        //delete engineer from that data base
+        //delete engineer from the data base 
         try
         {
             _dal.Engineer.Delete(id);
@@ -60,8 +61,9 @@ internal class EngineerImplementation : IEngineer
         }
         
     }
-    // a function that updates the engineer
+    // a function that deletes the engineer
     public void Update(BO.Engineer boEngineer)
+    // a function that updates the engineer
     {
         if (_dal.Engineer.Read(boEngineer.Id) == null)
             throw new BO.BlDoesNotExistException($"Engineer with ID={boEngineer.Id} does Not exist");
@@ -126,8 +128,9 @@ internal class EngineerImplementation : IEngineer
 
 
     }
-    // a function that returns a BO engineer
     public BO.Engineer Read(int id)
+    // a function that searches the engineer with that specific id
+
     {
         DO.Engineer? doEngineer = _dal.Engineer.Read(id);
         if (doEngineer == null)
@@ -145,6 +148,8 @@ internal class EngineerImplementation : IEngineer
     }
     // a function that returns an IEnumerable engineers
     public IEnumerable<BO.Engineer> ReadAll(Func<DO.Engineer, bool>? filter = null)
+    // a function that returns IEnumerable list of the engineers
+
     {
         if (filter == null)
             return (from item in _dal.Engineer.ReadAll()
@@ -185,6 +190,7 @@ internal class EngineerImplementation : IEngineer
                                     })
                                     .FirstOrDefault()
                     });
+
     }
 
       

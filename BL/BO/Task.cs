@@ -1,4 +1,4 @@
-﻿//צריך לכתוב תיעוד
+﻿
 namespace BO;
 /// <summary>
 /// id - id of the task (run number)
@@ -19,11 +19,6 @@ namespace BO;
 /// Engineer- the  responsible engineer of a task
 /// Complexity- the level of the responsible engineer
 /// 
-///
-/// 
-/// 
-/// 
-/// 
 /// </summary>
 
 public class Task
@@ -35,7 +30,6 @@ public class Task
     public DateTime? CreateAtDate { get; init; }
     public Status Status { get; set; }
     public List<TaskInList>? Dependencies { get; set; }
-    public MilestoneInTask? Milestone { get; set; }
     public TimeSpan? RequiredEffortTime { get; set; }
     public DateTime? StartDate { get; set; }
     public DateTime? ScheduledDate { get; set; }

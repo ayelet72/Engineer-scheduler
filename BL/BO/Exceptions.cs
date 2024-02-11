@@ -1,6 +1,7 @@
 ﻿using System.Runtime.Serialization;
 namespace BO;
 
+//BO Exceptions:
 
 [Serializable]
 public class BlAlreadyExistsException : Exception

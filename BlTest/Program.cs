@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using System.Xml.Linq;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 //Hadar Cohen 213953029
-//Ayelet
+//Ayelet Hashachar Abayev 323098939
 
 namespace BlTest
 {
@@ -24,7 +24,7 @@ namespace BlTest
                 int choice;
                 MainMenu();
 
-                do  //choos the Item you want to work with:
+                do                       //choos the Item you want to work with:
                 {
                     choice = int.Parse(Console.ReadLine()!);
                     switch (choice)
@@ -74,7 +74,8 @@ namespace BlTest
             Console.WriteLine("4. Create Project");
 
         }
-        public static void SubMenuEngineer() 
+        public static void SubMenuEngineer()
+        // choosing the function you want to activate on the chosen item.
         {
 
             Console.WriteLine("1. Exit main menu");
@@ -114,7 +115,8 @@ namespace BlTest
                 }
             } while (choice != 1);
         }
-        public static void SubMenuTask() // choosing the function you want to activate on the chosen item.
+        public static void SubMenuTask() 
+           // choosing the function you want to activate on the chosen item.
         {
             Console.WriteLine("1. Exit main menu");
             Console.WriteLine("2. Add new task");
@@ -262,7 +264,6 @@ namespace BlTest
             {
                 Console.WriteLine(mesg.Message);
             }
-
         }
 
         public static void ReadEngineer() //search item 
@@ -276,7 +277,6 @@ namespace BlTest
         public static void ReadAllEngineer()
         {
             s_bl!.Engineer.ReadAll().ToList().ForEach(x => Console.WriteLine(x));
-
         }
         public static void UpdateEngineer() // update item, and printing the data befor updating 
         {
@@ -371,6 +371,8 @@ namespace BlTest
         }
 
         public static BO.TaskInList InputTaskInListData()
+        // input function -> to receive all Task In List parameters 
+
         {
             Console.WriteLine($"Enter id of the task");
             string num = Console.ReadLine()!;
@@ -409,6 +411,7 @@ namespace BlTest
         }
 
         public static void UpdateScheduleDate()
+            //a specific attention to the scedual date -> to update it 
         {
             DateTime scheduled;
             try
@@ -646,6 +649,7 @@ namespace BlTest
         }
 
         private static DateTime? InputDate(DateTime? date)
+        // input function -> to receive all the DateTime parameters 
         {
             Console.WriteLine("Please enter a date (YYYY-MM-DD):");
             string userInput = Console.ReadLine()!;
@@ -661,8 +665,6 @@ namespace BlTest
                     date = inputDate;
 
                 }
-
-
             }
 
             return date;

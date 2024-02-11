@@ -1,6 +1,15 @@
 ﻿
-//צריך לכתוב תיעוד
+
 namespace BO;
+/// <summary>
+/// 
+/// id - id of the Engineer (run number)
+/// name-  the name of the engineer
+/// Email- the Email of the engineer
+/// Level- the level of the engineer
+/// Cost- the amount of the payment for this engineer
+/// task - the task this engineer is responsible for.
+/// </summary>
 
 public class Engineer
 {

@@ -9,6 +9,9 @@ using System.Threading.Tasks;
 
 namespace BO
 {
+    /// <summary>
+    /// Tools is an internal class for help methods and tools we needed through our coding:
+    /// </summary>
     internal static class Tools
     {
         private static DalApi.IDal _dal = DalApi.Factory.Get;
@@ -16,7 +19,6 @@ namespace BO
         public static Status CalcStatus(int id)
         {
             //Unscheduled, Scheduled, OnTrack , InJeopardy, Done
-
 
             DO.Task? doTask = _dal.Task.Read(id);
             //checking what is the status of the task according to the datetime
@@ -59,7 +61,7 @@ namespace BO
         }
         public static BO.EngineerInTask? CreateEngineerInTask(int id)
         {
-            //BO.EngineerInTask? engineer = null;
+            
             DO.Task? temp = _dal.Task.Read(id);
             if (temp != null && temp.EngineerId != 0)
             {
@@ -75,7 +77,6 @@ namespace BO
         }
 
 
-        // a help boolen method 
         public static bool IsTaskLinkedToOtherTasks(int id)
         {
 
@@ -112,9 +113,10 @@ namespace BO
         }
 
         public static string ToStringProperty<T>(this T obj, string str = "")
+            //a help method to manage the toString func as property
         {
 
-            foreach (PropertyInfo item in obj.GetType().GetProperties())
+            foreach (PropertyInfo item in obj!.GetType().GetProperties())
             {
                 object? value = item.GetValue(obj);
                 if (value != null)
@@ -155,8 +157,9 @@ namespace BO
             return boTask.CompleteDate;
         }
 
-        // Calculate the possible RequierdEffortTime
+       
         public static TimeSpan? SetRequiredEffortTime(Task boTask)
+        // Calculate the possible RequierdEffortTime
         {
 
 
@@ -168,6 +171,11 @@ namespace BO
 
             return calcTime;
 
+        }
+        static IEnumerable<IGrouping<EngineerExperience, Engineer>> GroupEngineersByLevel(List<Engineer> engineers)
+        // A function that gets a list of engineers and creates a group by their level
+        {
+            return engineers.GroupBy(e => e.Level);
         }
     }
 }

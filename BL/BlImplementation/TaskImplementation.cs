@@ -14,8 +14,9 @@ internal class TaskImplementation : ITask
     private DalApi.IDal _dal = DalApi.Factory.Get;
     private IBl bl =  BlApi.Factory.Get();
        
-    // a function that create a task
     public int Create(BO.Task boTask)
+    // a function that create a task
+
     {
         //cheking if engineer is exsit and if the input data is valid
         if (boTask.Alias == null || boTask.Description == null)
@@ -60,8 +61,9 @@ internal class TaskImplementation : ITask
 
     }
 
-    // a function that deletes a task 
     public void Delete(int id)
+    // a function that deletes a task 
+
     {
         //if (_dal.Task.Read(id) == null)
         //    throw new BO.BlDoesNotExistException($"Task with ID={id} doesn't exist");
@@ -80,8 +82,9 @@ internal class TaskImplementation : ITask
 
     }
 
-    // a function that returns a BO obj
     public BO.Task Read(int id)
+    // a function that searches a task in the list and returns a BO obj
+
     {
         DO.Task? doTask = _dal.Task.Read(id);
         if (doTask == null)
@@ -112,8 +115,9 @@ internal class TaskImplementation : ITask
     }
 
    
-    // a function that update the task
     public void Update(BO.Task boTask)
+    // a function that update the task
+
     {
         DO.Task task = _dal.Task.Read(boTask.Id) ??
             throw new BO.BlDoesNotExistException($"Task with ID={boTask.Id} does Not exist");
@@ -158,9 +162,10 @@ internal class TaskImplementation : ITask
 
             List<Dependency> dependency = _dal.Dependency.ReadAll(x => x.DependentTask == boTask.Id).ToList();
 
-            //case 1: there is a needed to add a dependency in the data base
+            //case 1: there is a need to add a dependency in the data base
             var t = from dep in boTask.Dependencies
-                    where dependency.FindIndex(x => x.DependsOnTask == dep.Id) == -1
+                    let index = dependency.FindIndex(x => x.DependsOnTask == dep.Id) //using LINQ - let: for definding bool index 
+                    where index==-1
                     select _dal.Dependency.Create(new DO.Dependency()
                     {
                         DependentTask = boTask.Id,
@@ -218,11 +223,11 @@ internal class TaskImplementation : ITask
         throw new BO.BlInvalidDataException($"the input data is invalid");
     }
 
-    // a function that return all the tasks in IEnumerable 
     public IEnumerable<BO.Task> ReadAll(Func<DO.Task, bool>? filter = null)
+    // a function that return all the tasks in IEnumerable 
     {
-        
-        
+
+
         if (filter == null)
             return (from item in _dal.Task.ReadAll()
                     select new BO.Task
@@ -257,8 +262,9 @@ internal class TaskImplementation : ITask
         
 
     }
-    // a function that update the scheduel time
+    
     public void Update(int id, DateTime scheduelTime)
+    // a function that update the scheduel time
     {
         DO.Task task = _dal.Task.Read(id) ??
              throw new BO.BlDoesNotExistException($"Task with ID={id} does Not exist");

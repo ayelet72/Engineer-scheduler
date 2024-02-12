@@ -177,5 +177,10 @@ namespace BO
         {
             return engineers.GroupBy(e => e.Level);
         }
+        static IEnumerable<BO.Task> OrderByUnassingedTasks(List<BO.Task> tasks)
+        // A function that sorting by tasks not assigned an engineer
+        {
+            return tasks.OrderBy(t => t.Engineer==null);
+        }
     }
 }

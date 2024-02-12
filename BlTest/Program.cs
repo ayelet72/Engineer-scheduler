@@ -217,10 +217,9 @@ namespace BlTest
             string level = Console.ReadLine()!;
             Console.WriteLine($"Enter a cost of engineer");
             string newCost = Console.ReadLine()!;
-            Console.WriteLine("enter id and alias of the assignTask of engineer");
-            string id = Console.ReadLine()!;
-            string alias = Console.ReadLine()!;
-            int.TryParse(id, out int idTask);
+            
+            string num = Console.ReadLine()!;
+            int.TryParse(num, out int choice);
             int.TryParse(newCost, out int newCostNum);
             Enum.TryParse<EngineerExperience>(level, out EngineerExperience selectedLevel);     //Bonus: converter from string to Enum
             int intValue = Convert.ToInt32(selectedLevel);
@@ -232,21 +231,43 @@ namespace BlTest
                 intValue = Convert.ToInt32(selectedLevel);
 
             }
-
-            BO.Engineer engineer = new BO.Engineer()
+            Console.WriteLine($"If you want to assign an engineer to a task, enter 1");
+            if (choice==1)
             {
-                Id = newIdNum,
-                Email = newEmail,
-                Name = newName,
-                Cost = newCostNum,
-                Level = selectedLevel,
-                Task = new BO.TaskInEngineer
+                Console.WriteLine("enter id and alias of the assignTask of engineer");
+                string id = Console.ReadLine()!;
+                string alias = Console.ReadLine()!;
+                int.TryParse(id, out int idTask);
+                BO.Engineer engineer = new BO.Engineer()
                 {
-                    Id = idTask,
-                    Alias = alias
-                }
-            };
-            return engineer;
+                    Id = newIdNum,
+                    Email = newEmail,
+                    Name = newName,
+                    Cost = newCostNum,
+                    Level = selectedLevel,
+                    Task = new BO.TaskInEngineer
+                    {
+                        Id = idTask,
+                        Alias = alias
+                    }
+                };
+                return engineer;
+            }
+            else
+            {
+                BO.Engineer engineer = new BO.Engineer()
+                {
+                    Id = newIdNum,
+                    Email = newEmail,
+                    Name = newName,
+                    Cost = newCostNum,
+                    Level = selectedLevel,
+                };
+                return engineer;
+            }
+            
+
+
 
 
 
@@ -282,6 +303,8 @@ namespace BlTest
         {
             Console.WriteLine("enter id, email,name ,cost, level of the update engineer");
             BO.Engineer UpdateEngineer = InputUpdateEngineerData()!;
+            Console.WriteLine("If you want to assign an engineer to a task enter 1");
+
             Console.WriteLine(s_bl!.Engineer.Read(UpdateEngineer.Id)!);     //printing the previous engineer with the same id in the list
             try
             {

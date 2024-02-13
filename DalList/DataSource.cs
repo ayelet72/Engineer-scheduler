@@ -18,6 +18,7 @@ internal static class DataSource
         internal static DateTime? EndProject { get; set; }
         internal static void ResetDependencyID() { nextDependencyId = StartDependencyId; }
         internal static void ResetTaskID() { nextTaskId = StartTaskId; }
+        internal static void ResetDate() { Startproject = DateTime.MinValue; EndProject = DateTime.MinValue; }
 
     }
     internal static List<DO.Engineer> Engineers { get; } = new();

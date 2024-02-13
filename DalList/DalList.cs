@@ -33,6 +33,8 @@ sealed internal class DalList : IDal
 
         DataSource.Config.ResetDependencyID();
         DataSource.Config.ResetTaskID();
+        DataSource.Config.ResetDate();
+        
     }
 }
 

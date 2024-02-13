@@ -31,6 +31,7 @@ sealed internal class DalXml : IDal
 
         Config.InitTaskID();
         Config.InitDependencyID();
+        Config.InitStartAndEndProject();
         
     }
 }

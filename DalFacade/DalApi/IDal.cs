@@ -11,6 +11,6 @@ public interface IDal
     IDependency Dependency { get; }
     DateTime? StartProject { set;get; }
     DateTime? EndProject { set; get; }
-    
+
     void Reset();
 }

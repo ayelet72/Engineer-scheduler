@@ -50,6 +50,10 @@ namespace BlTest
                             s_bl.CreateSchedule();
                             Console.WriteLine($"Schedule Project: \n"+ $"Start: {s_bl.StartProject!.GetValueOrDefault()} \n"+ $"End: {s_bl.EndProject!.GetValueOrDefault()}");
                             break;
+                        case 5:
+
+                            Console.WriteLine($"Project Status: {s_bl.CalcStatusProject()} \n");
+                            break;
 
                         default:
                             Console.WriteLine("ERROR");
@@ -72,6 +76,7 @@ namespace BlTest
             Console.WriteLine("2. Task");
             Console.WriteLine("3. Engineer");
             Console.WriteLine("4. Create Project");
+            Console.WriteLine("5. View Status Project");
 
         }
         public static void SubMenuEngineer()
@@ -371,7 +376,8 @@ namespace BlTest
             int intValue = Convert.ToInt32(selectedLevelCom);
             while (intValue > 4 || intValue < 0)
             {
-                Console.WriteLine("ERROR");
+                Console.WriteLine("ERROR Complexity");
+                Console.WriteLine("enter again a complexity");
                 levelCom = Console.ReadLine()!;
                 Enum.TryParse<EngineerExperience>(levelCom, out selectedLevelCom);     //Bonus: converter from string to Enum
                 intValue = Convert.ToInt32(selectedLevelCom);

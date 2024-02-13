@@ -164,5 +164,17 @@ static class XMLTools
         DateTime.TryParse(element.Value.ToString() == "" ? null : element.Value.ToString(), out DateTime endProject);
         return endProject;
     }
+
+    internal static void InitDate(string s_data_config_xml, string start, string end)
+    {
+        DateTime initDate = DateTime.MinValue;
+        XElement element1 = XMLTools.LoadListFromXMLElement(s_data_config_xml);
+        element1.Element("EndProject")?.SetValue(DateTime.MinValue.ToString());
+        SaveListToXMLElement(element1, s_data_config_xml);
+        XElement element2 = XMLTools.LoadListFromXMLElement(s_data_config_xml);
+        element2.Element("StartProject")?.SetValue(DateTime.MinValue.ToString());
+        SaveListToXMLElement(element2, s_data_config_xml);
+
+    }
     #endregion
 }

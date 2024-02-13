@@ -239,8 +239,11 @@ internal class TaskImplementation : ITask
                         Description = item.Description,
                         CreateAtDate = item.CreateAtDate,
                         ScheduledDate=item.ScheduledDate,
+                        RequiredEffortTime=item.RequiredEffortTime,
                         Engineer=Tools.CreateEngineerInTask(item.Id),
-                        Complexity = item.Complexity
+                        Complexity = item.Complexity,
+                        CompleteDate=item.CompleteDate
+
                     });
 
         //return an IEnumerable<BO.Task> filtered by a filter
@@ -255,9 +258,11 @@ internal class TaskImplementation : ITask
                          Dependencies = Tools.SetDependencies(item.Id),
                          Description = item.Description,
                          CreateAtDate = item.CreateAtDate,
+                         RequiredEffortTime = item.RequiredEffortTime,
                          ScheduledDate = item.ScheduledDate,
                          Engineer = Tools.CreateEngineerInTask(item.Id),
-                         Complexity = item.Complexity
+                         Complexity = item.Complexity,
+                         CompleteDate = item.CompleteDate
                      });
         
 
@@ -272,8 +277,9 @@ internal class TaskImplementation : ITask
         if (bl.StartProject!=DateTime.MinValue)
         {
             //it is not possible that schedele date of task will be before the start date of project
-            if (bl.StartProject > scheduelTime || bl.EndProject < scheduelTime)
+            if (bl.StartProject > scheduelTime || bl.EndProject < scheduelTime|| task.CreateAtDate > scheduelTime )
                 throw new BO.BlInvalidDateException($"Scheduled date isn't in the time span correctly");
+           
 
         }
         var boTask = Read(id);

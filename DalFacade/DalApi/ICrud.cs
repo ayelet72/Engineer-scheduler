@@ -16,7 +16,9 @@ namespace DalApi
         void Update(T item);           //Updates entity object
         void Delete(int id);                //Deletes an object by its Id
         IEnumerable<T> ReadAll(Func<T, bool>? filter=null); // stage 2
-  
+        private static IDal? s_dal;
+        public void Reset();
+
 
 
 

@@ -31,7 +31,7 @@ namespace BlTest
                     {
                         case 0:
                             Console.WriteLine("bye");
-                            s_dal.Reset();
+                            Initialization.Reset();
                             break;
                         case 1:
                             Console.Write("Would you like to create Initial data? (Y/N)"); //stage 3
@@ -183,13 +183,13 @@ namespace BlTest
             Console.WriteLine($"Enter a cost of engineer");
             string newCost = Console.ReadLine()!;
             int.TryParse(newCost, out int newCostNum);
-            Enum.TryParse<EngineerExperience>(level, out EngineerExperience selectedLevel);     //Bonus: converter from string to Enum
+            Enum.TryParse<BO.EngineerExperience>(level, out BO.EngineerExperience selectedLevel);     //Bonus: converter from string to Enum
             int intValue = Convert.ToInt32(selectedLevel);
             while (intValue > 4 || intValue < 0)
             {
                 Console.WriteLine("ERROR");
                 level = Console.ReadLine()!;
-                Enum.TryParse<EngineerExperience>(level, out selectedLevel);     //Bonus: converter from string to Enum
+                Enum.TryParse<BO.EngineerExperience>(level, out selectedLevel);     //Bonus: converter from string to Enum
                 intValue = Convert.ToInt32(selectedLevel);
 
             }
@@ -226,13 +226,13 @@ namespace BlTest
             string num = Console.ReadLine()!;
             int.TryParse(num, out int choice);
             int.TryParse(newCost, out int newCostNum);
-            Enum.TryParse<EngineerExperience>(level, out EngineerExperience selectedLevel);     //Bonus: converter from string to Enum
+            Enum.TryParse<BO.EngineerExperience>(level, out  BO.EngineerExperience selectedLevel);     //Bonus: converter from string to Enum
             int intValue = Convert.ToInt32(selectedLevel);
             while (intValue > 4 || intValue < 0)
             {
                 Console.WriteLine("ERROR");
                 level = Console.ReadLine()!;
-                Enum.TryParse<EngineerExperience>(level, out selectedLevel);     //Bonus: converter from string to Enum
+                Enum.TryParse<BO.EngineerExperience>(level, out selectedLevel);     //Bonus: converter from string to Enum
                 intValue = Convert.ToInt32(selectedLevel);
 
             }
@@ -351,7 +351,7 @@ namespace BlTest
             string description = Console.ReadLine()!;
             Console.WriteLine($"Enter a complexity to task");
             string levelCom = Console.ReadLine()!;
-            Enum.TryParse<DO.EngineerExperience>(levelCom, out DO.EngineerExperience selectedLevelCom);
+            Enum.TryParse<BO.EngineerExperience>(levelCom, out BO.EngineerExperience selectedLevelCom);
             Console.WriteLine($"Enter a requierdEffortTime to task");
             string? timeSpan = Console.ReadLine();
             Console.WriteLine($"if you want to add tasks that the task depends on enter 1");
@@ -379,7 +379,7 @@ namespace BlTest
                 Console.WriteLine("ERROR Complexity");
                 Console.WriteLine("enter again a complexity");
                 levelCom = Console.ReadLine()!;
-                Enum.TryParse<EngineerExperience>(levelCom, out selectedLevelCom);     //Bonus: converter from string to Enum
+                Enum.TryParse<BO.EngineerExperience>(levelCom, out selectedLevelCom);     //Bonus: converter from string to Enum
                 intValue = Convert.ToInt32(selectedLevelCom);
 
             }
@@ -574,7 +574,7 @@ namespace BlTest
                 string deliverables = Console.ReadLine()!;
                 Console.WriteLine($"Enter a complexity to task");
                 string levelCom = Console.ReadLine()!;
-                Enum.TryParse<DO.EngineerExperience>(levelCom, out DO.EngineerExperience selectedLevelCom);
+                Enum.TryParse<BO.EngineerExperience>(levelCom, out BO.EngineerExperience selectedLevelCom);
                 Console.WriteLine($"Enter a requierdEffortTime to task");
                 string? timeSpan = Console.ReadLine();
                 Console.WriteLine($"if you want to add or delete tasks that the task depends on enter 1");
@@ -614,7 +614,7 @@ namespace BlTest
                 {
                     Console.WriteLine("ERROR");
                     levelCom = Console.ReadLine()!;
-                    Enum.TryParse<EngineerExperience>(levelCom, out selectedLevelCom);     //Bonus: converter from string to Enum
+                    Enum.TryParse<BO.EngineerExperience>(levelCom, out selectedLevelCom);     //Bonus: converter from string to Enum
                     intValue = Convert.ToInt32(selectedLevelCom);
 
                 }

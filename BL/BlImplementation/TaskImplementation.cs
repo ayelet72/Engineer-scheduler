@@ -42,7 +42,7 @@ internal class TaskImplementation : ITask
             EngineerId:0,
             Description: boTask.Description,
             CreateAtDate: boTask.CreateAtDate,
-            Complexity: boTask.Complexity,
+            Complexity: (DO.EngineerExperience)boTask.Complexity,
             RequiredEffortTime: boTask.RequiredEffortTime,
             Remarks: boTask.Remarks,
             Deliverables: boTask.Deliverables
@@ -97,7 +97,7 @@ internal class TaskImplementation : ITask
                 Description = doTask.Description,
                 CreateAtDate = doTask.CreateAtDate,
                 Status = Tools.CalcStatus(id),
-                Complexity = doTask.Complexity,
+                Complexity = (BO.EngineerExperience)doTask.Complexity,
                 RequiredEffortTime = doTask.RequiredEffortTime,
                 Dependencies = Tools.SetDependencies(id),
                 StartDate = doTask.StartDate,
@@ -146,7 +146,7 @@ internal class TaskImplementation : ITask
                     Description = boTask.Description,
                     StartDate = Tools.CheckStartDate(boTask),
                     CompleteDate = Tools.CheckCompleteDate(boTask),
-                    Complexity = boTask.Complexity,
+                    Complexity = (DO.EngineerExperience)boTask.Complexity,
                     RequiredEffortTime = boTask.RequiredEffortTime, //Tools.SetRequiredEffortTime(boTask),
                     Remarks = boTask.Remarks,
                     Deliverables = boTask.Deliverables
@@ -207,7 +207,7 @@ internal class TaskImplementation : ITask
                     Alias = boTask.Alias,
                     EngineerId = boTask.Engineer.Id,
                     Description = boTask.Description,
-                    Complexity = boTask.Complexity,
+                    Complexity = (DO.EngineerExperience)boTask.Complexity,
                     Remarks = boTask.Remarks,
                     Deliverables = boTask.Deliverables
                 });
@@ -241,7 +241,7 @@ internal class TaskImplementation : ITask
                         ScheduledDate=item.ScheduledDate,
                         RequiredEffortTime=item.RequiredEffortTime,
                         Engineer=Tools.CreateEngineerInTask(item.Id),
-                        Complexity = item.Complexity,
+                        Complexity = (BO.EngineerExperience)item.Complexity,
                         CompleteDate=item.CompleteDate
 
                     });
@@ -261,7 +261,7 @@ internal class TaskImplementation : ITask
                          RequiredEffortTime = item.RequiredEffortTime,
                          ScheduledDate = item.ScheduledDate,
                          Engineer = Tools.CreateEngineerInTask(item.Id),
-                         Complexity = item.Complexity,
+                         Complexity = (BO.EngineerExperience)item.Complexity,
                          CompleteDate = item.CompleteDate
                      });
         

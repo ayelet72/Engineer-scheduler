@@ -99,4 +99,12 @@ internal class TaskImplementation: ITask   //With XMLSerializer for stage 3
         XMLTools.SaveListToXMLSerializer(Tasks, s_tasks_xml);
 
     }
+    public void Reset()
+    {
+        List<DO.Task> Tasks = XMLTools.LoadListFromXMLSerializer<DO.Task>(s_tasks_xml);
+        Tasks.Clear();
+        XMLTools.SaveListToXMLSerializer(Tasks, s_tasks_xml);
+
+
+    }
 }

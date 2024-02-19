@@ -15,6 +15,8 @@ public interface IBl
     public DateTime? EndProject { set; get; }
     public void CreateSchedule();
     public ProjectStatus CalcStatusProject();
+    public  void InitializeDB();
+    public  void ResetDB();
 }
 
 

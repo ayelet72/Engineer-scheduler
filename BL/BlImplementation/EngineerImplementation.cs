@@ -23,7 +23,7 @@ internal class EngineerImplementation : IEngineer
                         ID = boEngineer.Id,
                         Name = boEngineer.Name,
                         EMail = boEngineer.Email,
-                        Level = boEngineer.Level,
+                        Level = (DO.EngineerExperience)boEngineer.Level,
                         Cost = boEngineer.Cost
                     }
                     );
@@ -69,7 +69,7 @@ internal class EngineerImplementation : IEngineer
             throw new BO.BlDoesNotExistException($"Engineer with ID={boEngineer.Id} does Not exist");
 
         if (boEngineer.Name != null && boEngineer.Email != null && boEngineer.Cost > 0 && 
-            (_dal.Engineer.Read(boEngineer.Id)!).Level< boEngineer.Level && (int)boEngineer.Level<5&&
+            (_dal.Engineer.Read(boEngineer.Id)!).Level< (DO.EngineerExperience)boEngineer.Level && (int)boEngineer.Level<5&&
             _dal.Task.Read(boEngineer.Task!.Id)!=null)        
         {
             DO.Task? task = _dal.Task.Read(boEngineer.Task.Id);
@@ -83,7 +83,7 @@ internal class EngineerImplementation : IEngineer
                     {
                         Alias = (boEngineer.Task).Alias,
                         EngineerId = boEngineer.Id,
-                        Complexity = boEngineer.Level
+                        Complexity = (DO.EngineerExperience)boEngineer.Level
                     }
                    );
 
@@ -94,7 +94,7 @@ internal class EngineerImplementation : IEngineer
                         ID = boEngineer.Id,
                         Name = boEngineer.Name,
                         EMail = boEngineer.Email,
-                        Level = boEngineer.Level,
+                        Level = (DO.EngineerExperience)boEngineer.Level,
                         Cost = boEngineer.Cost,
                         Active = true
                     }
@@ -107,7 +107,7 @@ internal class EngineerImplementation : IEngineer
                     ID = boEngineer.Id,
                     Name = boEngineer.Name,
                     EMail = boEngineer.Email,
-                    Level = boEngineer.Level,
+                    Level = (DO.EngineerExperience)boEngineer.Level, 
                     Cost = boEngineer.Cost,
                     Active = _dal.Engineer.Read(boEngineer.Id)!.Active
                 }
@@ -141,7 +141,7 @@ internal class EngineerImplementation : IEngineer
             Id = id,
             Name = doEngineer.Name,
             Email=doEngineer.EMail,
-            Level=doEngineer.Level,
+            Level=(BO.EngineerExperience)doEngineer.Level,
             Cost=doEngineer.Cost
         };
 
@@ -158,7 +158,7 @@ internal class EngineerImplementation : IEngineer
                         Id =item.ID,
                         Name = item.Name,
                         Email = item.EMail,
-                        Level = item.Level,
+                        Level = (BO.EngineerExperience)item.Level,
                         Cost = item.Cost,
                         Task = _dal.Task.ReadAll()
                                     .Where(item => item.EngineerId == item.Id)
@@ -179,7 +179,7 @@ internal class EngineerImplementation : IEngineer
                         Id = item.ID,
                         Name = item.Name,
                         Email = item.EMail,
-                        Level = item.Level,
+                        Level = (BO.EngineerExperience)item.Level,
                         Cost = item.Cost,
                         Task = _dal.Task.ReadAll()
                                     .Where(item => item.EngineerId == item.Id)

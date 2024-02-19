@@ -39,7 +39,7 @@ public class Task
     public string? Deliverables { get; set; }
     public string? Remarks { get; set; }
     public EngineerInTask? Engineer { get; set; }
-    public DO.EngineerExperience Complexity { get; set; }
+    public BO.EngineerExperience Complexity { get; set; }
     public override string ToString() => this.ToStringProperty();
     
     

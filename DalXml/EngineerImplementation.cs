@@ -77,6 +77,15 @@ internal class EngineerImplementation: IEngineer //With XMLSerializer for stage 
         return result;
     }
 
+    public void Reset()
+    {
+        List<Engineer> Engineers = XMLTools.LoadListFromXMLSerializer<Engineer>(s_engineers_xml);
+        Engineers.Clear();
+        XMLTools.SaveListToXMLSerializer(Engineers, s_engineers_xml);
+
+
+    }
+
     public void Update(Engineer item)
     {
         //Load the list from XML to a temp list of enigneers

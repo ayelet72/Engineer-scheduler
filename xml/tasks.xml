@@ -1,2 +1,283 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<ArrayOfTask />
+<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfTask xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Task>
+    <Id>21</Id>
+    <EngineerId>0</EngineerId>
+    <Complexity>Intermediate</Complexity>
+    <Alias>Task #1</Alias>
+    <Description>User Registration and Authentication</Description>
+    <IsMilestone>false</IsMilestone>
+    <CreateAtDate>2023-12-20T16:28:48.7309593+02:00</CreateAtDate>
+    <StartDate xsi:nil="true" />
+    <ScheduledDate xsi:nil="true" />
+    <DeadlineDate xsi:nil="true" />
+    <CompleteDate xsi:nil="true" />
+    <RequiredEffortTime xsi:nil="true" />
+  </Task>
+  <Task>
+    <Id>22</Id>
+    <EngineerId>0</EngineerId>
+    <Complexity>Advanced</Complexity>
+    <Alias>Task #2</Alias>
+    <Description>Expense Entry Form</Description>
+    <IsMilestone>false</IsMilestone>
+    <CreateAtDate>2023-12-23T16:28:48.8133928+02:00</CreateAtDate>
+    <StartDate xsi:nil="true" />
+    <ScheduledDate xsi:nil="true" />
+    <DeadlineDate xsi:nil="true" />
+    <CompleteDate xsi:nil="true" />
+    <RequiredEffortTime xsi:nil="true" />
+  </Task>
+  <Task>
+    <Id>23</Id>
+    <EngineerId>0</EngineerId>
+    <Complexity>AdvancedBeginner</Complexity>
+    <Alias>Task #3</Alias>
+    <Description>Expense Categories</Description>
+    <IsMilestone>false</IsMilestone>
+    <CreateAtDate>2023-12-26T16:28:48.8434003+02:00</CreateAtDate>
+    <StartDate xsi:nil="true" />
+    <ScheduledDate xsi:nil="true" />
+    <DeadlineDate xsi:nil="true" />
+    <CompleteDate xsi:nil="true" />
+    <RequiredEffortTime xsi:nil="true" />
+  </Task>
+  <Task>
+    <Id>24</Id>
+    <EngineerId>0</EngineerId>
+    <Complexity>Beginner</Complexity>
+    <Alias>Task #4</Alias>
+    <Description>Expense List View</Description>
+    <IsMilestone>false</IsMilestone>
+    <CreateAtDate>2023-12-29T16:28:48.8687275+02:00</CreateAtDate>
+    <StartDate xsi:nil="true" />
+    <ScheduledDate xsi:nil="true" />
+    <DeadlineDate xsi:nil="true" />
+    <CompleteDate xsi:nil="true" />
+    <RequiredEffortTime xsi:nil="true" />
+  </Task>
+  <Task>
+    <Id>25</Id>
+    <EngineerId>0</EngineerId>
+    <Complexity>AdvancedBeginner</Complexity>
+    <Alias>Task #5</Alias>
+    <Description>Data Storage</Description>
+    <IsMilestone>false</IsMilestone>
+    <CreateAtDate>2024-01-01T16:28:48.8948237+02:00</CreateAtDate>
+    <StartDate xsi:nil="true" />
+    <ScheduledDate xsi:nil="true" />
+    <DeadlineDate xsi:nil="true" />
+    <CompleteDate xsi:nil="true" />
+    <RequiredEffortTime xsi:nil="true" />
+  </Task>
+  <Task>
+    <Id>26</Id>
+    <EngineerId>0</EngineerId>
+    <Complexity>Advanced</Complexity>
+    <Alias>Task #6</Alias>
+    <Description>Monthly Expense Report</Description>
+    <IsMilestone>false</IsMilestone>
+    <CreateAtDate>2024-01-04T16:28:48.9179433+02:00</CreateAtDate>
+    <StartDate xsi:nil="true" />
+    <ScheduledDate xsi:nil="true" />
+    <DeadlineDate xsi:nil="true" />
+    <CompleteDate xsi:nil="true" />
+    <RequiredEffortTime xsi:nil="true" />
+  </Task>
+  <Task>
+    <Id>27</Id>
+    <EngineerId>0</EngineerId>
+    <Complexity>Beginner</Complexity>
+    <Alias>Task #7</Alias>
+    <Description>Expense Chart</Description>
+    <IsMilestone>false</IsMilestone>
+    <CreateAtDate>2024-01-07T16:28:48.9458678+02:00</CreateAtDate>
+    <StartDate xsi:nil="true" />
+    <ScheduledDate xsi:nil="true" />
+    <DeadlineDate xsi:nil="true" />
+    <CompleteDate xsi:nil="true" />
+    <RequiredEffortTime xsi:nil="true" />
+  </Task>
+  <Task>
+    <Id>28</Id>
+    <EngineerId>0</EngineerId>
+    <Complexity>Advanced</Complexity>
+    <Alias>Task #8</Alias>
+    <Description>Budget Setting</Description>
+    <IsMilestone>false</IsMilestone>
+    <CreateAtDate>2024-01-10T16:28:48.9671449+02:00</CreateAtDate>
+    <StartDate xsi:nil="true" />
+    <ScheduledDate xsi:nil="true" />
+    <DeadlineDate xsi:nil="true" />
+    <CompleteDate xsi:nil="true" />
+    <RequiredEffortTime xsi:nil="true" />
+  </Task>
+  <Task>
+    <Id>29</Id>
+    <EngineerId>0</EngineerId>
+    <Complexity>Intermediate</Complexity>
+    <Alias>Task #9</Alias>
+    <Description>Expense Notifications</Description>
+    <IsMilestone>false</IsMilestone>
+    <CreateAtDate>2024-01-13T16:28:48.9959413+02:00</CreateAtDate>
+    <StartDate xsi:nil="true" />
+    <ScheduledDate xsi:nil="true" />
+    <DeadlineDate xsi:nil="true" />
+    <CompleteDate xsi:nil="true" />
+    <RequiredEffortTime xsi:nil="true" />
+  </Task>
+  <Task>
+    <Id>30</Id>
+    <EngineerId>0</EngineerId>
+    <Complexity>Intermediate</Complexity>
+    <Alias>Task #10</Alias>
+    <Description>Currency Localization</Description>
+    <IsMilestone>false</IsMilestone>
+    <CreateAtDate>2024-01-16T16:28:49.0223391+02:00</CreateAtDate>
+    <StartDate xsi:nil="true" />
+    <ScheduledDate xsi:nil="true" />
+    <DeadlineDate xsi:nil="true" />
+    <CompleteDate xsi:nil="true" />
+    <RequiredEffortTime xsi:nil="true" />
+  </Task>
+  <Task>
+    <Id>31</Id>
+    <EngineerId>0</EngineerId>
+    <Complexity>Advanced</Complexity>
+    <Alias>Task #11</Alias>
+    <Description>Export Data</Description>
+    <IsMilestone>false</IsMilestone>
+    <CreateAtDate>2024-01-19T16:28:49.0475241+02:00</CreateAtDate>
+    <StartDate xsi:nil="true" />
+    <ScheduledDate xsi:nil="true" />
+    <DeadlineDate xsi:nil="true" />
+    <CompleteDate xsi:nil="true" />
+    <RequiredEffortTime xsi:nil="true" />
+  </Task>
+  <Task>
+    <Id>32</Id>
+    <EngineerId>0</EngineerId>
+    <Complexity>Beginner</Complexity>
+    <Alias>Task #12</Alias>
+    <Description>Search and Filtering</Description>
+    <IsMilestone>false</IsMilestone>
+    <CreateAtDate>2024-01-22T16:28:49.0720903+02:00</CreateAtDate>
+    <StartDate xsi:nil="true" />
+    <ScheduledDate xsi:nil="true" />
+    <DeadlineDate xsi:nil="true" />
+    <CompleteDate xsi:nil="true" />
+    <RequiredEffortTime xsi:nil="true" />
+  </Task>
+  <Task>
+    <Id>33</Id>
+    <EngineerId>0</EngineerId>
+    <Complexity>Intermediate</Complexity>
+    <Alias>Task #13</Alias>
+    <Description>User Profile</Description>
+    <IsMilestone>false</IsMilestone>
+    <CreateAtDate>2024-01-25T16:28:49.094996+02:00</CreateAtDate>
+    <StartDate xsi:nil="true" />
+    <ScheduledDate xsi:nil="true" />
+    <DeadlineDate xsi:nil="true" />
+    <CompleteDate xsi:nil="true" />
+    <RequiredEffortTime xsi:nil="true" />
+  </Task>
+  <Task>
+    <Id>34</Id>
+    <EngineerId>0</EngineerId>
+    <Complexity>Advanced</Complexity>
+    <Alias>Task #14</Alias>
+    <Description>Expense Editing and Deletion</Description>
+    <IsMilestone>false</IsMilestone>
+    <CreateAtDate>2024-01-28T16:28:49.1204122+02:00</CreateAtDate>
+    <StartDate xsi:nil="true" />
+    <ScheduledDate xsi:nil="true" />
+    <DeadlineDate xsi:nil="true" />
+    <CompleteDate xsi:nil="true" />
+    <RequiredEffortTime xsi:nil="true" />
+  </Task>
+  <Task>
+    <Id>35</Id>
+    <EngineerId>0</EngineerId>
+    <Complexity>Advanced</Complexity>
+    <Alias>Task #15</Alias>
+    <Description>Data Security Measures</Description>
+    <IsMilestone>false</IsMilestone>
+    <CreateAtDate>2024-01-31T16:28:49.1450042+02:00</CreateAtDate>
+    <StartDate xsi:nil="true" />
+    <ScheduledDate xsi:nil="true" />
+    <DeadlineDate xsi:nil="true" />
+    <CompleteDate xsi:nil="true" />
+    <RequiredEffortTime xsi:nil="true" />
+  </Task>
+  <Task>
+    <Id>36</Id>
+    <EngineerId>0</EngineerId>
+    <Complexity>AdvancedBeginner</Complexity>
+    <Alias>Task #16</Alias>
+    <Description>Responsive Design</Description>
+    <IsMilestone>false</IsMilestone>
+    <CreateAtDate>2024-02-03T16:28:49.1712284+02:00</CreateAtDate>
+    <StartDate xsi:nil="true" />
+    <ScheduledDate xsi:nil="true" />
+    <DeadlineDate xsi:nil="true" />
+    <CompleteDate xsi:nil="true" />
+    <RequiredEffortTime xsi:nil="true" />
+  </Task>
+  <Task>
+    <Id>37</Id>
+    <EngineerId>0</EngineerId>
+    <Complexity>Intermediate</Complexity>
+    <Alias>Task #17</Alias>
+    <Description>Offline Mode</Description>
+    <IsMilestone>false</IsMilestone>
+    <CreateAtDate>2024-02-06T16:28:49.1933324+02:00</CreateAtDate>
+    <StartDate xsi:nil="true" />
+    <ScheduledDate xsi:nil="true" />
+    <DeadlineDate xsi:nil="true" />
+    <CompleteDate xsi:nil="true" />
+    <RequiredEffortTime xsi:nil="true" />
+  </Task>
+  <Task>
+    <Id>38</Id>
+    <EngineerId>0</EngineerId>
+    <Complexity>Expert</Complexity>
+    <Alias>Task #18</Alias>
+    <Description>Feedback and Ratings</Description>
+    <IsMilestone>false</IsMilestone>
+    <CreateAtDate>2024-02-09T16:28:49.216645+02:00</CreateAtDate>
+    <StartDate xsi:nil="true" />
+    <ScheduledDate xsi:nil="true" />
+    <DeadlineDate xsi:nil="true" />
+    <CompleteDate xsi:nil="true" />
+    <RequiredEffortTime xsi:nil="true" />
+  </Task>
+  <Task>
+    <Id>39</Id>
+    <EngineerId>0</EngineerId>
+    <Complexity>AdvancedBeginner</Complexity>
+    <Alias>Task #19</Alias>
+    <Description>Expense Analytics</Description>
+    <IsMilestone>false</IsMilestone>
+    <CreateAtDate>2024-02-12T16:28:49.2415871+02:00</CreateAtDate>
+    <StartDate xsi:nil="true" />
+    <ScheduledDate xsi:nil="true" />
+    <DeadlineDate xsi:nil="true" />
+    <CompleteDate xsi:nil="true" />
+    <RequiredEffortTime xsi:nil="true" />
+  </Task>
+  <Task>
+    <Id>40</Id>
+    <EngineerId>0</EngineerId>
+    <Complexity>Expert</Complexity>
+    <Alias>Task #20</Alias>
+    <Description>Testing and Bug Fixes</Description>
+    <IsMilestone>false</IsMilestone>
+    <CreateAtDate>2024-02-15T16:28:49.2845917+02:00</CreateAtDate>
+    <StartDate xsi:nil="true" />
+    <ScheduledDate xsi:nil="true" />
+    <DeadlineDate xsi:nil="true" />
+    <CompleteDate xsi:nil="true" />
+    <RequiredEffortTime xsi:nil="true" />
+  </Task>
+</ArrayOfTask>

@@ -9,4 +9,8 @@ public enum ProjectStatus
 {
     Planning, Scheduled, Execution
 }
-
+public enum EngineerExperience
+{
+    Beginner, AdvancedBeginner, Intermediate, Advanced, Expert,
+    None
+}

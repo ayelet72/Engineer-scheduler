@@ -142,4 +142,12 @@ internal class DependencyImplementation : IDependency //With XElement for stage 
         //save the new XElement list in the XML
         XMLTools.SaveListToXMLElement(dependencies, s_dependencies_xml);
     }
+    public void Reset()
+    {
+        List<Dependency> Dependencies = XMLTools.LoadListFromXMLSerializer<Dependency>(s_dependencies_xml);
+        Dependencies.Clear();
+        XMLTools.SaveListToXMLSerializer(Dependencies, s_dependencies_xml);
+
+
+    }
 }

@@ -4,6 +4,7 @@ namespace DalTest;
 using DO;
 using DalApi;
 using static System.Runtime.InteropServices.JavaScript.JSType;
+using System.Data.Common;
 
 public static class Initialization //Building the lists of items for Stage 1: 
 {
@@ -118,4 +119,15 @@ public static class Initialization //Building the lists of items for Stage 1:
         createDependcies();
 
     }
+
+
+    public static void Reset()
+    {
+        s_dal = DalApi.Factory.Get;
+        s_dal.Engineer.Reset();
+        s_dal.Task.Reset();
+        s_dal.Dependency.Reset();
+
+    }
+
 }

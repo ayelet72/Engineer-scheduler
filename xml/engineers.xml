@@ -1,2 +1,67 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<ArrayOfEngineer />
+<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfEngineer xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Engineer>
+    <ID>379061503</ID>
+    <EMail>mosh@jct.com</EMail>
+    <Name>Mosh</Name>
+    <Cost>791</Cost>
+    <Level>Advanced</Level>
+    <Active>true</Active>
+  </Engineer>
+  <Engineer>
+    <ID>207941414</ID>
+    <EMail>dan@jct.com</EMail>
+    <Name>Dan</Name>
+    <Cost>190</Cost>
+    <Level>Beginner</Level>
+    <Active>true</Active>
+  </Engineer>
+  <Engineer>
+    <ID>100654574</ID>
+    <EMail>jake@jct.com</EMail>
+    <Name>Jake</Name>
+    <Cost>346</Cost>
+    <Level>AdvancedBeginner</Level>
+    <Active>true</Active>
+  </Engineer>
+  <Engineer>
+    <ID>324840940</ID>
+    <EMail>gil@jct.com</EMail>
+    <Name>Gil</Name>
+    <Cost>890</Cost>
+    <Level>Expert</Level>
+    <Active>true</Active>
+  </Engineer>
+  <Engineer>
+    <ID>159542699</ID>
+    <EMail>noa@jct.com</EMail>
+    <Name>Noa</Name>
+    <Cost>496</Cost>
+    <Level>Intermediate</Level>
+    <Active>true</Active>
+  </Engineer>
+  <Engineer>
+    <ID>12345643</ID>
+    <EMail> Hila@jct.com</EMail>
+    <Name> Hila</Name>
+    <Cost>200</Cost>
+    <Level>Beginner</Level>
+    <Active>true</Active>
+  </Engineer>
+  <Engineer>
+    <ID>143256732</ID>
+    <EMail> roni@jct.com</EMail>
+    <Name> Roni</Name>
+    <Cost>900</Cost>
+    <Level>Expert</Level>
+    <Active>true</Active>
+  </Engineer>
+  <Engineer>
+    <ID>12342342</ID>
+    <EMail> lala@jct.com</EMail>
+    <Name> lala</Name>
+    <Cost>220</Cost>
+    <Level>Beginner</Level>
+    <Active>true</Active>
+  </Engineer>
+</ArrayOfEngineer>

@@ -8,6 +8,39 @@
 
         <local:ConvertIdToContent x:Key="ConvertIdToContentKey"/>
         <local:IdToEnabledConverter x:Key="IdToEnabledConverterKey"/>
+        <Style x:Key="ButtonMain"
+           TargetType="Button">
+            <Setter Property="FontSize"
+              Value="18" />
+            <Setter Property="FontFamily"
+              Value="Consolas" />
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="Height" Value="67" />
+            <Setter Property="Width" Value="125" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            CornerRadius="10">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
 
+            <Setter Property="Background">
+                <Setter.Value>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                        <GradientStop Color="LightSalmon" Offset="0.0"/>
+                        <GradientStop Color="Beige" Offset="1.0"/>
+                    </LinearGradientBrush>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        
+        
     </Application.Resources>
 </Application>

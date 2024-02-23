@@ -1,4 +1,4 @@
-﻿//Hadar Cohen
+﻿//Hadar 
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -45,9 +45,9 @@ namespace PL.Engineer
 
         private void btnAdd_Click(object sender, RoutedEventArgs e)
         {
-            EngineerWindow engineerWindow = new EngineerWindow();
-            engineerWindow.Closed += EngineerWindow_Closed!;
+            
             new EngineerWindow().ShowDialog();
+            EngineerList = s_bl.Engineer.ReadAll();
         }
 
         private void EngineerList_DoubleClick(object sender, MouseButtonEventArgs e)
@@ -56,23 +56,12 @@ namespace PL.Engineer
             if (engineer != null)
             {
                 EngineerWindow engineerWindow = new EngineerWindow(engineer.Id);
-                engineerWindow.Closed += EngineerWindow_Closed!;
                 engineerWindow.ShowDialog();
+                EngineerList = s_bl.Engineer.ReadAll();
 
             }
         }
-        private void EngineerWindow_Closed(object sender, EventArgs e)
-        {
-            // קריאה לפונקציה לעדכון רשימת הפריטים ב- ListView
-            UpdateEngineerList();
-        }
-        private void UpdateEngineerList()
-        {
-            List<BO.Engineer> engineers = s_bl.Engineer.ReadAll().ToList(); // דוגמה לקריאה לבסיס הנתונים או לשירות
-
-            // עדכון של מקור הנתונים של ה- ListView עם רשימת המהנדסים העדכנית
-            EngineerList = engineers;
-        }
+   
        
     }
 

@@ -4,14 +4,27 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL"
-        mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Background="{DynamicResource backgroundImage}"
+         mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800" >
+
+    <Window.Resources>
+
+        <ImageSource x:Key="imgSource">image/mainWindow.jpg</ImageSource>
+        <ImageBrush x:Key="backgroundImage" ImageSource="{DynamicResource imgSource}" ></ImageBrush>
+
+    </Window.Resources>
+
+
+    
     <Grid>
-        <TextBox> </TextBox>
+        <TextBox/>
         <!--three buttons for the main window-->
-        <Button  Content="ViewList" HorizontalAlignment="Left" Margin="106,123,0,0" VerticalAlignment="Top" Height="67" Width="125" Click="btnEngineers_Click"/>
-        <Button  Content="Inizilation Data" HorizontalAlignment="Left" Margin="321,123,0,0" VerticalAlignment="Top" Height="67" Width="125" Click="btnInitEngineers_Click" />
-        <Button  Content="Reset Data" HorizontalAlignment="Left" Margin="549,123,0,0" VerticalAlignment="Top" Height="67" Width="125" RenderTransformOrigin="0.767,-0.469" Click="btnResetEngineers_Click" />
+        <Button  Content="ViewList" Style="{StaticResource ButtonMain}"  Click="btnEngineers_Click" Margin="0,39,60,0" HorizontalAlignment="Right" VerticalAlignment="Top">
+        </Button>
+                 
+        <Button  Content=" Inizilation Data" Style="{StaticResource ButtonMain}" HorizontalAlignment="Left" Margin="511,163,0,0" VerticalAlignment="Top" Height="67" Width="125" Click="btnInitEngineers_Click" />
+        <Button  Content="Reset Data" Style="{StaticResource ButtonMain}" HorizontalAlignment="Left" Margin="357,283,0,0" VerticalAlignment="Top" Height="67" Width="125" RenderTransformOrigin="0.767,-0.469" Click="btnResetEngineers_Click" />
 
     </Grid>
 </Window>

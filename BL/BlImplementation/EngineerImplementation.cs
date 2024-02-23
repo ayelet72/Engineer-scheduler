@@ -69,37 +69,44 @@ internal class EngineerImplementation : IEngineer
             throw new BO.BlDoesNotExistException($"Engineer with ID={boEngineer.Id} does Not exist");
 
         if (boEngineer.Name != null && boEngineer.Email != null && boEngineer.Cost > 0 && 
-            (_dal.Engineer.Read(boEngineer.Id)!).Level< (DO.EngineerExperience)boEngineer.Level && (int)boEngineer.Level<5&&
-            _dal.Task.Read(boEngineer.Task!.Id)!=null)        
+            (_dal.Engineer.Read(boEngineer.Id)!).Level<= (DO.EngineerExperience)boEngineer.Level && (int)boEngineer.Level<5)
+            
         {
-            DO.Task? task = _dal.Task.Read(boEngineer.Task.Id);
+            
+            
 
             //if there is an update in the Task of the Engineer, update the task only if it haven't done yet
             try {
-                if (task != null && task.CompleteDate == null)
+                if(boEngineer.Task!=null)
                 {
+                    DO.Task? task = _dal.Task.Read(boEngineer.Task.Id);
 
-                    _dal.Task.Update(task with
-                    {
-                        Alias = (boEngineer.Task).Alias,
-                        EngineerId = boEngineer.Id,
-                        Complexity = (DO.EngineerExperience)boEngineer.Level
-                    }
-                   );
-
-                    // if the manager or the engineer assigned a task for the engineer active=true.
-                    _dal.Engineer.Update(new DO.Engineer()
+                    if (task != null && task.CompleteDate == null)
                     {
 
-                        ID = boEngineer.Id,
-                        Name = boEngineer.Name,
-                        EMail = boEngineer.Email,
-                        Level = (DO.EngineerExperience)boEngineer.Level,
-                        Cost = boEngineer.Cost,
-                        Active = true
+                        _dal.Task.Update(task with
+                        {
+                            Alias = (boEngineer.Task).Alias,
+                            EngineerId = boEngineer.Id,
+                            Complexity = (DO.EngineerExperience)boEngineer.Level
+                        }
+                       );
+
+                        // if the manager or the engineer assigned a task for the engineer active=true.
+                        _dal.Engineer.Update(new DO.Engineer()
+                        {
+
+                            ID = boEngineer.Id,
+                            Name = boEngineer.Name,
+                            EMail = boEngineer.Email,
+                            Level = (DO.EngineerExperience)boEngineer.Level,
+                            Cost = boEngineer.Cost,
+                            Active = true
+                        }
+                        );
                     }
-                    );
                 }
+                  
                 // if the manager or the engineer didn't assign a task for the engineer keep the original active.
                 _dal.Engineer.Update(new DO.Engineer()
                 {
@@ -122,9 +129,11 @@ internal class EngineerImplementation : IEngineer
 
 
         }
+        else
             throw new BO.BlInvalidDataException($"Engineer with ID={boEngineer.Id} invalid");
 
-        
+
+
 
 
     }

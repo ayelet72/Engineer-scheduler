@@ -31,8 +31,8 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
+            <!--create or update fields of engineer by binding data-->
 
-            
             <Label Content="Id:" Grid.Column="1" Grid.Row="0" Margin="37,6,250,1"/>
             <TextBox Text="{Binding Id, Mode=TwoWay,NotifyOnValidationError=true,  ValidatesOnExceptions=true}"
                      IsEnabled="{Binding Id,Mode=OneTime, Converter={StaticResource IdToEnabledConverterKey}}"
@@ -61,7 +61,7 @@
 
         </Grid>
 
-
+        <!--a button of add or update engineer-->
         <Button FontSize="20" Grid.Row="2" Margin="3"
                 Style="{StaticResource CustomButtonStyle}"
                 Content="{Binding Id, Mode=OneTime, Converter={StaticResource ConvertIdToContentKey}}" 

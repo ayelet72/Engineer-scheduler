@@ -60,7 +60,7 @@
     <ID>1234562</ID>
     <EMail>Ayelt@jct.com</EMail>
     <Name>Ayelt</Name>
-    <Cost>300</Cost>
+    <Cost>400</Cost>
     <Level>Intermediate</Level>
     <Active>true</Active>
   </Engineer>

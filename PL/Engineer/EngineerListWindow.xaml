@@ -24,6 +24,7 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <Label Content="Select level of engineer" HorizontalAlignment="Left" Margin="109,0,0,0" VerticalAlignment="Center" Grid.Column="0"/>
+            <!--filter comboBox-->
             <ComboBox SelectedValue="{Binding Level, Mode=TwoWay}" ItemsSource="{Binding Source={StaticResource ExperienceLevelCollectionKey}}"
                                         Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  SelectionChanged="cbLevelSelector_SelectionChanged"/>
 

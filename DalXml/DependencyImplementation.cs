@@ -147,7 +147,7 @@ internal class DependencyImplementation : IDependency //With XElement for stage 
         List<Dependency> Dependencies = XMLTools.LoadListFromXMLSerializer<Dependency>(s_dependencies_xml);
         Dependencies.Clear();
         XMLTools.SaveListToXMLSerializer(Dependencies, s_dependencies_xml);
-
+        Config.InitDependencyID();
 
     }
 }

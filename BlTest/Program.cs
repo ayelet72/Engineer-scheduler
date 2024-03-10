@@ -83,12 +83,12 @@ namespace BlTest
         // choosing the function you want to activate on the chosen item.
         {
 
-            Console.WriteLine("1. Exit main menu");
-            Console.WriteLine("2. Add new engineer");
-            Console.WriteLine("3. Read engineer");
-            Console.WriteLine("4. ReadAll engineers");
-            Console.WriteLine("5. Update engineer");
-            Console.WriteLine("6. Delete engineer");
+            Console.WriteLine("0. Exit main menu");
+            Console.WriteLine("1. Add new engineer");
+            Console.WriteLine("2. Read engineer");
+            Console.WriteLine("3. ReadAll engineers");
+            Console.WriteLine("4. Update engineer");
+            Console.WriteLine("5. Delete engineer");
 
             int choice;
             do
@@ -96,66 +96,68 @@ namespace BlTest
                 choice = int.Parse(Console.ReadLine()!);
                 switch (choice)
                 {
-                    case 1:
+                    case 0:
                         Console.WriteLine("exit sub menu");
+                        MainMenu();
                         return;
-                    case 2:
+                    case 1:
                         AddEngineer();
                         break;
-                    case 3:
+                    case 2:
                         ReadEngineer();
                         break;
-                    case 4:
+                    case 3:
                         ReadAllEngineer();
                         break;
-                    case 5:
+                    case 4:
                         UpdateEngineer();
                         break;
-                    case 6:
+                    case 5:
                         DeleteEngineer();
                         break;
                     default:
                         Console.WriteLine("ERROR");
                         break;
                 }
-            } while (choice != 1);
+            } while (choice != 0);
         }
         public static void SubMenuTask() 
            // choosing the function you want to activate on the chosen item.
         {
-            Console.WriteLine("1. Exit main menu");
-            Console.WriteLine("2. Add new task");
-            Console.WriteLine("3. Update schedule date of task");
-            Console.WriteLine("4. Read task");
-            Console.WriteLine("5. ReadAll tasks");
-            Console.WriteLine("6. Update task");
-            Console.WriteLine("7. Delete task");
+            Console.WriteLine("0. Exit main menu");
+            Console.WriteLine("1. Add new task");
+            Console.WriteLine("2. Update schedule date of task");
+            Console.WriteLine("3. Read task");
+            Console.WriteLine("4. ReadAll tasks");
+            Console.WriteLine("5. Update task");
+            Console.WriteLine("6. Delete task");
             int choice;
             do
             {
                 choice = int.Parse(Console.ReadLine()!);
                 switch (choice)
                 {
-                    case 1:
+                    case 0:
                         Console.WriteLine("exit sub menu");
+                        MainMenu();
                         return;
-                    case 2:
+                    case 1:
 
                         AddTask();
                         break;
-                    case 3:
+                    case 2:
                         UpdateScheduleDate();
                         break;
-                    case 4:
+                    case 3:
                         ReadTask();
                         break;
-                    case 5:
+                    case 4:
                         ReadAllTask();
                         break;
-                    case 6:
+                    case 5:
                         UpdateTask();
                         break;
-                    case 7:
+                    case 6:
                         DeleteTask();
                         break;
                     default:
@@ -163,7 +165,7 @@ namespace BlTest
                         break;
                 }
 
-            } while (choice != 1);
+            } while (choice != 0);
 
         }
 
@@ -561,21 +563,40 @@ namespace BlTest
                 Console.WriteLine(" enter id of the task");
                 num = Console.ReadLine()!;
                 int.TryParse(num, out int id);
-                Console.WriteLine(" enter id of the engineer");
+                Console.WriteLine("enter 1 if you want to ");
                 num = Console.ReadLine()!;
-                int.TryParse(num, out int engineerID);
+                int.TryParse(num, out choice);
+                int? engineerID = null;
+                if (choice==1)
+                {
+                    Console.WriteLine("enter id of the engineer");
+                    num = Console.ReadLine()!;
+                    int.TryParse(num, out int idEngineer);
+                    engineerID = idEngineer;
+
+                }
+                
                 Console.WriteLine(" enter alias of the task");
                 string alias = Console.ReadLine()!;
-                Console.WriteLine(" enter description of the task");
+                Console.WriteLine("enter description of the task");
                 string description = Console.ReadLine()!;
-                Console.WriteLine(" enter remarks of the task");
+                Console.WriteLine("enter remarks of the task");
                 string remarks = Console.ReadLine()!;
-                Console.WriteLine(" enter deliverables of the task");
+                Console.WriteLine("enter deliverables of the task");
                 string deliverables = Console.ReadLine()!;
                 Console.WriteLine($"Enter a complexity to task");
                 string levelCom = Console.ReadLine()!;
                 Enum.TryParse<BO.EngineerExperience>(levelCom, out BO.EngineerExperience selectedLevelCom);
-                Console.WriteLine($"Enter a requierdEffortTime to task");
+                int intValue = Convert.ToInt32(selectedLevelCom);
+                while (intValue > 4 || intValue < 0)
+                {
+                    Console.WriteLine("ERROR");
+                    levelCom = Console.ReadLine()!;
+                    Enum.TryParse<BO.EngineerExperience>(levelCom, out selectedLevelCom);     //Bonus: converter from string to Enum
+                    intValue = Convert.ToInt32(selectedLevelCom);
+
+                }
+                Console.WriteLine($"enter a requierdEffortTime to task");
                 string? timeSpan = Console.ReadLine();
                 Console.WriteLine($"if you want to add or delete tasks that the task depends on enter 1");
                 num = Console.ReadLine()!;
@@ -609,15 +630,7 @@ namespace BlTest
                 }
 
                 TimeSpan.TryParse(timeSpan, out TimeSpan requierdEffortTime);
-                int intValue = Convert.ToInt32(selectedLevelCom);
-                while (intValue > 4 || intValue < 0)
-                {
-                    Console.WriteLine("ERROR");
-                    levelCom = Console.ReadLine()!;
-                    Enum.TryParse<BO.EngineerExperience>(levelCom, out selectedLevelCom);     //Bonus: converter from string to Enum
-                    intValue = Convert.ToInt32(selectedLevelCom);
-
-                }
+                
 
                 DateTime? startDate = null;
                 Console.WriteLine($"if you want to enter Startproject enter 1,else 0");
@@ -643,26 +656,49 @@ namespace BlTest
 
                 try
                 {
-                    Console.WriteLine(s_bl.Task.Read(id));
-                    s_bl.Task.Update(new BO.Task
+                    if(engineerID!=null)
                     {
-                        Id = id,
-                        Alias = alias,
-                        Description = description,
-                        CompleteDate = completeDate,
-                        StartDate = startDate,
-                        Complexity = selectedLevelCom,
-                        Dependencies = dependencies,
-                        RequiredEffortTime = requierdEffortTime,
-                        Remarks = remarks,
-                        Deliverables = deliverables,
-                        Engineer = new BO.EngineerInTask
+                        Console.WriteLine(s_bl.Task.Read(id));
+                        s_bl.Task.Update(new BO.Task
                         {
-                            Id = engineerID,
-                            Name = s_dal.Engineer.Read(engineerID)?.Name
-                        }
+                            Id = id,
+                            Alias = alias,
+                            Description = description,
+                            CompleteDate = completeDate,
+                            StartDate = startDate,
+                            Complexity = selectedLevelCom,
+                            Dependencies = dependencies,
+                            RequiredEffortTime = requierdEffortTime,
+                            Remarks = remarks,
+                            Deliverables = deliverables,
+                            Engineer = new BO.EngineerInTask
+                            {
+                                Id = (int)engineerID,
+                                Name = s_dal.Engineer.Read((int)engineerID)?.Name
+                            }
 
-                    });
+                        });
+                    }
+                    else
+                    {
+                        Console.WriteLine(s_bl.Task.Read(id));
+                        s_bl.Task.Update(new BO.Task
+                        {
+                            Id = id,
+                            Alias = alias,
+                            Description = description,
+                            CompleteDate = completeDate,
+                            StartDate = startDate,
+                            Complexity = selectedLevelCom,
+                            Dependencies = dependencies,
+                            RequiredEffortTime = requierdEffortTime,
+                            Remarks = remarks,
+                            Deliverables = deliverables,
+                            
+
+                        });
+                    }
+                    
                 }
                 catch (Exception mesg)
                 {

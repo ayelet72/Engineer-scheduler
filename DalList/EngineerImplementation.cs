@@ -70,8 +70,6 @@ internal class EngineerImplementation : IEngineer
     }
     public void Reset()
     {
-
         DataSource.Engineers.Clear();
-
     }
 }

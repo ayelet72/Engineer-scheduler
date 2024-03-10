@@ -36,7 +36,8 @@ internal class EngineerImplementation : IEngineer
             }
             
         }
-        throw new BO.BlInvalidDataException($"Engineer with ID={boEngineer.Id} invalid");
+        else
+            throw new BO.BlInvalidDataException($"Engineer with ID={boEngineer.Id} invalid");
 
     }
     // a function that creates an engineer

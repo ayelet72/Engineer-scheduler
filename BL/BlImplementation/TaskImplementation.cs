@@ -121,36 +121,66 @@ internal class TaskImplementation : ITask
     {
         DO.Task task = _dal.Task.Read(boTask.Id) ??
             throw new BO.BlDoesNotExistException($"Task with ID={boTask.Id} does Not exist");
-        DO.Engineer engineer = _dal.Engineer.Read(boTask.Engineer!.Id) ??
-            throw new BO.BlDoesNotExistException($"Engineer with ID={boTask.Engineer.Id} does Not exist");
-        
-        if (boTask.Alias == null || boTask.Description == null || engineer.Level < task.Complexity)
-            throw new BO.BlInvalidDataException($"Invalid data "); 
+        if(boTask.Engineer !=null)
+        {
+            DO.Engineer engineer = _dal.Engineer.Read(boTask.Engineer!.Id) ??
+           throw new BO.BlDoesNotExistException($"Engineer with ID={boTask.Engineer.Id} does Not exist");
+            if (boTask.Alias == null || boTask.Description == null || engineer.Level < task.Complexity)
+                throw new BO.BlInvalidDataException($"Invalid data ");
+        }
+        if (boTask.Alias == null || boTask.Description == null)
+            throw new BO.BlInvalidDataException($"Invalid data ");
+
+
 
 
         //TODO start end date
         if (bl.StartProject == null)
         {
             // update engineer too
-            try {
-                _dal.Engineer.Update(engineer with
+            try
+            {
+                if (boTask.Engineer != null)
                 {
-                    Active = true
+                    DO.Engineer engineer = _dal.Engineer.Read(boTask.Engineer!.Id)!;
+                    _dal.Engineer.Update(engineer with
+                    {
+                        Active = true
+                    }
+                    );
+                    //if there is no scheduel project and there is an engineer it is possible to update this fields:
+                    _dal.Task.Update(task with
+                    {
+                        Alias = boTask.Alias,
+                        EngineerId = boTask.Engineer.Id,
+                        Description = boTask.Description,
+                        StartDate = Tools.CheckStartDate(boTask),
+                        CompleteDate = Tools.CheckCompleteDate(boTask),
+                        Complexity = (DO.EngineerExperience)boTask.Complexity,
+                        RequiredEffortTime = boTask.RequiredEffortTime, //Tools.SetRequiredEffortTime(boTask),
+                        Remarks = boTask.Remarks,
+                        Deliverables = boTask.Deliverables
+                    });
                 }
-                );
-                //if there is no scheduel project it is possible to update this fields:
-                _dal.Task.Update(task with
+                else
                 {
-                    Alias = boTask.Alias,
-                    EngineerId = boTask.Engineer.Id,
-                    Description = boTask.Description,
-                    StartDate = Tools.CheckStartDate(boTask),
-                    CompleteDate = Tools.CheckCompleteDate(boTask),
-                    Complexity = (DO.EngineerExperience)boTask.Complexity,
-                    RequiredEffortTime = boTask.RequiredEffortTime, //Tools.SetRequiredEffortTime(boTask),
-                    Remarks = boTask.Remarks,
-                    Deliverables = boTask.Deliverables
-                });
+                    //There is no engineer
+                    _dal.Task.Update(task with
+                    {
+                        Alias = boTask.Alias,
+                        Description = boTask.Description,
+                        StartDate = Tools.CheckStartDate(boTask),
+                        CompleteDate = Tools.CheckCompleteDate(boTask),
+                        Complexity = (DO.EngineerExperience)boTask.Complexity,
+                        RequiredEffortTime = boTask.RequiredEffortTime, //Tools.SetRequiredEffortTime(boTask),
+                        Remarks = boTask.Remarks,
+                        Deliverables = boTask.Deliverables
+                    });
+                }
+                
+
+
+
             }
             catch(DO.DalNotExistsException ex)
             {
@@ -196,21 +226,40 @@ internal class TaskImplementation : ITask
         {
             try
             {
-                _dal.Engineer.Update(engineer with
+                if (boTask.Engineer != null)
                 {
-                    Active = true
-                });
+                    DO.Engineer engineer = _dal.Engineer.Read(boTask.Engineer!.Id)!;
+                    _dal.Engineer.Update(engineer with
+                    {
+                        Active = true
+                    }
+                    );
+                    //there is an engineer
+                    _dal.Task.Update(task with
+                    {
+                        Alias = boTask.Alias,
+                        EngineerId = boTask.Engineer.Id,
+                        Description = boTask.Description,
+                        Complexity = (DO.EngineerExperience)boTask.Complexity,
+                        Remarks = boTask.Remarks,
+                        Deliverables = boTask.Deliverables
+                    });
+                }
+                else
+                {
+                    _dal.Task.Update(task with
+                    {
+                        Alias = boTask.Alias,
+                        Description = boTask.Description,
+                        Complexity = (DO.EngineerExperience)boTask.Complexity,
+                        Remarks = boTask.Remarks,
+                        Deliverables = boTask.Deliverables
+                    });
+                }
+                
 
 
-                _dal.Task.Update(task with
-                {
-                    Alias = boTask.Alias,
-                    EngineerId = boTask.Engineer.Id,
-                    Description = boTask.Description,
-                    Complexity = (DO.EngineerExperience)boTask.Complexity,
-                    Remarks = boTask.Remarks,
-                    Deliverables = boTask.Deliverables
-                });
+
             }
             catch (DO.DalNotExistsException ex)
             {
@@ -220,7 +269,6 @@ internal class TaskImplementation : ITask
 
         }
 
-        throw new BO.BlInvalidDataException($"the input data is invalid");
     }
 
     public IEnumerable<BO.Task> ReadAll(Func<DO.Task, bool>? filter = null)

@@ -25,6 +25,7 @@ internal static class Config
     internal static void InitTaskID() => XMLTools.InitNextId(s_data_config_xml, "NextTaskId", "InitTaskID");
     internal static void InitDependencyID() => XMLTools.InitNextId(s_data_config_xml, "NextDependencyId", "InitDependencyID");
     internal static void InitStartAndEndProject() => XMLTools.InitDate(s_data_config_xml, "StartProject", "EndProject");
+    
     // internal static void InitEndProject() => XMLTools.InitNextId(s_data_config_xml, "NextDependencyId", "InitDependencyID");
 
 

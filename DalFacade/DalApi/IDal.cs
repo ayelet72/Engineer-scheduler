@@ -12,4 +12,5 @@ public interface IDal
     DateTime? StartProject { set;get; }
     DateTime? EndProject { set; get; }
 
+    void Reset();
 }

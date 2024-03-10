@@ -1,8 +1,28 @@
 ﻿using System.Globalization;
+using System.Windows;
 using System.Windows.Data;
 
 namespace PL;
 
+ class TaskToVisibilityConverter : IValueConverter
+{
+    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        bool showButton = false;
+        if (value != null && parameter != null && value is BO.Task task && parameter is string boolParameter)
+        {
+            bool parameterValue = bool.TryParse(boolParameter, out bool result) ? result : false;
+            showButton = (task != null && parameterValue) || (task == null && !parameterValue);
+        }
+
+        return showButton ? Visibility.Visible : Visibility.Collapsed;
+    }
+
+    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        throw new NotImplementedException();
+    }
+}
 class ConvertIdToContent : IValueConverter
 {
     public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
@@ -37,3 +57,4 @@ class ConvertIdToContent : IValueConverter
         throw new NotImplementedException();
     }
 }
+

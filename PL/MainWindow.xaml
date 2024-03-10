@@ -10,21 +10,23 @@
 
     <Window.Resources>
 
-        <ImageSource x:Key="imgSource">image/mainWindow.jpg</ImageSource>
+        <ImageSource x:Key="imgSource">images/mainWindow.jpg</ImageSource>
         <ImageBrush x:Key="backgroundImage" ImageSource="{DynamicResource imgSource}" ></ImageBrush>
 
     </Window.Resources>
 
 
-    
+
     <Grid>
-        <TextBox/>
+        <TextBox>
+            <TextBox.Background>
+                <ImageBrush/>
+            </TextBox.Background>
+        </TextBox>
         <!--three buttons for the main window-->
-        <Button  Content="ViewList" Style="{StaticResource ButtonMain}"  Click="btnEngineers_Click" Margin="0,39,60,0" HorizontalAlignment="Right" VerticalAlignment="Top">
-        </Button>
-                 
-        <Button  Content=" Inizilation Data" Style="{StaticResource ButtonMain}" HorizontalAlignment="Left" Margin="511,163,0,0" VerticalAlignment="Top" Height="67" Width="125" Click="btnInitEngineers_Click" />
-        <Button  Content="Reset Data" Style="{StaticResource ButtonMain}" HorizontalAlignment="Left" Margin="357,283,0,0" VerticalAlignment="Top" Height="67" Width="125" RenderTransformOrigin="0.767,-0.469" Click="btnResetEngineers_Click" />
+        <Button  Content="Engineer" Style="{StaticResource ButtonMain}"  Click="btnEngineer_Click" Margin="0,299,183,0" HorizontalAlignment="Right" VerticalAlignment="Top" RenderTransformOrigin="-0.099,0.554"/>
+        <Button  Content="Admin" Style="{StaticResource ButtonMain}"  Click="btnAdmin_Click" Margin="0,299,503,0" HorizontalAlignment="Right" VerticalAlignment="Top"/>
+       
 
     </Grid>
 </Window>

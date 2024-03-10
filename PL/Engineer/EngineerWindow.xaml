@@ -6,18 +6,19 @@
         xmlns:local="clr-namespace:PL.Engineer"
         mc:Ignorable="d"
         Title="EngineerWindow" Height="250" Width="350"
-        
-    DataContext="{Binding CurrentEngineer, RelativeSource={RelativeSource Self}, Mode=TwoWay}">
-    <Grid Style="{StaticResource CustomGridBackgroundStyle}">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="Auto"/>
-        </Grid.RowDefinitions>
+        DataContext="{Binding CurrentEngineer, RelativeSource={RelativeSource Self}, Mode=TwoWay}">
 
 
 
-        <Grid x:Name="CourseDetailsGrid" Grid.Row="1">
+    
+        <Grid Style="{StaticResource CustomGridBackgroundStyle}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <Grid  Grid.Row="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="*"/>
@@ -30,24 +31,33 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
+
+            
             <Label Content="Id:" Grid.Column="1" Grid.Row="0" Margin="37,6,250,1"/>
-            <TextBox Style="{StaticResource CustomTextBoxStyle}" Text="{Binding Id, Mode=TwoWay,NotifyOnValidationError=true,  ValidatesOnExceptions=true}"
+            <TextBox Text="{Binding Id, Mode=TwoWay,NotifyOnValidationError=true,  ValidatesOnExceptions=true}"
                      IsEnabled="{Binding Id,Mode=OneTime, Converter={StaticResource IdToEnabledConverterKey}}"
+                     Style="{StaticResource CustomTextBoxStyle}"
                      Grid.Column="1" Grid.Row="0" Margin="3" Width="150" Height="25"/>
 
             <Label Content="Name:" Grid.Column="0" Grid.Row="1" Margin="37,4,250,2" Grid.ColumnSpan="2"/>
-            <TextBox Style="{StaticResource CustomTextBoxStyle}" Text="{Binding Name, Mode=TwoWay,NotifyOnValidationError=true,  ValidatesOnExceptions=true}" Grid.Column="1" Grid.Row="1" Margin="3" Width="150" Height="25"/>
+            <TextBox  Text="{Binding Name, Mode=TwoWay,NotifyOnValidationError=true,  ValidatesOnExceptions=true}" Grid.Column="1" Grid.Row="1" Margin="3" Width="150" Height="25"
+                      Style="{StaticResource CustomTextBoxStyle}"/>
 
             <Label Content="Email:" Grid.Column="0" Grid.Row="2" Margin="37,3,250,3" Grid.ColumnSpan="2"/>
-            <TextBox Style="{StaticResource CustomTextBoxStyle}" Text="{Binding Email, Mode=TwoWay,NotifyOnValidationError=true,  ValidatesOnExceptions=true}" Grid.Column="1" Grid.Row="2" Margin="3" Width="150" Height="25"/>
+            <TextBox  Text="{Binding Email, Mode=TwoWay,NotifyOnValidationError=true,  ValidatesOnExceptions=true}"
+                      Style="{StaticResource CustomTextBoxStyle}"
+                      Grid.Column="1" Grid.Row="2" Margin="3" Width="150" Height="25"/>
 
             <Label Content="Level:" Grid.Column="0" Grid.Row="3" Margin="37,2,250,4" Grid.ColumnSpan="2"/>
-            <ComboBox Style="{StaticResource CustomComboBoxStyle}" SelectedValue="{Binding Level, Mode=TwoWay,NotifyOnValidationError=true, ValidatesOnExceptions=true}"
+            <ComboBox  SelectedValue="{Binding Level, Mode=TwoWay,NotifyOnValidationError=true, ValidatesOnExceptions=true}"
                                      ItemsSource="{Binding Source={StaticResource ExperienceLevelCollectionKey}}"
-                                    Grid.Column="1" Grid.Row="3" Margin="2" Width="150" Height="25" />
+                                    Grid.Column="1" Grid.Row="3" Margin="2" Width="150" Height="25"/>
+          
 
             <Label Content="Cost:" Grid.Column="0" Grid.Row="4" Margin="37,2,250,4" Grid.ColumnSpan="2"/>
-            <TextBox Style="{StaticResource CustomTextBoxStyle}" Text="{Binding Cost, Mode=TwoWay,NotifyOnValidationError=true,  ValidatesOnExceptions=true}" Grid.Column="1" Grid.Row="4" Margin="3" Width="150" Height="25"/>
+            <TextBox Text="{Binding Cost, Mode=TwoWay,NotifyOnValidationError=true,  ValidatesOnExceptions=true}" 
+                     Style="{StaticResource CustomTextBoxStyle}"
+                     Grid.Column="1" Grid.Row="4" Margin="3" Width="150" Height="25"/>
 
         </Grid>
 

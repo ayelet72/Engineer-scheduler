@@ -17,6 +17,19 @@ public interface IBl
     public ProjectStatus CalcStatusProject();
     public  void InitializeDB();
     public  void ResetDB();
+
+    #region Properties 
+    DateTime Clock { get; }
+    #endregion
+
+    #region Methods
+    void AdvanceTimeByYear(int years);
+    void AdvanceTimeByMonth(int months);
+    void AdvanceTimeByDay(int days);
+    void AdvanceTimeByHour(int hours);
+    void InitializeTime();
+
+    #endregion
 }
 
 

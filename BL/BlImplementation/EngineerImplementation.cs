@@ -9,7 +9,9 @@ using System.Xml.Linq;
 internal class EngineerImplementation : IEngineer
 {
     private DalApi.IDal _dal = DalApi.Factory.Get;
-   
+    private readonly IBl _bl;
+    internal EngineerImplementation(IBl bl) => _bl = bl;
+
     public int Create(BO.Engineer boEngineer)
     // a function that creates an engineer
     {

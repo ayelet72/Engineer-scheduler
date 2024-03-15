@@ -13,7 +13,10 @@ internal class TaskImplementation : ITask
 {
     private DalApi.IDal _dal = DalApi.Factory.Get;
     private IBl bl =  BlApi.Factory.Get();
-       
+    private readonly IBl _bl;
+    internal TaskImplementation(IBl bl) => _bl = bl;    //הגדרתי אותו עכשיו צריך לשנות איכשהו כלפעם שמופיע DATETIME לשנות לשעון שהגדרנו מתוך הביאל
+
+
     public int Create(BO.Task boTask)
     // a function that create a task
 
@@ -256,16 +259,12 @@ internal class TaskImplementation : ITask
                         Deliverables = boTask.Deliverables
                     });
                 }
-                
-
-
 
             }
             catch (DO.DalNotExistsException ex)
             {
                 throw new BlDoesNotExistException($"doesn't exsit", ex);
             }
-
 
         }
 
@@ -274,8 +273,6 @@ internal class TaskImplementation : ITask
     public IEnumerable<BO.Task> ReadAll(Func<DO.Task, bool>? filter = null)
     // a function that return all the tasks in IEnumerable 
     {
-
-
         if (filter == null)
             return (from item in _dal.Task.ReadAll()
                     select new BO.Task
@@ -357,8 +354,9 @@ internal class TaskImplementation : ITask
             throw new BlDoesNotExistException($"doesn't exsit", ex);
         }
 
-
     }
+
+    
 }
 
 

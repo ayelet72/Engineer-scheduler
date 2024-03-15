@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PL.Task;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,9 +20,15 @@ namespace PL
     /// </summary>
     public partial class EngineerViewWindow : Window
     {
-       
+
         static readonly BlApi.IBl s_bl = BlApi.Factory.Get();
-        public BO.Task? CurrentTask { get; set; }
+        public BO.Task? CurrentTask
+        {
+            get { return (BO.Task)GetValue(CurrentTaskProperty); }
+            set { SetValue(CurrentTaskProperty, value); }
+        }
+        public static readonly DependencyProperty CurrentTaskProperty =
+           DependencyProperty.Register("CurrentTask", typeof(BO.Task), typeof(EngineerViewWindow), new PropertyMetadata(null));
         public EngineerViewWindow(int id)
         {
             InitializeComponent();
@@ -43,6 +50,18 @@ namespace PL
         private void ShowTaskListButton_Click(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        private void AddTaskButton_Click(object sender, RoutedEventArgs e)
+        {
+            // פתיחת חלון חדש עבור הוספת משימה
+            TaskListWindow addTaskWindow = new TaskListWindow();
+
+            // פתיחת החלון והמתנה לסגירה
+            if (addTaskWindow.ShowDialog() == true)
+            {
+               
+            }
         }
     }
 }

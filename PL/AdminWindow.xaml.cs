@@ -38,12 +38,15 @@ namespace PL
             if (result == MessageBoxResult.Yes)
             {
                 s_bl.InitializeDB();
+                MessageBox.Show($"initlization was successfully done", "Success", MessageBoxButton.OK, MessageBoxImage.Exclamation);
             }
 
         }
         private void btnResetEngineers_Click(object sender, RoutedEventArgs e)
         {
             s_bl.ResetDB();
+            MessageBox.Show($"Reset was successfully done", "Success", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+
         }
 
         private void btnGant_Click(object sender, RoutedEventArgs e)

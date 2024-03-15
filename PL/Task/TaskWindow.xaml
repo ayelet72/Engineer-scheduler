@@ -5,9 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL.Task"
         mc:Ignorable="d"
-        Title="TaskWindow" Height="337" Width="391"
-         DataContext="{Binding RelativeSource={RelativeSource Mode=Self}}">
-    <Grid Style="{StaticResource CustomGridBackgroundStyle}" Margin="0,0,-86,0">
+        Title="TaskWindow" Height="380" Width="521"
+        DataContext="{Binding CurrentTask, RelativeSource={RelativeSource Self}, Mode=TwoWay}">
+    <Grid Style="{StaticResource CustomGridBackgroundStyle}" Margin="0,-21,0,13" HorizontalAlignment="Center" Width="520">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
@@ -16,7 +16,7 @@
 
 
 
-        <Grid Grid.Row="1" Margin="0,0,84,0">
+        <Grid Grid.Row="1" Margin="24,18,24,0" Grid.RowSpan="2">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="*"/>
@@ -32,52 +32,46 @@
             <Label Content="Id:" Grid.Column="1" Grid.Row="0" Margin="11,7,341,32"/>
             <TextBox Style="{StaticResource CustomTextBoxStyle}" Text="{Binding Id, Mode=TwoWay,NotifyOnValidationError=true,  ValidatesOnExceptions=true}"
                      IsEnabled="False"
-                     Grid.Column="1" Grid.Row="0" Margin="85,10,210,29"/>
+                     Grid.Column="1" Grid.Row="0" Margin="85,10,270,29"/>
 
             <Label Content="Alias:" Grid.Column="0" Grid.Row="1" Margin="11,3,328,30" Grid.ColumnSpan="2"/>
             <TextBox Style="{StaticResource CustomTextBoxStyle}" Text="{Binding Alias, Mode=TwoWay,NotifyOnValidationError=true,  ValidatesOnExceptions=true}" 
-                     Grid.Column="1" Grid.Row="1" Margin="85,7,210,32"/>
+                     Grid.Column="1" Grid.Row="1" Margin="85,10,270,29"/>
 
             <Label Content="Description:" Grid.Column="0" Grid.Row="2" Margin="3,2,306,27" Grid.ColumnSpan="2" RenderTransformOrigin="0.5,0.5"/>
-            <TextBox Style="{StaticResource CustomTextBoxStyle}" Text="{Binding Description, Mode=TwoWay,NotifyOnValidationError=true,  ValidatesOnExceptions=true}" Grid.Column="1" Grid.Row="2" Margin="85,7,210,32" TextChanged="TextBox_TextChanged"/>
+            <TextBox Style="{StaticResource CustomTextBoxStyle}" Text="{Binding Description, Mode=TwoWay,NotifyOnValidationError=true,  ValidatesOnExceptions=true}" Grid.Column="1" Grid.Row="2" Margin="85,10,270,29" TextChanged="TextBox_TextChanged"/>
 
 
 
             <Label Content="Remarks:" Grid.Column="0" Grid.Row="3" Margin="3,2,306,27" Grid.ColumnSpan="2"/>
-            <TextBox Style="{StaticResource CustomTextBoxStyle}" Text="{Binding Remarks, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Column="1" Grid.Row="3" Margin="85,7,210,32"/>
+            <TextBox Style="{StaticResource CustomTextBoxStyle}" Text="{Binding Remarks, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Column="1" Grid.Row="3" Margin="85,10,270,29"/>
 
             <Label Content="Deliverables:" Grid.Column="0" Grid.Row="4" Margin="3,2,306,27" Grid.ColumnSpan="2"/>
-            <TextBox Style="{StaticResource CustomTextBoxStyle}" Text="{Binding Deliverables, Mode=TwoWay,NotifyOnValidationError=true,  ValidatesOnExceptions=true}" Grid.Column="1" Grid.Row="4" Margin="85,7,210,32"/>
+            <TextBox Style="{StaticResource CustomTextBoxStyle}" Text="{Binding Deliverables, Mode=TwoWay,NotifyOnValidationError=true,  ValidatesOnExceptions=true}" Grid.Column="1" Grid.Row="4" Margin="85,10,270,29"/>
 
-            <Label Content="Complexity:" Grid.Column="0" Grid.Row="1" Margin="213,3,96,25" Grid.ColumnSpan="2" RenderTransformOrigin="0.505,1.019"/>
+            <Label Content="Complexity:" Grid.Column="0" Grid.Row="1" Margin="240,3,69,25" Grid.ColumnSpan="2" RenderTransformOrigin="0.505,1.019"/>
             <ComboBox Style="{StaticResource CustomComboBoxStyle}" SelectedValue="{Binding Complexity, Mode=TwoWay,NotifyOnValidationError=true, ValidatesOnExceptions=true}"
                           ItemsSource="{Binding Source={StaticResource ExperienceLevelCollectionKey}}"
-                         Grid.Column="1" Grid.Row="1" Margin="327,8,-32,30" />
+                         Grid.Column="1" Grid.Row="1"  Margin="315,12,40,28" />
 
-            <Label Content="Required&#xD;&#xA;Effort Time" Grid.Column="1" Grid.Row="0" Margin="213,7,86,62" Grid.RowSpan="2"/>
-            <TextBox Style="{StaticResource CustomTextBoxStyle}" Text="{Binding RequiredEffortTime, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Column="1" Margin="327,10,-32,29"/>
+            <Label Content="Required&#xD;&#xA;Effort Time" Grid.Column="1" Grid.Row="0" Margin="245,5,54,64" Grid.RowSpan="2"/>
+            <TextBox Style="{StaticResource CustomTextBoxStyle}" Text="{Binding RequiredEffortTime, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Column="1" Margin="315,12,40,28"/>
 
-                <Label Content="Enginner:" Grid.Column="1" Grid.Row="2" Margin="219,7,109,27"/>
-            <ComboBox Style="{StaticResource CustomComboBoxStyle}" ItemsSource="{Binding DataContext.Engineers, RelativeSource={RelativeSource AncestorType={x:Type Window}}}" Grid.Column="1" Margin="327,5,-32,32" Grid.Row="2" >
-                <ComboBox.ItemTemplate>
-                    <DataTemplate>
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="{Binding Name}" Margin="5"/>
-                            <TextBlock Text="{Binding Id}" Margin="5"/>
-                        </StackPanel>
-                    </DataTemplate>
-                </ComboBox.ItemTemplate>
-            </ComboBox>
+            <Label Content="Enginner:" Grid.Column="1" Grid.Row="2" Margin="245,0,83,34"/>
+            <ComboBox Style="{StaticResource CustomComboBoxStyle}" SelectedValue="{Binding Engineer , Mode=TwoWay,NotifyOnValidationError=true, ValidatesOnExceptions=true}"
+                          ItemsSource="{Binding Engineers}"
+                         Grid.Column="1" Grid.Row="2"  Margin="315,0,40,40" />
+
 
 
 
         </Grid>
 
 
-        <Button FontSize="20" Grid.Row="2" Margin="3"
+        <Button FontSize="20" Grid.Row="2" Margin="70,70,70,10"
                 Style="{StaticResource CustomButtonStyle}"
                 Content="{Binding Id, Mode=OneTime, Converter={StaticResource ConvertIdToContentKey}}" 
-                Click="btnAddUpdate_Click"/>
+                Click="btnAddUpdateClick"/>
 
     </Grid>
 </Window>

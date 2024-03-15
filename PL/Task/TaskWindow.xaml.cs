@@ -34,6 +34,15 @@ namespace PL.Task
         public static readonly DependencyProperty CurrentTaskProperty =
             DependencyProperty.Register("CurrentTask", typeof(BO.Task), typeof(TaskWindow), new PropertyMetadata(null));
 
+        public IEnumerable<BO.Task> Tasks
+        {
+            get { return (IEnumerable<BO.Task>)GetValue(TasksProperty); }
+            set { SetValue(TasksProperty, value); }
+        }
+
+        public static readonly DependencyProperty TasksProperty =
+            DependencyProperty.Register("Tasks", typeof(IEnumerable<BO.Task>), typeof(TaskWindow), new PropertyMetadata(null));
+
         public IEnumerable<BO.Engineer> Engineers
         {
             get { return (IEnumerable<BO.Engineer>)GetValue(EngineersProperty); }
@@ -48,7 +57,7 @@ namespace PL.Task
         {
             
             InitializeComponent();
-            Engineers = s_bl.Engineer.ReadAll();
+            Tasks = s_bl.Task.ReadAll();
 
             try
             {
@@ -67,7 +76,7 @@ namespace PL.Task
                 MessageBox.Show(ex.Message, "Fail", MessageBoxButton.OK, MessageBoxImage.Exclamation);
             }
         }
-        private void btnAddUpdate_Click(object sender, RoutedEventArgs e)
+        private void btnAddUpdateClick(object sender, RoutedEventArgs e)
         {
             if ((sender as Button)!.Content.ToString() == "Add")
             {

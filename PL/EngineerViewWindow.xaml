@@ -7,8 +7,8 @@
         mc:Ignorable="d"
         Title="EngineerViewWindow" Height="450" Width="800">
     <Grid>
-        <!--<TextBlock Text="{Binding CurrentTask, FallbackValue='Engineer does not have a task'}"  />
-        <Button Content="Done">-->
-        
+        <TextBlock Text="{Binding CurrentTask, FallbackValue='Engineer does not have a task'}"  />
+        <Button Content="Add Task" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="340,374,0,0" Click="AddTaskButton_Click" Height="50" Width="96"/>
+
     </Grid>
 </Window>

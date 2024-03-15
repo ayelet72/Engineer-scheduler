@@ -28,6 +28,13 @@ namespace PL.Task
             InitializeComponent();
             TaskList = s_bl?.Task.ReadAll()!;
         }
+
+        public TaskListWindow(int id)
+        {
+
+            InitializeComponent();
+            TaskList = s_bl?.Task.ReadAll( item=> item.EngineerId == 0)!;
+        }
         public IEnumerable<BO.Task> TaskList
         {
             get { return (IEnumerable<BO.Task>)GetValue(TaskListProperty); }
@@ -50,21 +57,18 @@ namespace PL.Task
             TaskList = s_bl.Task.ReadAll();
         }
 
-        private void EngineerList_DoubleClick(object sender, MouseButtonEventArgs e)
+    
+
+        private void TaskList_DoubleClick(object sender, MouseButtonEventArgs e)
         {
-            BO.Engineer? task = (sender as ListView)?.SelectedItem as BO.Engineer;
+            BO.Task? task = (sender as ListView)?.SelectedItem as BO.Task;
             if (task != null)
             {
-                EngineerWindow taskWindow = new EngineerWindow(task.Id);
+                TaskWindow taskWindow = new TaskWindow(task.Id);
                 taskWindow.ShowDialog();
                 TaskList = s_bl.Task.ReadAll();
 
             }
-        }
-
-        private void TaskList_DoubleClick(object sender, MouseButtonEventArgs e)
-        {
-
         }
     }
    

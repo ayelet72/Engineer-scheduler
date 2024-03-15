@@ -40,4 +40,12 @@
     <Level>Intermediate</Level>
     <Active>true</Active>
   </Engineer>
+  <Engineer>
+    <ID>123321</ID>
+    <EMail> ayelet@gmail.com</EMail>
+    <Name> ayelet</Name>
+    <Cost>324</Cost>
+    <Level>Beginner</Level>
+    <Active>true</Active>
+  </Engineer>
 </ArrayOfEngineer>

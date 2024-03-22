@@ -20,9 +20,7 @@ internal class Bl : IBl
         get { return _dal.StartProject; }
         set
         {
-
             _dal.StartProject = value;
-
 
         }
     }

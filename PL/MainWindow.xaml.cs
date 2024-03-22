@@ -1,4 +1,5 @@
-﻿using PL.Engineer;
+﻿using BlApi;
+using PL.Engineer;
 using PL.Task;
 using System;
 using System.Collections.Generic;
@@ -22,9 +23,27 @@ namespace PL
     /// </summary>
     public partial class MainWindow : Window
     {
+        static readonly IBl s_bl = Factory.Get();
+
+        public static readonly DependencyProperty CurrentTimeProperty =
+            DependencyProperty.Register("CurrentTime", typeof(DateTime), typeof(MainWindow), new PropertyMetadata(DateTime.Now));
+
+        // Property to access the CurrentTime dependency property
+        public DateTime CurrentTime
+        {
+            get { return (DateTime)GetValue(CurrentTimeProperty); }
+            set { SetValue(CurrentTimeProperty, value); }
+        }
+
         public MainWindow()
         {
             InitializeComponent();
+
+            // Update the current time periodically
+            var timer = new System.Windows.Threading.DispatcherTimer();
+            timer.Tick += (sender, e) => CurrentTime = DateTime.Now;
+            timer.Interval = TimeSpan.FromSeconds(1);
+            timer.Start();
         }
        
      
@@ -32,10 +51,19 @@ namespace PL
         private void btnEngineer_Click(object sender, RoutedEventArgs e)
         {
             new EnteringIDWindow().ShowDialog();
-            
-
         } 
         private void btnAdmin_Click(object sender, RoutedEventArgs e)
         { new AdminWindow().Show(); }
+
+
+        // Button click handlers:
+        private void AdvanceHour_Click(object sender, RoutedEventArgs e) => s_bl.AdvanceTimeByHour(1);
+
+        private void AdvanceDay_Click(object sender, RoutedEventArgs e) => s_bl.AdvanceTimeByDay(1);
+        private void AdvanceMonth_Click(object sender, RoutedEventArgs e) => s_bl.AdvanceTimeByMonth(1);
+
+        private void AdvanceYear_Click(object sender, RoutedEventArgs e) => s_bl.AdvanceTimeByYear(1);
+
+        private void ResetClock_Click(object sender, RoutedEventArgs e) => s_bl.InitializeTime();
     }
 }

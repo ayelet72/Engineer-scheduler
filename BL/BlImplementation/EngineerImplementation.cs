@@ -127,17 +127,9 @@ internal class EngineerImplementation : IEngineer
             {
                 throw new BlDoesNotExistException($"Doesn't exsit", ex);
             }
-
-
-
-
         }
         else
             throw new BO.BlInvalidDataException($"Engineer with ID={boEngineer.Id} invalid");
-
-
-
-
 
     }
     public BO.Engineer Read(int id)

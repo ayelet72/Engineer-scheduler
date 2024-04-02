@@ -23,7 +23,7 @@
                 <ImageBrush/>
             </TextBox.Background>
         </TextBox>
-        <!--three buttons for the main window-->
+        <!--two buttons for the main window-->
         <Button  Content="Engineer" Style="{StaticResource ButtonMain}"  Click="btnEngineer_Click" Margin="0,299,183,0" HorizontalAlignment="Right" VerticalAlignment="Top" RenderTransformOrigin="-0.099,0.554"/>
         <Button  Content="Admin" Style="{StaticResource ButtonMain}"  Click="btnAdmin_Click" Margin="0,299,503,0" HorizontalAlignment="Right" VerticalAlignment="Top"/>
         <!-- Displaying current time using a Label -->

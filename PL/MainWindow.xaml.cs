@@ -38,32 +38,39 @@ namespace PL
         public MainWindow()
         {
             InitializeComponent();
+            DataContext = this;
+            CurrentTime = DateTime.Now;
 
             // Update the current time periodically
-            var timer = new System.Windows.Threading.DispatcherTimer();
-            timer.Tick += (sender, e) => CurrentTime = DateTime.Now;
-            timer.Interval = TimeSpan.FromSeconds(1);
-            timer.Start();
+            //var timer = new System.Windows.Threading.DispatcherTimer();
+            //timer.Tick += (sender, e) => CurrentTime = DateTime.Now;
+            //timer.Interval = TimeSpan.FromSeconds(1);
+            //timer.Start();
         }
-       
-     
-        
+
+
+
         private void btnEngineer_Click(object sender, RoutedEventArgs e)
         {
             new EnteringIDWindow().ShowDialog();
-        } 
+        }
         private void btnAdmin_Click(object sender, RoutedEventArgs e)
         { new AdminWindow().Show(); }
 
 
         // Button click handlers:
-        private void AdvanceHour_Click(object sender, RoutedEventArgs e) => s_bl.AdvanceTimeByHour(1);
+        private void AdvanceHour_Click(object sender, RoutedEventArgs e) => CurrentTime= s_bl.AdvanceTimeByHour(CurrentTime);
 
-        private void AdvanceDay_Click(object sender, RoutedEventArgs e) => s_bl.AdvanceTimeByDay(1);
-        private void AdvanceMonth_Click(object sender, RoutedEventArgs e) => s_bl.AdvanceTimeByMonth(1);
+        private void AdvanceDay_Click(object sender, RoutedEventArgs e) => CurrentTime = s_bl.AdvanceTimeByDay(CurrentTime);
+        private void AdvanceMonth_Click(object sender, RoutedEventArgs e) => CurrentTime = s_bl.AdvanceTimeByMonth(CurrentTime);
 
-        private void AdvanceYear_Click(object sender, RoutedEventArgs e) => s_bl.AdvanceTimeByYear(1);
+        private void AdvanceYear_Click(object sender, RoutedEventArgs e) => CurrentTime = s_bl.AdvanceTimeByYear(CurrentTime);
 
-        private void ResetClock_Click(object sender, RoutedEventArgs e) => s_bl.InitializeTime();
+        private void ResetClock_Click(object sender, RoutedEventArgs e)
+        {
+            s_bl.InitializeTime();
+            CurrentTime = s_bl.Clock;
+        }
+
     }
 }

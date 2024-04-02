@@ -4,8 +4,7 @@ using System.Runtime.InteropServices;
 
 namespace DO;
 
-    public record  Task
-(
+    public record  Task (
     int Id,
     int EngineerId,
     DO.EngineerExperience Complexity,
@@ -20,15 +19,12 @@ namespace DO;
     TimeSpan? RequiredEffortTime = null,
     string? Deliverables = null,
     string? Remarks = null
-
 )
+
 {
     public Task() : this(0, 0, 0) //empty ctor for stage 1
     {
         CreateAtDate = DateTime.Now; 
     }
    
-
-
-
 }

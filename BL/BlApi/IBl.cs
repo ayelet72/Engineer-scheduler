@@ -23,10 +23,10 @@ public interface IBl
     #endregion
 
     #region Methods
-    void AdvanceTimeByYear(int years);
-    void AdvanceTimeByMonth(int months);
-    void AdvanceTimeByDay(int days);
-    void AdvanceTimeByHour(int hours);
+    DateTime AdvanceTimeByYear(DateTime date);
+    DateTime AdvanceTimeByMonth(DateTime date);
+    DateTime AdvanceTimeByDay(DateTime date);
+    DateTime AdvanceTimeByHour(DateTime date);
     void InitializeTime();
 
     #endregion

@@ -55,7 +55,7 @@ internal class Bl : IBl
         BO.Task? LastTask=tasks.MaxBy(x => x.ScheduledDate);
         if (StartProject == DateTime.MinValue)
             return ProjectStatus.Planning;
-        else if (DateTime.Now >= EndProject)
+        else if (Clock >= EndProject)          //checking
             return ProjectStatus.Execution;
 
         return ProjectStatus.Scheduled;
@@ -73,30 +73,30 @@ internal class Bl : IBl
     public DateTime Clock
     {
         get { return s_Clock; }
-       private set { s_Clock = value; }
+        private set { s_Clock = value; }
     }
     #endregion
 
     #region Methods
 
-    public void AdvanceTimeByYear(int years)
+    public DateTime AdvanceTimeByYear(DateTime date)
     {
-        s_Clock = s_Clock.AddYears(years);
+       return date.AddYears(1);
     }
 
-    public void AdvanceTimeByMonth(int months)
+    public DateTime AdvanceTimeByMonth(DateTime date)
     {
-        s_Clock = s_Clock.AddMonths(months);
+        return date.AddMonths(1);
     }
 
-    public void AdvanceTimeByDay(int days)
+    public DateTime AdvanceTimeByDay(DateTime date)
     {
-        s_Clock = s_Clock.AddDays(days);
+        return date.AddDays(1);
     }
 
-    public void AdvanceTimeByHour(int hours)
+    public DateTime AdvanceTimeByHour(DateTime date)
     {
-        s_Clock = s_Clock.AddHours(hours);
+        return date.AddHours(1);
     }
 
     public void InitializeTime()

@@ -1,4 +1,5 @@
-﻿using PL.Task;
+﻿using PL.Engineer;
+using PL.Task;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,20 +23,38 @@ namespace PL
     {
 
         static readonly BlApi.IBl s_bl = BlApi.Factory.Get();
-        public BO.Task? CurrentTask
+        private string _currentTaskMessage = "There is no current task assigned to this engineer.";
+
+
+        public string CurrentTaskMessage
         {
-            get { return (BO.Task)GetValue(CurrentTaskProperty); }
+            get => CurrentTask == null ? _currentTaskMessage : string.Empty;
+        }
+        public BO.Engineer? CurrentEngineer
+
+        {
+            get { return (BO.Engineer?)GetValue(CurrentEngineerProperty); }
+            set { SetValue(CurrentEngineerProperty, value); }
+        }
+
+        public static readonly DependencyProperty CurrentEngineerProperty =
+            DependencyProperty.Register("CurrentEngineer", typeof(BO.Engineer), typeof(EngineerWindow), new PropertyMetadata(null));
+        public BO.Task? CurrentTask
+
+        {
+            get { return (BO.Task?)GetValue(CurrentTaskProperty); }
             set { SetValue(CurrentTaskProperty, value); }
         }
+
         public static readonly DependencyProperty CurrentTaskProperty =
-           DependencyProperty.Register("CurrentTask", typeof(BO.Task), typeof(EngineerViewWindow), new PropertyMetadata(null));
+            DependencyProperty.Register("CurrentTask", typeof(BO.Task), typeof(EngineerWindow), new PropertyMetadata(null));
         public EngineerViewWindow(int id)
         {
             InitializeComponent();
-            BO.Engineer engineer= s_bl.Engineer.Read(id)!;
+            CurrentEngineer= s_bl.Engineer.Read(id)!;
             //if engineer have a task
-            if (engineer.Task != null)
-                CurrentTask = s_bl.Task.Read((engineer.Task).Id);
+            if (CurrentEngineer.Task != null)
+                CurrentTask = s_bl.Task.Read((CurrentEngineer.Task).Id);
             else
                 CurrentTask = null;
         }

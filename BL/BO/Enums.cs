@@ -3,7 +3,7 @@ namespace BO;
 
 public enum Status
 {
-    Unscheduled, Scheduled, OnTrack, Done //רק בשביל מי שעושה לוז אוטומטי
+    Unscheduled, Scheduled, OnTrack, Done,None //רק בשביל מי שעושה לוז אוטומטי
 }
 public enum ProjectStatus
 {

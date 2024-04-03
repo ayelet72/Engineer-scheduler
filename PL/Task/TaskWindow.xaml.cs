@@ -30,18 +30,29 @@ namespace PL.Task
             get { return (BO.Task?)GetValue(CurrentTaskProperty); }
             set { SetValue(CurrentTaskProperty, value); }
         }
-
         public static readonly DependencyProperty CurrentTaskProperty =
-            DependencyProperty.Register("CurrentTask", typeof(BO.Task), typeof(TaskWindow), new PropertyMetadata(null));
+          DependencyProperty.Register("CurrentTask", typeof(BO.Task), typeof(TaskWindow), new PropertyMetadata(null));
+        public int? IdEngineer
 
-        public IEnumerable<BO.Task> Tasks
         {
-            get { return (IEnumerable<BO.Task>)GetValue(TasksProperty); }
-            set { SetValue(TasksProperty, value); }
+            get { return (int?)GetValue(IdEngineerProperty); }
+            set { SetValue(IdEngineerProperty, value); }
         }
 
-        public static readonly DependencyProperty TasksProperty =
-            DependencyProperty.Register("Tasks", typeof(IEnumerable<BO.Task>), typeof(TaskWindow), new PropertyMetadata(null));
+        public static readonly DependencyProperty IdEngineerProperty =
+            DependencyProperty.Register("IdEngineer", typeof(int), typeof(TaskWindow), new PropertyMetadata(null));
+
+      
+        public BO.Engineer? CurrentEngineer
+
+        {
+            get { return (BO.Engineer?)GetValue(CurrentEngineerProperty); }
+            set { SetValue(CurrentEngineerProperty, value); }
+        }
+
+        public static readonly DependencyProperty CurrentEngineerProperty =
+            DependencyProperty.Register("CurrentEngineer", typeof(BO.Engineer), typeof(TaskWindow), new PropertyMetadata(null));
+
 
         public IEnumerable<BO.Engineer> Engineers
         {
@@ -53,28 +64,34 @@ namespace PL.Task
             DependencyProperty.Register("Engineers", typeof(IEnumerable<BO.Engineer>), typeof(TaskWindow), new PropertyMetadata(null));
 
 
-        public TaskWindow(int id = 0)
+        public TaskWindow(int id = 0 )
         {
             
-            InitializeComponent();
-            Tasks = s_bl.Task.ReadAll();
+            Engineers = s_bl.Engineer.ReadAll();
+            DataContext = this;
+            //CurrentEngineer = null; 
 
             try
             {
                 // if id isn't a deafult create a new task . else, find the exsit engineer with the same id (Read Method)
 
                 CurrentTask = (id != 0) ? s_bl.Task.Read(id)! : new BO.Task() { Id = 0, Description = " ", Alias = " ", Complexity = BO.EngineerExperience.None, Remarks = " ", RequiredEffortTime = null, Engineer = null, Deliverables = " " };
+                CurrentEngineer= (CurrentTask.Engineer!=null) ? s_bl.Engineer.Read(CurrentTask.Engineer.Id)! : new BO.Engineer() { Id = 0, Name = " ", Email = " ", Level = BO.EngineerExperience.None };
             }
+           
             catch (BO.BlDoesNotExistException ex)
             {
                 CurrentTask = null;
                 MessageBox.Show(ex.Message, "Fail", MessageBoxButton.OK, MessageBoxImage.Exclamation);
                 this.Close();
             }
+
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Fail", MessageBoxButton.OK, MessageBoxImage.Exclamation);
             }
+            InitializeComponent();
+
         }
         private void btnAddUpdateClick(object sender, RoutedEventArgs e)
         {
@@ -82,7 +99,15 @@ namespace PL.Task
             {
                 try
                 {
-
+                    if(CurrentEngineer!=null)
+                    {
+                        CurrentTask!.Engineer = new BO.EngineerInTask
+                        {
+                            Name = CurrentEngineer.Name,
+                            Id = CurrentEngineer.Id
+                        };
+                    }
+                
                     int? id = s_bl.Task.Create(CurrentTask!);
                     MessageBox.Show($"Task {id} was successfully added!", "Success", MessageBoxButton.OK, MessageBoxImage.Exclamation);
                     this.Close();
@@ -96,9 +121,19 @@ namespace PL.Task
             {
                 try
                 {
+
+                    if (CurrentEngineer != null)
+                    {
+                        CurrentTask!.Engineer = new BO.EngineerInTask
+                        {
+                            Name = CurrentEngineer.Name,
+                            Id = CurrentEngineer.Id
+                        };
+                    }
                     s_bl.Task.Update(CurrentTask!);
                     MessageBox.Show($"Task {CurrentTask!.Id} was successfully Update!", "Success", MessageBoxButton.OK, MessageBoxImage.Exclamation);
                     this.Close();
+
                 }
                 catch (BO.BlAlreadyExistsException ex)
                 {
@@ -111,19 +146,31 @@ namespace PL.Task
         {
 
         }
-       
+        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            
+            if (sender is ComboBox comboBox)
+            {
+                
+                BO.Engineer? selectedEngineer = null;
+                if (comboBox.SelectedItem != null)
+                {
+                    selectedEngineer = (BO.Engineer)comboBox.SelectedItem;
+                }
+
+
+                CurrentEngineer = selectedEngineer;
+            }
+        }
 
 
 
     }
-    //public class EngineersCollection : IEnumerable
-    //{
-    //    static readonly BlApi.IBl s_bl = BlApi.Factory.Get();
-    //    static readonly IEnumerable<BO.Engineer> s_engineers = s_bl.Engineer.ReadAll();
-    //    public IEnumerator GetEnumerator() => s_engineers.GetEnumerator();
-    //}
+    
+   
 }
     
+
 
 
 

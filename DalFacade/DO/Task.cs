@@ -7,8 +7,8 @@ namespace DO;
     public record  Task
 (
     int Id,
-    int EngineerId,
-    DO.EngineerExperience Complexity,
+    int? EngineerId=null,
+    DO.EngineerExperience Complexity= EngineerExperience.None,
     string? Alias = null,
     string? Description = null,
     bool IsMilestone = false,

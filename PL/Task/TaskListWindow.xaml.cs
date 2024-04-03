@@ -49,7 +49,12 @@ namespace PL.Task
             TaskList = (Complexity == BO.EngineerExperience.None) ?
                 s_bl?.Task.ReadAll()! : s_bl?.Task.ReadAll(item => item.Complexity == (DO.EngineerExperience)Complexity)!;
         }
-
+        public BO.Status StatusTask { get; set; } = BO.Status.None;
+        private void cbStatusSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            TaskList = (StatusTask == BO.Status.None) ?
+                s_bl?.Task.ReadAll()! : s_bl?.Task.ReadAll(item => s_bl.Task.Read(item.Id).Status== StatusTask)!;
+        }
         private void btnAdd_Click(object sender, RoutedEventArgs e)
         {
 
@@ -69,6 +74,16 @@ namespace PL.Task
                 TaskList = s_bl.Task.ReadAll();
 
             }
+        }
+
+        private void StatusComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        private void FilterComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
         }
     }
    

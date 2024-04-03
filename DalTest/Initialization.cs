@@ -72,13 +72,12 @@ public static class Initialization //Building the lists of items for Stage 1:
             dateTime = DateTime.Now.AddDays(-60 + 3*i);
             experience = (EngineerExperience)s_rand.Next(5);
             s_dal!.Task.Create(new Task(
-                Id:0,
-                EngineerId:0,
+                Id: 0,
                 Complexity: experience,
-                Alias: $"Task #{i+1}",
+                Alias: $"Task #{i + 1}",
                 Description: description[i],
                 CreateAtDate: dateTime
-                ));
+                )); 
      
 
 

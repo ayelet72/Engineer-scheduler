@@ -57,4 +57,27 @@ class ConvertIdToContent : IValueConverter
         throw new NotImplementedException();
     }
 }
+ class TaskDetailsConverter : IValueConverter
+{
+    static readonly BlApi.IBl s_bl = BlApi.Factory.Get();
+    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+
+        if (value == null)
+
+        {
+            return "There is no current task assigned to this engineer.";
+        }
+        else
+        {
+            // פרטי המשימה
+            return s_bl.Task.Read(((BO.Task)value).Id);
+        }
+    }
+
+    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        throw new NotImplementedException();
+    }
+}
 

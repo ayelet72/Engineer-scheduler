@@ -5,10 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL" xmlns:system="http://schemas.microsoft.com/winfx/2009/xaml"
         mc:Ignorable="d"
-        Title="EngineerViewWindow" Height="450" Width="800">
+        Title="EngineerViewWindow" Height="450" Width="800"
+        DataContext="{Binding RelativeSource={RelativeSource Mode=Self}}" >
     <Grid>
-        <TextBlock Text="{Binding CurrentTask, FallbackValue='Engineer does not have a task'}"  />
-        <Button Content="Add Task" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="340,374,0,0" Click="AddTaskButton_Click" Height="50" Width="96"/>
-
+        <!--<TextBox Text="{Binding CurrentTask Converter={StaticResource TaskDetailsConverterKey}, Mode=TwoWay}" IsReadOnly="False"/>-->
     </Grid>
 </Window>

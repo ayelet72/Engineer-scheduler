@@ -63,10 +63,10 @@ namespace BO
         {
             
             DO.Task? temp = _dal.Task.Read(id);
-            if (temp != null && temp.EngineerId != 0)
+            if (temp != null && temp.EngineerId.HasValue)
             {
-                string? name = (_dal.Engineer.Read(temp.EngineerId))?.Name;
-                int tempId = (_dal.Engineer.Read(temp.EngineerId))!.ID;
+                string? name = (_dal.Engineer.Read((int)temp.EngineerId))?.Name;
+                int tempId = (_dal.Engineer.Read((int)temp.EngineerId))!.ID;
                 return new EngineerInTask
                 {
                     Name = name,

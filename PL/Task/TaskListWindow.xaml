@@ -24,25 +24,17 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <Label Content="Select filter" HorizontalAlignment="Left" Margin="166,0,0,0" VerticalAlignment="Center" Grid.Column="0" Height="23" Width="91"/>
-            
-            <!--<StackPanel>
 
-                <GroupBox  Width="120
-               
-               " Background="AliceBlue">
-                    <StackPanel>
-                        <TextBlock Width="auto"  Background="AliceBlue" Text="super Combobox"></TextBlock>
-                        <ComboBox Name="MainComboBox" Width="auto" SelectedValue="True" IsDropDownOpen="True" ItemsSource="{Binding MainComboBoxItems}" HorizontalAlignment="Left" Text="rrr">
-                            <ComboBox.ItemTemplate>
-                                <DataTemplate>
-                                    <ComboBox   DropDownClosed="ComboBox_DropDownClosed" ItemsSource="{Binding SubComboBoxItems}"/>
-                                </DataTemplate>
-                            </ComboBox.ItemTemplate>
-                        </ComboBox>
-                    </StackPanel>
-                </GroupBox>
-                <Button Content="Get Selected Values" Click="Button_Click" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,20"/>
-            </StackPanel>-->
+            <ComboBox x:Name="filterComboBox" SelectionChanged="FilterComboBox_SelectionChanged" HorizontalAlignment="Left" VerticalAlignment="Top" Width="150" Margin="10">
+                <ComboBoxItem Content="All"/>
+                <ComboBoxItem Content="Filter by Status" Tag="StatusFilter"/>
+            </ComboBox>
+            <ComboBox x:Name="statusComboBox" HorizontalAlignment="Left" VerticalAlignment="Top" Width="150" Margin="10" Visibility="Collapsed">
+                <ComboBoxItem Content="Unscheduled"/>
+                <ComboBoxItem Content="Scheduled"/>
+                <ComboBoxItem Content="OnTrack"/>
+                <ComboBoxItem Content="Done"/>
+            </ComboBox>
 
         </Grid>
         <ListView Margin="5" Grid.Row="1" ItemsSource="{Binding TaskList}" MouseDoubleClick="TaskList_DoubleClick">

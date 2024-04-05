@@ -76,7 +76,7 @@
             </Setter>
         </Style>-->
 
-        <Style TargetType="ComboBox" x:Key="CustomComboBoxStyle">
+        <!--<Style TargetType="ComboBox" x:Key="CustomComboBoxStyle">
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="ComboBox">
@@ -86,7 +86,7 @@
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
-        </Style>
+        </Style>-->
 
     <Style TargetType="Button" x:Key="CustomButtonStyle">
         <Setter Property="FontSize" Value="16"/>

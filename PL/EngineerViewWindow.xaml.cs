@@ -25,6 +25,15 @@ namespace PL
         static readonly BlApi.IBl s_bl = BlApi.Factory.Get();
         private string _currentTaskMessage = "There is no current task assigned to this engineer.";
 
+        public bool IsButtonVisibile
+
+        {
+            get { return (bool)GetValue(IsButtonVisibileProperty); }
+            set { SetValue(IsButtonVisibileProperty, value); }
+        }
+
+        public static readonly DependencyProperty IsButtonVisibileProperty =
+            DependencyProperty.Register("IsButtonVisibile", typeof(bool), typeof(EngineerViewWindow), new PropertyMetadata(null));
 
         public string CurrentTaskMessage
         {
@@ -50,13 +59,26 @@ namespace PL
             DependencyProperty.Register("CurrentTask", typeof(BO.Task), typeof(EngineerWindow), new PropertyMetadata(null));
         public EngineerViewWindow(int id)
         {
-            InitializeComponent();
+            
             CurrentEngineer= s_bl.Engineer.Read(id)!;
+
+            InitializeComponent();
+            DataContext = this;
+
             //if engineer have a task
-            if (CurrentEngineer.Task != null)
-                CurrentTask = s_bl.Task.Read((CurrentEngineer.Task).Id);
+            if(CurrentEngineer.Task!=null)
+            {
+                CurrentTask = s_bl.Task.Read(CurrentEngineer.Task.Id);
+                IsButtonVisibile = false;
+            }
+           
             else
+            {
                 CurrentTask = null;
+                IsButtonVisibile = true;
+
+            }
+
         }
 
         private void FinishTaskButton_Click(object sender, RoutedEventArgs e)
@@ -71,16 +93,17 @@ namespace PL
 
         }
 
-        private void AddTaskButton_Click(object sender, RoutedEventArgs e)
-        {
-            // פתיחת חלון חדש עבור הוספת משימה
-            TaskListWindow addTaskWindow = new TaskListWindow();
 
-            // פתיחת החלון והמתנה לסגירה
-            if (addTaskWindow.ShowDialog() == true)
-            {
-               
-            }
+
+        private void AssignTask_Click(object sender, RoutedEventArgs e)
+        {
+            // opening a new window for Assigning an engineer to the task
+
+            TaskAssignmentWindow addTaskWindow = new TaskAssignmentWindow(CurrentEngineer!.Id);
+            addTaskWindow.ShowDialog();
+            Close();
+
+
         }
     }
 }

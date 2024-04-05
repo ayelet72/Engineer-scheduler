@@ -8,6 +8,7 @@
         Title="EngineerViewWindow" Height="450" Width="800"
         DataContext="{Binding RelativeSource={RelativeSource Mode=Self}}" >
     <Grid>
-        <!--<TextBox Text="{Binding CurrentTask Converter={StaticResource TaskDetailsConverterKey}, Mode=TwoWay}" IsReadOnly="False"/>-->
+        <TextBox Text="{Binding CurrentTask , Mode=TwoWay}" IsReadOnly="False"/>
+        <Button Content="assignment task" Visibility="{Binding IsButtonVisibile}" Click="AssignTask_Click" Margin="282,357,282,0"/>
     </Grid>
 </Window>

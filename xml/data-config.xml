@@ -2,7 +2,7 @@
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <InitTaskID>1</InitTaskID>
   <InitDependencyID>1</InitDependencyID>
-  <NextTaskId>22</NextTaskId>
+  <NextTaskId>21</NextTaskId>
   <NextDependencyId>41</NextDependencyId>
   <EndProject>01/01/0001 00:00:00</EndProject>
   <!--<EndProject xsi:nil="true" />-->

@@ -138,7 +138,7 @@ internal class TaskImplementation : ITask
 
 
         //TODO start end date
-        if (bl.StartProject == null)
+        if (bl.StartProject == DateTime.MinValue)
         {
             // update engineer too
             try

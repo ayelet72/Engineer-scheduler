@@ -22,6 +22,23 @@ namespace PL.Task
     public partial class TaskListWindow : Window
     {
         static readonly BlApi.IBl s_bl = BlApi.Factory.Get();
+        public bool IsButtonVisibile
+
+        {
+            get { return (bool)GetValue(IsButtonVisibileProperty); }
+            set { SetValue(IsButtonVisibileProperty, value); }
+        }
+
+        public static readonly DependencyProperty IsButtonVisibileProperty =
+            DependencyProperty.Register("IsButtonVisibile", typeof(bool), typeof(EngineerViewWindow), new PropertyMetadata(null));
+        public IEnumerable<BO.Task> TaskList
+        {
+            get { return (IEnumerable<BO.Task>)GetValue(TaskListProperty); }
+            set { SetValue(TaskListProperty, value); }
+        }
+
+        public static readonly DependencyProperty TaskListProperty =
+            DependencyProperty.Register("TaskList", typeof(IEnumerable<BO.Task>), typeof(TaskListWindow), new PropertyMetadata(null));
         public TaskListWindow()
         {
             
@@ -35,14 +52,7 @@ namespace PL.Task
             InitializeComponent();
             TaskList = s_bl?.Task.ReadAll( item=> item.EngineerId == 0)!;
         }
-        public IEnumerable<BO.Task> TaskList
-        {
-            get { return (IEnumerable<BO.Task>)GetValue(TaskListProperty); }
-            set { SetValue(TaskListProperty, value); }
-        }
-
-        public static readonly DependencyProperty TaskListProperty =
-            DependencyProperty.Register("TaskList", typeof(IEnumerable<BO.Task>), typeof(TaskListWindow), new PropertyMetadata(null));
+        
         public BO.EngineerExperience Complexity { get; set; } = BO.EngineerExperience.None;
         private void cbLevelSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {

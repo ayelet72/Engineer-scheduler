@@ -17,6 +17,7 @@ public interface IBl
     public ProjectStatus CalcStatusProject();
     public  void InitializeDB();
     public  void ResetDB();
+    public void IsSchedule();
 
     #region Properties 
     DateTime Clock { get; }

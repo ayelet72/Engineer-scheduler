@@ -140,57 +140,24 @@ internal class TaskImplementation : ITask
         //TODO start end date
         if (bl.StartProject == DateTime.MinValue)
         {
-            // update engineer too
             try
             {
-                if (boTask.Engineer != null)
-                {
-                    DO.Engineer engineer = _dal.Engineer.Read(boTask.Engineer!.Id)!;
-                    _dal.Engineer.Update(engineer with
-                    {
-                        Active = true
-                    }
-                    );
-                    //if there is no scheduel project and there is an engineer it is possible to update this fields:
-                    _dal.Task.Update(task with
-                    {
-                        Alias = boTask.Alias,
-                        EngineerId = boTask.Engineer.Id,
-                        Description = boTask.Description,
-                        StartDate = Tools.CheckStartDate(boTask),
-                        CompleteDate = Tools.CheckCompleteDate(boTask),
-                        Complexity = (DO.EngineerExperience)boTask.Complexity,
-                        RequiredEffortTime = boTask.RequiredEffortTime, //Tools.SetRequiredEffortTime(boTask),
-                        Remarks = boTask.Remarks,
-                        Deliverables = boTask.Deliverables
-                    });
-                }
-                else
-                {
-                    //There is no engineer
                     _dal.Task.Update(task with
                     {
                         Alias = boTask.Alias,
                         Description = boTask.Description,
-                        StartDate = Tools.CheckStartDate(boTask),
-                        CompleteDate = Tools.CheckCompleteDate(boTask),
                         Complexity = (DO.EngineerExperience)boTask.Complexity,
-                        RequiredEffortTime = boTask.RequiredEffortTime, //Tools.SetRequiredEffortTime(boTask),
+                        RequiredEffortTime = boTask.RequiredEffortTime,         //Tools.SetRequiredEffortTime(boTask),
                         Remarks = boTask.Remarks,
                         Deliverables = boTask.Deliverables
                     });
-                }
-                
-
-
-
+      
             }
             catch(DO.DalNotExistsException ex)
             {
                 throw new BlDoesNotExistException($"doesn't exsit", ex);
             }
    
-
             //if there is an update in the dependencies field of BO.Task
 
             List<Dependency> dependency = _dal.Dependency.ReadAll(x => x.DependentTask == boTask.Id).ToList();
@@ -237,6 +204,7 @@ internal class TaskImplementation : ITask
                         Active = true
                     }
                     );
+
                     //there is an engineer
                     _dal.Task.Update(task with
                     {
@@ -245,7 +213,9 @@ internal class TaskImplementation : ITask
                         Description = boTask.Description,
                         Complexity = (DO.EngineerExperience)boTask.Complexity,
                         Remarks = boTask.Remarks,
-                        Deliverables = boTask.Deliverables
+                        Deliverables = boTask.Deliverables,
+                        StartDate = Tools.CheckStartDate(boTask),
+                        CompleteDate = Tools.CheckCompleteDate(boTask),
                     });
                 }
                 else
@@ -256,7 +226,9 @@ internal class TaskImplementation : ITask
                         Description = boTask.Description,
                         Complexity = (DO.EngineerExperience)boTask.Complexity,
                         Remarks = boTask.Remarks,
-                        Deliverables = boTask.Deliverables
+                        Deliverables = boTask.Deliverables,
+                        StartDate = Tools.CheckStartDate(boTask),
+                        CompleteDate = Tools.CheckCompleteDate(boTask),
                     });
                 }
 

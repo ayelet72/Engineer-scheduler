@@ -26,6 +26,7 @@ namespace PL.Task
     public partial class TaskWindow : Window
     {
         static readonly BlApi.IBl s_bl = BlApi.Factory.Get();
+
         public class SelectTask
         {
 
@@ -108,6 +109,32 @@ namespace PL.Task
                 }
             }
            
+            catch (BO.BlDoesNotExistException ex)
+            {
+                CurrentTask = null;
+                MessageBox.Show(ex.Message, "Fail", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                this.Close();
+            }
+
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Fail", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+            }
+
+            InitializeComponent();
+        }
+        public TaskWindow(int id = 0, BO.Engineer? engineer=null)
+        {
+
+            SelectedEngineer = engineer!;
+            try
+            {
+                // if id isn't a deafult create a new task . else, find the exsit engineer with the same id (Read Method)
+
+                CurrentTask = (id != 0) ? s_bl.Task.Read(id)! : new BO.Task() { Id = 0, Description = " ", Alias = " ", Complexity = BO.EngineerExperience.None, Remarks = " ", RequiredEffortTime = null, Engineer = null, Deliverables = " " };
+              
+            }
+
             catch (BO.BlDoesNotExistException ex)
             {
                 CurrentTask = null;

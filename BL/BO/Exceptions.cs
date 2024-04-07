@@ -36,6 +36,22 @@ public class BlAlreadyExistsException : Exception
         {
         }
     }
+[Serializable]
+public class BlIsScheduled : Exception
+{
+
+    public BlIsScheduled(string? message) : base(message)
+    {
+    }
+
+    public BlIsScheduled(string? message, Exception? innerException) : base(message, innerException)
+    {
+    }
+
+    protected BlIsScheduled(SerializationInfo info, StreamingContext context) : base(info, context)
+    {
+    }
+}
 
 [Serializable]
 public class BlCannotBeDeletedException : Exception

@@ -24,7 +24,6 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <Label Content="Select filter" HorizontalAlignment="Left" Margin="166,0,0,0" VerticalAlignment="Center" Grid.Column="0" Height="23" Width="91"/>
-
             <ComboBox x:Name="filterComboBox" SelectionChanged="FilterComboBox_SelectionChanged" HorizontalAlignment="Left" VerticalAlignment="Top" Width="150" Margin="10">
                 <ComboBoxItem Content="All"/>
                 <ComboBoxItem Content="Filter by Status" Tag="StatusFilter"/>
@@ -44,7 +43,7 @@
                 </GridView>
             </ListView.View>
         </ListView>
-        <Button Content="Add" Grid.Row="2" HorizontalAlignment="Center" Height="50" Width="100" Click="btnAdd_Click" Visibility="{Binding AddVisibility}"/>
+        <Button Content="Add" Grid.Row="2" HorizontalAlignment="Center" Height="50" Width="100" Click="btnAdd_Click" />
     </Grid>
 
 </Window>

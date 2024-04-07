@@ -46,9 +46,33 @@ namespace PL
         public TaskAssignmentWindow(int id=0)
         {
             CurrentEngineer = s_bl.Engineer.Read(id);
-            //TaskList= s_bl.Task.ReadAll(item => (item.EngineerId==null && C ))
-
+            TaskList = s_bl.Task.ReadAll(item => (item.EngineerId == null && item.Complexity <= (DO.EngineerExperience)CurrentEngineer!.Level));
+            TaskList = TaskList.Where(task => task.Dependencies == null || task.Dependencies!.All(dep => s_bl.Task.Read(dep.Id).CompleteDate != null)); ;
             InitializeComponent();
+        }
+
+        private void TaskAssign_DoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            try
+            {
+               // s_bl.IsSchedule();
+                BO.Task? task = (sender as ListView)?.SelectedItem as BO.Task;
+                if (task != null)
+                {
+                    TaskWindow taskWindow = new TaskWindow(task.Id, CurrentEngineer);
+                    taskWindow.ShowDialog();
+                    TaskList = s_bl.Task.ReadAll();
+
+                }
+
+            }
+            catch (BO.BlIsScheduled ex)
+            {
+               
+                MessageBox.Show(ex.Message, "project didn't schedule yet", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                this.Close();
+            }
+            
         }
     }
 }

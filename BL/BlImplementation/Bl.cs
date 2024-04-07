@@ -48,6 +48,11 @@ internal class Bl : IBl
         _dal.EndProject = tasks.Max(x => x.ScheduledDate + x.RequiredEffortTime);
 
     }
+    public void IsSchedule()
+    {
+        if(StartProject==DateTime.MinValue && EndProject==DateTime.MinValue)
+            throw new BO.BlIsScheduled($"Project isn't Scheduled yet");
+    }
 
     public ProjectStatus CalcStatusProject()
     {

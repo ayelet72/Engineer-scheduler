@@ -22,15 +22,7 @@ namespace PL.Task
     public partial class TaskListWindow : Window
     {
         static readonly BlApi.IBl s_bl = BlApi.Factory.Get();
-        public bool IsButtonVisibile
-
-        {
-            get { return (bool)GetValue(IsButtonVisibileProperty); }
-            set { SetValue(IsButtonVisibileProperty, value); }
-        }
-
-        public static readonly DependencyProperty IsButtonVisibileProperty =
-            DependencyProperty.Register("IsButtonVisibile", typeof(bool), typeof(EngineerViewWindow), new PropertyMetadata(null));
+       
         public IEnumerable<BO.Task> TaskList
         {
             get { return (IEnumerable<BO.Task>)GetValue(TaskListProperty); }
@@ -68,7 +60,7 @@ namespace PL.Task
         private void btnAdd_Click(object sender, RoutedEventArgs e)
         {
 
-            new TaskWindow().ShowDialog();
+            new TaskWindow(0).ShowDialog();
             TaskList = s_bl.Task.ReadAll();
         }
 

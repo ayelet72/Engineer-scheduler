@@ -23,22 +23,16 @@ namespace PL
     {
 
         static readonly BlApi.IBl s_bl = BlApi.Factory.Get();
-        private string _currentTaskMessage = "There is no current task assigned to this engineer.";
-
-        public bool IsButtonVisibile
+        public Visibility IsButtonVisibile
 
         {
-            get { return (bool)GetValue(IsButtonVisibileProperty); }
+            get { return (Visibility)GetValue(IsButtonVisibileProperty); }
             set { SetValue(IsButtonVisibileProperty, value); }
         }
 
         public static readonly DependencyProperty IsButtonVisibileProperty =
-            DependencyProperty.Register("IsButtonVisibile", typeof(bool), typeof(EngineerViewWindow), new PropertyMetadata(null));
+            DependencyProperty.Register("IsButtonVisibile", typeof(Visibility), typeof(EngineerViewWindow), new PropertyMetadata(null));
 
-        public string CurrentTaskMessage
-        {
-            get => CurrentTask == null ? _currentTaskMessage : string.Empty;
-        }
         public BO.Engineer? CurrentEngineer
 
         {
@@ -47,7 +41,7 @@ namespace PL
         }
 
         public static readonly DependencyProperty CurrentEngineerProperty =
-            DependencyProperty.Register("CurrentEngineer", typeof(BO.Engineer), typeof(EngineerWindow), new PropertyMetadata(null));
+            DependencyProperty.Register("CurrentEngineer", typeof(BO.Engineer), typeof(EngineerViewWindow), new PropertyMetadata(null));
         public BO.Task? CurrentTask
 
         {
@@ -56,29 +50,26 @@ namespace PL
         }
 
         public static readonly DependencyProperty CurrentTaskProperty =
-            DependencyProperty.Register("CurrentTask", typeof(BO.Task), typeof(EngineerWindow), new PropertyMetadata(null));
+            DependencyProperty.Register("CurrentTask", typeof(BO.Task), typeof(EngineerViewWindow), new PropertyMetadata(null));
         public EngineerViewWindow(int id)
         {
             
             CurrentEngineer= s_bl.Engineer.Read(id)!;
 
-            InitializeComponent();
-            DataContext = this;
-
             //if engineer have a task
             if(CurrentEngineer.Task!=null)
             {
                 CurrentTask = s_bl.Task.Read(CurrentEngineer.Task.Id);
-                IsButtonVisibile = false;
+                IsButtonVisibile = Visibility.Visible;
             }
            
             else
             {
                 CurrentTask = null;
-                IsButtonVisibile = true;
+                IsButtonVisibile = Visibility.Hidden;
 
             }
-
+            InitializeComponent();
         }
 
         private void FinishTaskButton_Click(object sender, RoutedEventArgs e)
@@ -88,17 +79,11 @@ namespace PL
 
         }
 
-        private void ShowTaskListButton_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-
 
         private void AssignTask_Click(object sender, RoutedEventArgs e)
         {
             // opening a new window for Assigning an engineer to the task
-
+            
             TaskAssignmentWindow addTaskWindow = new TaskAssignmentWindow(CurrentEngineer!.Id);
             addTaskWindow.ShowDialog();
             Close();

@@ -1,6 +1,9 @@
 ﻿
 using BlApi;
 using BO;
+using DalApi;
+using DO;
+using System.Diagnostics;
 using System.Numerics;
 using System.Reflection.Metadata.Ecma335;
 using System.Reflection.PortableExecutable;
@@ -12,8 +15,8 @@ internal class Bl : IBl
     public Bl() { }
     private DalApi.IDal _dal = DalApi.Factory.Get;
 
-    public IEngineer Engineer => new EngineerImplementation(this);
-    public ITask Task => new TaskImplementation(this);
+    public BlApi.IEngineer Engineer => new EngineerImplementation(this);
+    public BlApi.ITask Task => new TaskImplementation(this);
 
     public DateTime? StartProject
     {
@@ -21,7 +24,6 @@ internal class Bl : IBl
         set
         {
             _dal.StartProject = value;
-
         }
     }
     public DateTime? EndProject
@@ -38,7 +40,7 @@ internal class Bl : IBl
         set { CalcStatusProject(); }
     }
 
-    public void CreateSchedule()
+    public void CreateManualSchedule()
     {
         var tasks = Task.ReadAll();
         if (tasks.Any(x => x.ScheduledDate == null)|| tasks.Count()==0)
@@ -48,11 +50,33 @@ internal class Bl : IBl
         _dal.EndProject = tasks.Max(x => x.ScheduledDate + x.RequiredEffortTime);
 
     }
-    public void IsSchedule()
+    public static void CreateAutomateSchedule(IEnumerable<BO.Task> Tasks, DateTime projectStartDate)
     {
-        if(StartProject==DateTime.MinValue && EndProject==DateTime.MinValue)
-            throw new BO.BlIsScheduled($"Project isn't Scheduled yet");
+        foreach (var task in Tasks)
+        {
+            if (task.Dependencies==null)
+            {
+                task.StartDate= projectStartDate ;
+            }
+            else
+            {
+                DateTime maxDependencyEndDate = DateTime.MinValue;
+                foreach (var dependencyTask in task.Dependencies)
+                {
+                    int id = dependencyTask.Id;
+                    var boTask =Read(id); //hadar
+
+                    if (boTask.EndDate > maxDependencyEndDate)
+                    {
+                        maxDependencyEndDate = boTask.EndDate;
+                    }
+                }
+                    task.StartDate = maxDependencyEndDate;
+            }
+        }
+
     }
+
 
     public ProjectStatus CalcStatusProject()
     {

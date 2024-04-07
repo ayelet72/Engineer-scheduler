@@ -13,7 +13,8 @@ public interface IBl
     
     public DateTime? StartProject { set; get; }
     public DateTime? EndProject { set; get; }
-    public void CreateSchedule();
+    public void CreateManualSchedule(); //not in use
+    public void CreateAutomateSchedule(IEnumerable<BO.Task> Tasks, DateTime projectStartDate);
     public ProjectStatus CalcStatusProject();
     public  void InitializeDB();
     public  void ResetDB();

@@ -14,7 +14,7 @@ internal class TaskImplementation : ITask
     private DalApi.IDal _dal = DalApi.Factory.Get;
     private IBl bl =  BlApi.Factory.Get();
     private readonly IBl _bl;
-    internal TaskImplementation(IBl bl) => _bl = bl;    //הגדרתי אותו עכשיו צריך לשנות איכשהו כלפעם שמופיע DATETIME לשנות לשעון שהגדרנו מתוך הביאל
+    internal TaskImplementation(IBl bl) => _bl = bl;   
 
 
     public int Create(BO.Task boTask)

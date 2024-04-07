@@ -1,14 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ArrayOfEngineer xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Engineer>
-    <ID>675721794</ID>
-    <EMail>mosh@jct.com</EMail>
-    <Name>Mosh</Name>
-    <Cost>652</Cost>
-    <Level>Advanced</Level>
-    <Active>true</Active>
-  </Engineer>
-  <Engineer>
     <ID>303444361</ID>
     <EMail>dan@jct.com</EMail>
     <Name>Dan</Name>
@@ -38,6 +30,14 @@
     <Name>Noa</Name>
     <Cost>520</Cost>
     <Level>Intermediate</Level>
+    <Active>true</Active>
+  </Engineer>
+  <Engineer>
+    <ID>675721794</ID>
+    <EMail>mosh@jct.com</EMail>
+    <Name>Mosh</Name>
+    <Cost>700</Cost>
+    <Level>Advanced</Level>
     <Active>true</Active>
   </Engineer>
 </ArrayOfEngineer>

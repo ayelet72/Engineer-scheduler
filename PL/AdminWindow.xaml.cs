@@ -2,7 +2,9 @@
 using PL.Task;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -22,9 +24,38 @@ namespace PL
     public partial class AdminWindow : Window
     {
         static readonly BlApi.IBl s_bl = BlApi.Factory.Get();
+
+        public static readonly DependencyProperty TaskListProperty =
+           DependencyProperty.Register("TaskList", typeof(IEnumerable<BO.Task>), typeof(TaskListWindow), new PropertyMetadata(null));
+        public IEnumerable<BO.Task> TaskList
+        {
+            get { return (IEnumerable<BO.Task>)GetValue(TaskListProperty); }
+            set { SetValue(TaskListProperty, value); }
+        }
+
+
+        //private DateTime _projectStartDate;
+
+        //public event PropertyChangedEventHandler PropertyChanged;
+
+        //public DateTime ProjectStartDate
+        //{
+        //    get { return _projectStartDate; }
+        //    set
+        //    {
+        //        if (_projectStartDate != value)
+        //        {
+        //            _projectStartDate = value;
+        //            OnPropertyChanged();
+        //        }
+        //    }
+        //}
+
         public AdminWindow()
         {
             InitializeComponent();
+            TaskList = s_bl?.Task.ReadAll()!;
+           // DataContext = this;
         }
         private void btnEngineers_Click(object sender, RoutedEventArgs e)
         { new EngineerListWindow().Show(); }
@@ -53,6 +84,24 @@ namespace PL
         {
 
         }
+
+        //protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        //{
+        //    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        //}
+
+        private void CreateSchedule_Click(object sender, RoutedEventArgs e)
+        { 
+           // s_bl.CreateAutomateSchedule(TaskList, ProjectStartDate);
+            
+        }
+        //private void DatePicker_SelectedDate(object sender, SelectionChangedEventArgs e)
+        //{
+
+        //}
+
+
+
     }
 }
 

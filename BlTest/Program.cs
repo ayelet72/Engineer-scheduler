@@ -47,7 +47,7 @@ namespace BlTest
                             SubMenuEngineer();
                             break;
                         case 4:
-                            s_bl.CreateSchedule();
+                            s_bl.CreateManualSchedule();
                             Console.WriteLine($"Schedule Project: \n"+ $"Start: {s_bl.StartProject!.GetValueOrDefault()} \n"+ $"End: {s_bl.EndProject!.GetValueOrDefault()}");
                             break;
                         case 5:

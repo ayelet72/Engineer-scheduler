@@ -17,7 +17,7 @@ public record Engineer
     string Name,
     double Cost,
     EngineerExperience Level = EngineerExperience.Beginner,
-    bool Active = true
+    bool Active = false
 )
 {
     public Engineer() : this(0,"","",0) { }      //empty ctor for stage 1

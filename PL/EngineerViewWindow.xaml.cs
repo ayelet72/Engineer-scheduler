@@ -53,20 +53,22 @@ namespace PL
             DependencyProperty.Register("CurrentTask", typeof(BO.Task), typeof(EngineerViewWindow), new PropertyMetadata(null));
         public EngineerViewWindow(int id)
         {
-            
+            DataContext = this;
             CurrentEngineer= s_bl.Engineer.Read(id)!;
+            CurrentTask = null;
+            IsButtonVisibile=Visibility.Hidden;
 
             //if engineer have a task
             if(CurrentEngineer.Task!=null)
             {
                 CurrentTask = s_bl.Task.Read(CurrentEngineer.Task.Id);
-                IsButtonVisibile = Visibility.Visible;
+                IsButtonVisibile = Visibility.Hidden;
             }
            
             else
             {
                 CurrentTask = null;
-                IsButtonVisibile = Visibility.Hidden;
+                IsButtonVisibile = Visibility.Visible;
 
             }
             InitializeComponent();
@@ -83,11 +85,22 @@ namespace PL
         private void AssignTask_Click(object sender, RoutedEventArgs e)
         {
             // opening a new window for Assigning an engineer to the task
-            
-            TaskAssignmentWindow addTaskWindow = new TaskAssignmentWindow(CurrentEngineer!.Id);
-            addTaskWindow.ShowDialog();
-            Close();
 
+            try
+            {
+                s_bl.IsSchedule();
+                TaskAssignmentWindow addTaskWindow = new TaskAssignmentWindow(CurrentEngineer!.Id);
+                addTaskWindow.ShowDialog();
+                Close();
+
+            }
+            catch (BO.BlIsScheduled ex)
+            {
+                
+
+                MessageBox.Show(ex.Message, "project is already scheduled", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                this.Close();
+            }
 
         }
     }

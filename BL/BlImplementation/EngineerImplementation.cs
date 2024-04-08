@@ -91,7 +91,6 @@ internal class EngineerImplementation : IEngineer
                         {
                             Alias = (boEngineer.Task).Alias,
                             EngineerId = boEngineer.Id,
-                            Complexity = (DO.EngineerExperience)boEngineer.Level
                         }
                        );
 
@@ -139,15 +138,31 @@ internal class EngineerImplementation : IEngineer
         DO.Engineer? doEngineer = _dal.Engineer.Read(id);
         if (doEngineer == null)
             throw new BO.BlDoesNotExistException($"Engineer with ID={id} does Not exist");
-
-        return new BO.Engineer()
+        if(doEngineer.Active==true)
         {
-            Id = id,
-            Name = doEngineer.Name,
-            Email=doEngineer.EMail,
-            Level=(BO.EngineerExperience)doEngineer.Level,
-            Cost=doEngineer.Cost
-        };
+            DO.Task task = _dal.Task.ReadAll().FirstOrDefault(t => t.EngineerId == doEngineer.ID)!;
+            return new BO.Engineer()
+            {
+                Id = id,
+                Name = doEngineer.Name,
+                Email = doEngineer.EMail,
+                Level = (BO.EngineerExperience)doEngineer.Level,
+                Cost = doEngineer.Cost,
+                Task= new TaskInEngineer { Alias=task.Alias,Id=task.Id}
+            };
+        }
+        else
+        {
+            return new BO.Engineer()
+            {
+                Id = id,
+                Name = doEngineer.Name,
+                Email = doEngineer.EMail,
+                Level = (BO.EngineerExperience)doEngineer.Level,
+                Cost = doEngineer.Cost
+            };
+        }
+       
 
     }
     // a function that returns an IEnumerable engineers

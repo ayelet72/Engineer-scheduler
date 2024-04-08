@@ -35,10 +35,10 @@
 
             <Label Content="Alias:" Grid.Column="0" Grid.Row="1" Margin="11,3,328,30" Grid.ColumnSpan="2"/>
             <TextBox Style="{StaticResource CustomTextBoxStyle}" Text="{Binding CurrentTask.Alias, Mode=TwoWay,NotifyOnValidationError=true,  ValidatesOnExceptions=true}" 
-                     Grid.Column="1" Grid.Row="1" Margin="85,10,270,29"/>
+                     Grid.Column="1" IsEnabled="{Binding Enable}" Grid.Row="1" Margin="85,10,270,29"/>
 
             <Label Content="Description:" Grid.Column="0" Grid.Row="2" Margin="3,2,306,27" Grid.ColumnSpan="2" RenderTransformOrigin="0.5,0.5"/>
-            <TextBox Style="{StaticResource CustomTextBoxStyle}" Text="{Binding CurrentTask.Description, Mode=TwoWay,NotifyOnValidationError=true,  ValidatesOnExceptions=true}" Grid.Column="1" Grid.Row="2" Margin="85,10,270,29"/>
+            <TextBox IsEnabled="{Binding Enable}" Style="{StaticResource CustomTextBoxStyle}" Text="{Binding CurrentTask.Description, Mode=TwoWay,NotifyOnValidationError=true,  ValidatesOnExceptions=true}" Grid.Column="1" Grid.Row="2" Margin="85,10,270,29"/>
 
 
 
@@ -51,16 +51,16 @@
             <Label Content="Complexity:" Grid.Column="0" Grid.Row="1" Margin="240,3,69,25" Grid.ColumnSpan="2" RenderTransformOrigin="0.505,1.019"/>
             <ComboBox SelectedValue="{Binding CurrentTask.Complexity, Mode=TwoWay,NotifyOnValidationError=true, ValidatesOnExceptions=true}"
                           ItemsSource="{Binding Source={StaticResource ExperienceLevelCollectionKey}}"
-                         Grid.Column="1" Grid.Row="1"  Margin="334,6,21,33" />
+                         Grid.Column="1" Grid.Row="1"  Margin="334,6,21,33" IsEnabled="{Binding Enable}"/>
 
             <Label Content="Required&#xD;&#xA;Effort Time" Grid.Column="1" Grid.Row="0" Margin="245,5,54,64" Grid.RowSpan="2"/>
-            <TextBox Style="{StaticResource CustomTextBoxStyle}" Text="{Binding CurrentTask.RequiredEffortTime, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Column="1" Margin="333,11,22,29"/>
+            <TextBox IsEnabled="{Binding Enable}" Style="{StaticResource CustomTextBoxStyle}" Text="{Binding CurrentTask.RequiredEffortTime, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Column="1" Margin="333,11,22,29"/>
 
             <Label Content="Engineer" Grid.Column="1" Grid.Row="1" Margin="248,80,51,69" Grid.RowSpan="3"/>
             <TextBox Style="{StaticResource CustomTextBoxStyle}" Text="{Binding SelectedEngineer.Name, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" IsEnabled="False"  Grid.Column="1" Margin="333,80,22,41" Grid.RowSpan="2" Grid.Row="1"/>
 
             <Label Content="Dependencies:" Grid.Column="0" Grid.Row="3" Margin="240,1,69,26" Grid.ColumnSpan="2" RenderTransformOrigin="0.505,1.019"/>
-            <ListBox ItemsSource="{Binding UpDependencies}" Grid.Column="1" Grid.Row="2" Margin="334,75,22,27" Grid.RowSpan="2" IsEnable="{binding }"
+            <ListBox ItemsSource="{Binding UpDependencies}" IsEnabled="{Binding Enable}" Grid.Column="1" Grid.Row="2" Margin="334,75,22,27" Grid.RowSpan="2" >
                 <ListBox.ItemTemplate>
                     <DataTemplate>
 

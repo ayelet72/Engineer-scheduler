@@ -5,6 +5,7 @@ using DO;
 using DalApi;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 using System.Data.Common;
+using System;
 
 public static class Initialization //Building the lists of items for Stage 1: 
 {
@@ -65,18 +66,23 @@ public static class Initialization //Building the lists of items for Stage 1:
 
         EngineerExperience experience;
         DateTime dateTime;
+        int requierdTime;
 
         for (int i = 0; i < 20; i++)
         {
 
             dateTime = DateTime.Now.AddDays(-60 + 3*i);
             experience = (EngineerExperience)s_rand.Next(5);
+            requierdTime = s_rand.Next(10, 21);
+
             s_dal!.Task.Create(new Task(
                 Id: 0,
                 Complexity: experience,
                 Alias: $"Task #{i + 1}",
                 Description: description[i],
-                CreateAtDate: dateTime
+                CreateAtDate: dateTime,
+                RequiredEffortTime: TimeSpan.FromDays(requierdTime)
+
                 )); 
      
 
@@ -123,10 +129,10 @@ public static class Initialization //Building the lists of items for Stage 1:
     public static void Reset()
     {
         s_dal = DalApi.Factory.Get;
-        s_dal.Engineer.Reset();
-        s_dal.Task.Reset();
-        s_dal.Dependency.Reset();
-
+        //s_dal.Engineer.Reset();
+        //s_dal.Task.Reset();
+        //s_dal.Dependency.Reset();
+        s_dal.Reset();
     }
 
 }

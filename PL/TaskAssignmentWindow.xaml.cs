@@ -11,6 +11,7 @@ using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
@@ -47,7 +48,8 @@ namespace PL
         {
             CurrentEngineer = s_bl.Engineer.Read(id);
             TaskList = s_bl.Task.ReadAll(item => (item.EngineerId == null && item.Complexity <= (DO.EngineerExperience)CurrentEngineer!.Level));
-            TaskList = TaskList.Where(task => task.Dependencies == null || task.Dependencies!.All(dep => s_bl.Task.Read(dep.Id).CompleteDate != null)); ;
+            TaskList = TaskList.Where(task => (task.Dependencies == null || task.Dependencies!.All(dep => s_bl.Task.Read(dep.Id).CompleteDate != null)) && task.ScheduledDate<= s_bl.Clock);
+            ;
             InitializeComponent();
         }
 
@@ -55,7 +57,7 @@ namespace PL
         {
             try
             {
-               // s_bl.IsSchedule();
+                s_bl.IsSchedule();
                 BO.Task? task = (sender as ListView)?.SelectedItem as BO.Task;
                 if (task != null)
                 {

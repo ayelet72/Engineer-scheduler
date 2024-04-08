@@ -1,6 +1,7 @@
 ﻿
 using BO;
 using DalApi;
+using DO;
 using System.Security.Cryptography.X509Certificates;
 
 namespace BlApi;
@@ -14,7 +15,7 @@ public interface IBl
     public DateTime? StartProject { set; get; }
     public DateTime? EndProject { set; get; }
     public void CreateManualSchedule(); //not in use
-    public void CreateAutomateSchedule(IEnumerable<BO.Task> Tasks, DateTime projectStartDate);
+    public void  CreateAutomateSchedule(DateTime? projectStartDate);
     public ProjectStatus CalcStatusProject();
     public  void InitializeDB();
     public  void ResetDB();
@@ -25,10 +26,10 @@ public interface IBl
     #endregion
 
     #region Methods
-    DateTime AdvanceTimeByYear(DateTime date);
-    DateTime AdvanceTimeByMonth(DateTime date);
-    DateTime AdvanceTimeByDay(DateTime date);
-    DateTime AdvanceTimeByHour(DateTime date);
+    public void AdvanceTimeByYear();
+    public void AdvanceTimeByMonth();
+    public void AdvanceTimeByDay();
+    public void AdvanceTimeByHour();
     void InitializeTime();
 
     #endregion

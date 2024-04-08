@@ -9,6 +9,6 @@
         DataContext="{Binding RelativeSource={RelativeSource Mode=Self}}" >
     <Grid>
         <TextBox Text="{Binding CurrentTask ,Mode=OneWay}" IsReadOnly="False" />
-        <Button Content="assignment task" Visibility="{Binding IsButtonVisibile}" Click="AssignTask_Click" Margin="282,357,282,0"/>
+        <Button Content="assignment task" Visibility="{Binding IsButtonVisibile, Mode=TwoWay}" Click="AssignTask_Click" Margin="282,357,282,0"/>
     </Grid>
 </Window>

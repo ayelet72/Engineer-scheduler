@@ -6,7 +6,8 @@
         xmlns:local="clr-namespace:PL"
         Background="{DynamicResource backgroundImage}"
          mc:Ignorable="d"
-        Title="AdminWindow" Height="450" Width="800" >
+        Title="AdminWindow" Height="450" Width="800" 
+        DataContext="{Binding RelativeSource={RelativeSource Mode=Self}}">
 
     <Window.Resources>
 
@@ -29,8 +30,11 @@
         <Button  Content="Gant" Style="{StaticResource ButtonMain}"  Click="btnGant_Click" Margin="0,343,39,0" HorizontalAlignment="Right" VerticalAlignment="Top"/>
         <Button  Content=" Inizilation Data" Style="{StaticResource ButtonMain}" HorizontalAlignment="Left" Margin="322,217,0,0" VerticalAlignment="Top" Height="67" Width="125" Click="btnInitEngineers_Click" />
         <Button  Content="Reset Data" Style="{StaticResource ButtonMain}" HorizontalAlignment="Left" Margin="162,316,0,0" VerticalAlignment="Top" Height="67" Width="125" RenderTransformOrigin="0.767,-0.469" Click="btnResetEngineers_Click" />
-        <!--<DatePicker IsEnabled="False" SelectedDate="{Binding ProjectStartDate}" HorizontalAlignment="Right" Margin="0,300,190,0" VerticalAlignment="Top"/>-->
-        <Button Content="schedule" Style="{StaticResource ButtonMain}" Margin="0,340,180,0" HorizontalAlignment="Right" VerticalAlignment="Top" Click="CreateSchedule_Click"/>
+        <StackPanel Margin="322,316,164,-12" Visibility="{Binding IsScheduele, Mode=TwoWay}">
+            <Label Content="   Select Start Date:" Width="198" FontFamily="Consolas" FontSize="15" Foreground="Black" FontWeight="Bold"/>
+            <DatePicker SelectedDate="{Binding selectedStartDateProject, Mode=TwoWay}" Width="134" Margin="10"/>
+            <Button Content="Set Start Date" Click="SetStartDateProject_Click" Width="152" Style="{StaticResource ButtonMain}" Height="28" />
+        </StackPanel>
 
     </Grid>
 </Window>

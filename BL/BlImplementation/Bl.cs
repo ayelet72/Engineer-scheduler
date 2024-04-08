@@ -50,31 +50,26 @@ internal class Bl : IBl
         _dal.EndProject = tasks.Max(x => x.ScheduledDate + x.RequiredEffortTime);
 
     }
-    public static void CreateAutomateSchedule(IEnumerable<BO.Task> Tasks, DateTime projectStartDate)
+    public  void CreateAutomateSchedule(DateTime? projectStartDate)
     {
-        foreach (var task in Tasks)
+        _dal.StartProject = projectStartDate;
+        var tasks = _dal.Task.ReadAll().ToDictionary(t => t.Id);
+        var dependecies = _dal.Dependency.ReadAll();
+        foreach (var task in tasks.Values)
         {
-            if (task.Dependencies==null)
-            {
-                task.StartDate= projectStartDate ;
-            }
-            else
-            {
-                DateTime maxDependencyEndDate = DateTime.MinValue;
-                foreach (var dependencyTask in task.Dependencies)
-                {
-                    int id = dependencyTask.Id;
-                    var boTask =Read(id); //hadar
+            var depndencies1 = dependecies.Where(d => d.DependentTask == task.Id);
+            var dependeciesTasks= depndencies1.Select(t => _dal.Task.Read(t.DependsOnTask!)).ToList();
+            var maxDate = dependeciesTasks.Max(t => t!.ScheduledDate + t.RequiredEffortTime);
+            var scheduledDate = maxDate is null ? _dal.StartProject : maxDate;
+            _dal.Task.Update(task with { ScheduledDate = scheduledDate });
 
-                    if (boTask.EndDate > maxDependencyEndDate)
-                    {
-                        maxDependencyEndDate = boTask.EndDate;
-                    }
-                }
-                    task.StartDate = maxDependencyEndDate;
-            }
         }
 
+    }
+    public void IsSchedule()
+    {
+        if (StartProject == DateTime.MinValue)
+            throw new BlIsScheduled($"The project has not yet been scheduled");
     }
 
 
@@ -108,30 +103,36 @@ internal class Bl : IBl
 
     #region Methods
 
-    public DateTime AdvanceTimeByYear(DateTime date)
+    public void AdvanceTimeByYear()
     {
-       return date.AddYears(1);
+       s_Clock= s_Clock.AddYears(1);
+        Clock = s_Clock;
     }
 
-    public DateTime AdvanceTimeByMonth(DateTime date)
+    public void AdvanceTimeByMonth()
     {
-        return date.AddMonths(1);
+        s_Clock = s_Clock.AddMonths(1);
+        Clock = s_Clock;
     }
 
-    public DateTime AdvanceTimeByDay(DateTime date)
+    public void AdvanceTimeByDay()
     {
-        return date.AddDays(1);
+        s_Clock= s_Clock.AddDays(1);
+        Clock = s_Clock;
     }
 
-    public DateTime AdvanceTimeByHour(DateTime date)
+    public void AdvanceTimeByHour( )
     {
-        return date.AddHours(1);
+        s_Clock= s_Clock.AddHours(1);
+        Clock = s_Clock;
     }
 
     public void InitializeTime()
     {
         s_Clock = DateTime.Now;
     }
+
+  
 
     #endregion
 }

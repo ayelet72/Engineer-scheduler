@@ -30,7 +30,6 @@ sealed internal class DalList : IDal
         Engineer.Reset();
         Task.Reset();
         Dependency.Reset();
-
         DataSource.Config.ResetDependencyID();
         DataSource.Config.ResetTaskID();
         DataSource.Config.ResetDate();

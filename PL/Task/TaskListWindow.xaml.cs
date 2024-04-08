@@ -31,60 +31,67 @@ namespace PL.Task
 
         public static readonly DependencyProperty TaskListProperty =
             DependencyProperty.Register("TaskList", typeof(IEnumerable<BO.Task>), typeof(TaskListWindow), new PropertyMetadata(null));
+        public Visibility IsButtonVisibile
+
+        {
+            get { return (Visibility)GetValue(IsButtonVisibileProperty); }
+            set { SetValue(IsButtonVisibileProperty, value); }
+        }
+
+        public static readonly DependencyProperty IsButtonVisibileProperty =
+            DependencyProperty.Register("IsButtonVisibile", typeof(Visibility), typeof(TaskListWindow), new PropertyMetadata(null));
+
+        public BO.EngineerExperience Complexity { get; set; } = BO.EngineerExperience.None;
+        public BO.Status StatusTask { get; set; } = BO.Status.None;
         public TaskListWindow()
         {
-            
+
+            if (s_bl.StartProject != DateTime.MinValue)
+                IsButtonVisibile = Visibility.Hidden;
+            else
+                IsButtonVisibile = Visibility.Visible;
             InitializeComponent();
             TaskList = s_bl?.Task.ReadAll()!;
         }
 
-        public TaskListWindow(int id)
-        {
-
-            InitializeComponent();
-            TaskList = s_bl?.Task.ReadAll( item=> item.EngineerId == 0)!;
-        }
+      
         
-        public BO.EngineerExperience Complexity { get; set; } = BO.EngineerExperience.None;
-        private void cbLevelSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            TaskList = (Complexity == BO.EngineerExperience.None) ?
-                s_bl?.Task.ReadAll()! : s_bl?.Task.ReadAll(item => item.Complexity == (DO.EngineerExperience)Complexity)!;
-        }
-        public BO.Status StatusTask { get; set; } = BO.Status.None;
-        private void cbStatusSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            TaskList = (StatusTask == BO.Status.None) ?
-                s_bl?.Task.ReadAll()! : s_bl?.Task.ReadAll(item => s_bl.Task.Read(item.Id).Status== StatusTask)!;
-        }
+        
+
         private void btnAdd_Click(object sender, RoutedEventArgs e)
         {
-
-            new TaskWindow(0).ShowDialog();
-            TaskList = s_bl.Task.ReadAll();
+            
+                new TaskWindow(0).ShowDialog();
+                TaskList = s_bl.Task.ReadAll();
+  
         }
 
     
 
         private void TaskList_DoubleClick(object sender, MouseButtonEventArgs e)
         {
-            BO.Task? task = (sender as ListView)?.SelectedItem as BO.Task;
-            if (task != null)
-            {
-                TaskWindow taskWindow = new TaskWindow(task.Id);
-                taskWindow.ShowDialog();
-                TaskList = s_bl.Task.ReadAll();
+            
+                BO.Task? task = (sender as ListView)?.SelectedItem as BO.Task;
+                if (task != null)
+                {
+                    TaskWindow taskWindow = new TaskWindow(task.Id);
+                    taskWindow.ShowDialog();
+                    TaskList = s_bl.Task.ReadAll();
 
-            }
+                }
+            
         }
 
-        private void StatusComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
+  
 
-        }
-
-        private void FilterComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void cbSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            TaskList = (StatusTask == BO.Status.None) ?
+                s_bl?.Task.ReadAll()! : s_bl?.Task.ReadAll(item => s_bl.Task.Read(item.Id).Status == StatusTask)!;
+
+
+            TaskList = (Complexity == BO.EngineerExperience.None) ?
+                TaskList : TaskList.Where(item => item.Complexity == Complexity)!;
 
         }
     }

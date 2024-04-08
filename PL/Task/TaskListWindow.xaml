@@ -23,18 +23,11 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <Label Content="Select filter" HorizontalAlignment="Left" Margin="166,0,0,0" VerticalAlignment="Center" Grid.Column="0" Height="23" Width="91"/>
-            <ComboBox x:Name="filterComboBox" SelectionChanged="FilterComboBox_SelectionChanged" HorizontalAlignment="Left" VerticalAlignment="Top" Width="150" Margin="10">
-                <ComboBoxItem Content="All"/>
-                <ComboBoxItem Content="Filter by Status" Tag="StatusFilter"/>
-            </ComboBox>
-            <ComboBox x:Name="statusComboBox" HorizontalAlignment="Left" VerticalAlignment="Top" Width="150" Margin="10" Visibility="Collapsed">
-                <ComboBoxItem Content="Unscheduled"/>
-                <ComboBoxItem Content="Scheduled"/>
-                <ComboBoxItem Content="OnTrack"/>
-                <ComboBoxItem Content="Done"/>
-            </ComboBox>
-
+            <Label Content="Select Status" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Grid.Column="0"/>
+            <!--filter comboBox-->
+            <ComboBox SelectedValue="{Binding StatusTask, Mode=TwoWay}" ItemsSource="{Binding Source={StaticResource StatusCollectionKey}}"  SelectionChanged="cbSelector_SelectionChanged" Margin="111,6,130,0"/>
+            <ComboBox SelectedValue="{Binding Complexity, Mode=TwoWay}" ItemsSource="{Binding Source={StaticResource ExperienceLevelCollectionKey}}"  SelectionChanged="cbSelector_SelectionChanged" Margin="200,5,41,2" Grid.Column="1"/>
+            <Label Content="Select Complexity" HorizontalAlignment="Left" Margin="78,11,0,0" VerticalAlignment="Top" Grid.Column="1"/>
         </Grid>
         <ListView Margin="5" Grid.Row="1" ItemsSource="{Binding TaskList}" MouseDoubleClick="TaskList_DoubleClick">
             <ListView.View>
@@ -43,7 +36,7 @@
                 </GridView>
             </ListView.View>
         </ListView>
-        <Button Content="Add" Grid.Row="2" HorizontalAlignment="Center" Height="50" Width="100" Click="btnAdd_Click" />
+        <Button Content="Add" Grid.Row="2" HorizontalAlignment="Center" Height="50" Width="100" Click="btnAdd_Click" Visibility="{Binding IsButtonVisibile, Mode=TwoWay}" />
     </Grid>
 
 </Window>

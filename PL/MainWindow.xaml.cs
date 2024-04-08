@@ -39,13 +39,9 @@ namespace PL
         {
             InitializeComponent();
             DataContext = this;
-            CurrentTime = DateTime.Now;
+            CurrentTime = s_bl.Clock;
 
-            // Update the current time periodically
-            //var timer = new System.Windows.Threading.DispatcherTimer();
-            //timer.Tick += (sender, e) => CurrentTime = DateTime.Now;
-            //timer.Interval = TimeSpan.FromSeconds(1);
-            //timer.Start();
+
         }
 
 
@@ -59,17 +55,36 @@ namespace PL
 
 
         // Button click handlers:
-        private void AdvanceHour_Click(object sender, RoutedEventArgs e) => CurrentTime= s_bl.AdvanceTimeByHour(CurrentTime);
+        private void AdvanceHour_Click(object sender, RoutedEventArgs e)
+        {
+            s_bl.AdvanceTimeByHour();
+            CurrentTime = s_bl.Clock;
+        }
 
-        private void AdvanceDay_Click(object sender, RoutedEventArgs e) => CurrentTime = s_bl.AdvanceTimeByDay(CurrentTime);
-        private void AdvanceMonth_Click(object sender, RoutedEventArgs e) => CurrentTime = s_bl.AdvanceTimeByMonth(CurrentTime);
+        private void AdvanceDay_Click(object sender, RoutedEventArgs e)
+        {
+            s_bl.AdvanceTimeByDay();
+            CurrentTime = s_bl.Clock;
 
-        private void AdvanceYear_Click(object sender, RoutedEventArgs e) => CurrentTime = s_bl.AdvanceTimeByYear(CurrentTime);
+        }
+        private void AdvanceMonth_Click(object sender, RoutedEventArgs e)
+        {
+            s_bl.AdvanceTimeByMonth();
+            CurrentTime = s_bl.Clock;
 
-        private void ResetClock_Click(object sender, RoutedEventArgs e)
+        }
+
+        private void AdvanceYear_Click(object sender, RoutedEventArgs e) 
+        {
+             s_bl.AdvanceTimeByYear();
+            CurrentTime = s_bl.Clock;
+        }
+
+    private void ResetClock_Click(object sender, RoutedEventArgs e)
         {
             s_bl.InitializeTime();
             CurrentTime = s_bl.Clock;
+             
         }
 
     }

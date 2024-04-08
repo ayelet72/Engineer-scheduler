@@ -6,39 +6,41 @@
         xmlns:local="clr-namespace:PL"
         Background="{DynamicResource backgroundImage}"
          mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800" >
+        Title="MainWindow" Height="450" Width="800">
 
-    <Window.Resources>
 
-        <ImageSource x:Key="imgSource">images/mainWindow.jpg</ImageSource>
-        <ImageBrush x:Key="backgroundImage" ImageSource="{DynamicResource imgSource}" ></ImageBrush>
+<Window.Resources>
+  
 
-    </Window.Resources>
+    <ImageSource x:Key="imgSource">images/mainWindow.jpg</ImageSource>
+    <ImageBrush x:Key="backgroundImage" ImageSource="{DynamicResource imgSource}" ></ImageBrush>
 
+</Window.Resources>
 
 
     <Grid RenderTransformOrigin="0.507,0.504">
-        <TextBox>
-            <TextBox.Background>
-                <ImageBrush/>
-            </TextBox.Background>
-        </TextBox>
-        <!--two buttons for the main window-->
-        <Button  Content="Engineer" Style="{StaticResource ButtonMain}"  Click="btnEngineer_Click" Margin="0,299,183,0" HorizontalAlignment="Right" VerticalAlignment="Top" RenderTransformOrigin="-0.099,0.554"/>
-        <Button  Content="Admin" Style="{StaticResource ButtonMain}"  Click="btnAdmin_Click" Margin="0,299,503,0" HorizontalAlignment="Right" VerticalAlignment="Top"/>
-        <!-- Displaying current time using a Label -->
-        <Label Content="{Binding CurrentTime, RelativeSource={RelativeSource AncestorType={x:Type Window}}}" 
+    <TextBox>
+        <TextBox.Background>
+            <ImageBrush/>
+        </TextBox.Background>
+    </TextBox>
+    <!--two buttons for the main window-->
+    <Button  Content="Engineer" Style="{StaticResource ButtonMain}"  Click="btnEngineer_Click" Margin="0,299,183,0" HorizontalAlignment="Right" VerticalAlignment="Top" RenderTransformOrigin="-0.099,0.554"/>
+    <Button  Content="Admin" Style="{StaticResource ButtonMain}"  Click="btnAdmin_Click" Margin="0,299,503,0" HorizontalAlignment="Right" VerticalAlignment="Top"/>
+    <!-- Displaying current time using a Label -->
+    <Label Content="{Binding CurrentTime, RelativeSource={RelativeSource AncestorType={x:Type Window}}}" 
                HorizontalAlignment="Left" VerticalAlignment="Top" Height="74" Width="156" Margin="618,25,0,0"
                Background="White" Foreground="Black"/>
 
-        <!-- Buttons for advancing the clock -->
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,20">
-            <Button Content="Advance Hour" Click="AdvanceHour_Click"/>
-            <Button Content="Advance Day" Click="AdvanceDay_Click"/>
-            <Button Content="Advance Month" Click="AdvanceMonth_Click"/>
-            <Button Content="Advance Year" Click="AdvanceYear_Click"/>
-            <Button Content="Reset Clock" Click="ResetClock_Click"/>
-        </StackPanel>
+    <!-- Buttons for advancing the clock -->
+    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,20">
+        <Button Content="Advance Hour" Click="AdvanceHour_Click"/>
+        <Button Content="Advance Day" Click="AdvanceDay_Click"/>
+        <Button Content="Advance Month" Click="AdvanceMonth_Click"/>
+        <Button Content="Advance Year" Click="AdvanceYear_Click"/>
+        <Button Content="Reset Clock" Click="ResetClock_Click"/>
+    </StackPanel>
 
-    </Grid>
+</Grid>
+
 </Window>

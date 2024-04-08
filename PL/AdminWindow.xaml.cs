@@ -25,37 +25,36 @@ namespace PL
     {
         static readonly BlApi.IBl s_bl = BlApi.Factory.Get();
 
-        public static readonly DependencyProperty TaskListProperty =
-           DependencyProperty.Register("TaskList", typeof(IEnumerable<BO.Task>), typeof(TaskListWindow), new PropertyMetadata(null));
-        public IEnumerable<BO.Task> TaskList
+   
+
+        public DateTime? selectedStartDateProject
         {
-            get { return (IEnumerable<BO.Task>)GetValue(TaskListProperty); }
-            set { SetValue(TaskListProperty, value); }
+            get { return (DateTime?)GetValue(selectedStartDateProjectProperty); }
+            set { SetValue(selectedStartDateProjectProperty, value); }
         }
 
+        public static readonly DependencyProperty selectedStartDateProjectProperty =
+            DependencyProperty.Register("selectedStartDateProject", typeof(DateTime?), typeof(AdminWindow), new PropertyMetadata(null));
+        public Visibility IsScheduele
 
-        //private DateTime _projectStartDate;
+        {
+            get { return (Visibility)GetValue(IsSchedueleProperty); }
+            set { SetValue(IsSchedueleProperty, value); }
+        }
 
-        //public event PropertyChangedEventHandler PropertyChanged;
+        public static readonly DependencyProperty IsSchedueleProperty =
+            DependencyProperty.Register("IsScheduele", typeof(Visibility), typeof(AdminWindow), new PropertyMetadata(null));
 
-        //public DateTime ProjectStartDate
-        //{
-        //    get { return _projectStartDate; }
-        //    set
-        //    {
-        //        if (_projectStartDate != value)
-        //        {
-        //            _projectStartDate = value;
-        //            OnPropertyChanged();
-        //        }
-        //    }
-        //}
 
         public AdminWindow()
         {
+            if (s_bl.StartProject != DateTime.MinValue)
+                IsScheduele = Visibility.Hidden;
+            else
+                IsScheduele = Visibility.Visible;
+            selectedStartDateProject = null;
             InitializeComponent();
-            TaskList = s_bl?.Task.ReadAll()!;
-           // DataContext = this;
+
         }
         private void btnEngineers_Click(object sender, RoutedEventArgs e)
         { new EngineerListWindow().Show(); }
@@ -77,6 +76,7 @@ namespace PL
         {
             s_bl.ResetDB();
             MessageBox.Show($"Reset was successfully done", "Success", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+            IsScheduele = Visibility.Visible;
 
         }
 
@@ -85,20 +85,19 @@ namespace PL
 
         }
 
-        //protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        //{
-        //    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        //}
+        private void SetStartDateProject_Click(object sender, RoutedEventArgs e)
+        {
+            if(selectedStartDateProject!=null)
+            {
+                s_bl.StartProject = selectedStartDateProject;
 
-        private void CreateSchedule_Click(object sender, RoutedEventArgs e)
-        { 
-           // s_bl.CreateAutomateSchedule(TaskList, ProjectStartDate);
+                s_bl.CreateAutomateSchedule(s_bl.StartProject);
+                MessageBox.Show($"Project start date set to: {selectedStartDateProject}");
+                IsScheduele = Visibility.Hidden;
+            }
             
         }
-        //private void DatePicker_SelectedDate(object sender, SelectionChangedEventArgs e)
-        //{
-
-        //}
+     
 
 
 

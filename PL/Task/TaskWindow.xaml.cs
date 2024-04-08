@@ -33,6 +33,7 @@ namespace PL.Task
             public bool IsSelected { get; set; }
             public BO.Task? task { get; set; }
         }
+
         public List<SelectTask>? UpDependencies
         {
             get { return (List<SelectTask>?)GetValue(UpDependenciesProperty); }
@@ -42,7 +43,14 @@ namespace PL.Task
          DependencyProperty.Register("UpDependencies", typeof(List<SelectTask>), typeof(TaskWindow));
 
 
+        public static readonly DependencyProperty EnableProperty =
+      DependencyProperty.Register(" Enable", typeof(bool), typeof(TaskWindow), new PropertyMetadata(null));
 
+        public bool Enable
+        {
+            get { return (bool)GetValue(EnableProperty); }
+            set { SetValue(EnableProperty, value); }
+        }
 
         public IEnumerable<BO.Task> Tasks
         {
@@ -62,33 +70,20 @@ namespace PL.Task
         public static readonly DependencyProperty CurrentTaskProperty =
           DependencyProperty.Register("CurrentTask", typeof(BO.Task), typeof(TaskWindow), new PropertyMetadata(null));
 
-        public BO.Engineer SelectedEngineer
+        public BO.Engineer? SelectedEngineer
         {
-            get { return (BO.Engineer)GetValue(SelectedEngineerProperty); }
+            get { return (BO.Engineer?)GetValue(SelectedEngineerProperty); }
             set { SetValue(SelectedEngineerProperty, value); }
         }
         public static readonly DependencyProperty SelectedEngineerProperty =
          DependencyProperty.Register("SelectedEngineer", typeof(BO.Engineer), typeof(TaskWindow));
-       
-
-        public IEnumerable<BO.Engineer> Engineers
-        {
-            get { return (IEnumerable<BO.Engineer>)GetValue(EngineersProperty); }
-            set { SetValue(EngineersProperty, value); }
-        }
-
-        public static readonly DependencyProperty EngineersProperty =
-            DependencyProperty.Register("Engineers", typeof(IEnumerable<BO.Engineer>), typeof(TaskWindow), new PropertyMetadata(null));
-
 
         public TaskWindow(int id = 0 )
         {
            List<BO.Task> temp = s_bl.Task.ReadAll().ToList();
             UpDependencies = temp.Select(item => new SelectTask{ task = item, IsSelected=false }).ToList();
-            Engineers = s_bl.Engineer.ReadAll();
-            DataContext = this;
-            
-            //CurrentEngineer = null; 
+            SelectedEngineer = null;
+            Enable = true;
 
             try
             {
@@ -127,6 +122,7 @@ namespace PL.Task
         {
 
             SelectedEngineer = engineer!;
+            Enable = false;
             try
             {
                 // if id isn't a deafult create a new task . else, find the exsit engineer with the same id (Read Method)
@@ -151,17 +147,21 @@ namespace PL.Task
         }
         private void btnAddUpdateClick(object sender, RoutedEventArgs e)
         {
-            CurrentTask!.Dependencies?.Clear();
-            CurrentTask!.Dependencies = UpDependencies!
-            .Where(item => item.IsSelected == true)
-            .Select(item => new TaskInList
+            if (SelectedEngineer == null)
             {
-                Id = item.task!.Id,
-                Alias = s_bl.Task.Read(item.task.Id).Alias,
-                Description = s_bl.Task.Read(item.task.Id).Description,
-                Status = s_bl.Task.Read(item.task.Id).Status
-            })
-            .ToList();
+                CurrentTask!.Dependencies?.Clear();
+                CurrentTask!.Dependencies = UpDependencies!
+                .Where(item => item.IsSelected == true)
+                .Select(item => new TaskInList
+                {
+                    Id = item.task!.Id,
+                    Alias = s_bl.Task.Read(item.task.Id).Alias,
+                    Description = s_bl.Task.Read(item.task.Id).Description,
+                    Status = s_bl.Task.Read(item.task.Id).Status
+                })
+                .ToList();
+            }
+            
             if ((sender as Button)!.Content.ToString() == "Add")
             {
                 try
@@ -180,7 +180,14 @@ namespace PL.Task
             {
                 try
                 {
-                    
+                    if (SelectedEngineer != null)
+                    {
+                        CurrentTask!.Engineer = new BO.EngineerInTask { Id = SelectedEngineer.Id, Name = SelectedEngineer.Name };
+                        CurrentTask!.StartDate = s_bl.Clock;
+                        SelectedEngineer.Task = new BO.TaskInEngineer { Id = CurrentTask.Id, Alias = CurrentTask.Alias };
+                        s_bl.Engineer.Update(SelectedEngineer);
+                    }
+                        
                     s_bl.Task.Update(CurrentTask!);
                     MessageBox.Show($"Task {CurrentTask!.Id} was successfully Update!", "Success", MessageBoxButton.OK, MessageBoxImage.Exclamation);
                     this.Close();

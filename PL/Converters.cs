@@ -1,6 +1,8 @@
-﻿using System.Globalization;
+﻿using BO;
+using System.Globalization;
 using System.Windows;
 using System.Windows.Data;
+using System.Windows.Media;
 
 namespace PL;
 
@@ -40,8 +42,7 @@ class ConvertIdToContent : IValueConverter
 {
     public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
     {
-        // כאן אתה יכול לבצע כל סוג של לוגיקה שברצונך, לדוגמה:
-        // אם הערך הוא 0, החזר False לשביתת הפקד. אחרת, החזר True לאפשרויות הפקד.
+        
         if ((int)value == 0)
         {
             return true;
@@ -79,5 +80,75 @@ class ConvertIdToContent : IValueConverter
     {
         throw new NotImplementedException();
     }
+
+}
+class EffotTimeToWidthConverter : IValueConverter
+{
+    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        if (value == null)
+        {
+            return 0;
+        }
+        else
+        {
+            // פרטי המשימה
+            return ((TimeSpan)value).TotalDays * 5;
+        }
+    }
+
+    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        throw new NotImplementedException();
+    }
 }
 
+class StartDateToMarginConverter : IValueConverter
+{
+    static readonly BlApi.IBl s_bl = BlApi.Factory.Get();
+    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        if (value == null)
+        {
+            return 0;
+        }
+        else
+        {
+            // פרטי המשימה
+            return new Thickness((((DateTime)value).Subtract(s_bl.StartProject ?? DateTime.Now).TotalDays) * 5 + 100, 0, 0, 0);
+        }
+    }
+
+    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        throw new NotImplementedException();
+    }
+}
+
+class ColorConverter : IValueConverter
+{
+    static readonly BlApi.IBl s_bl = BlApi.Factory.Get();
+    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        if (value == null)
+        {
+            return 0;
+        }
+        else
+        {
+            
+            if ((BO.Status)value == BO.Status.Scheduled) 
+                return Brushes.Red;
+            if ((BO.Status)value == BO.Status.OnTrack)
+                return Brushes.LightYellow;
+            if ((BO.Status)value == BO.Status.Scheduled)
+                return Brushes.LightSalmon;
+        }
+        return 0;
+    }
+
+    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        throw new NotImplementedException();
+    }
+}

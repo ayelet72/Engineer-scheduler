@@ -32,6 +32,15 @@ namespace PL
 
         public static readonly DependencyProperty IsButtonVisibileProperty =
             DependencyProperty.Register("IsButtonVisibile", typeof(Visibility), typeof(EngineerViewWindow), new PropertyMetadata(null));
+        public Visibility IsButtonDoneVisibile
+
+        {
+            get { return (Visibility)GetValue(IsButtonDoneVisibileProperty); }
+            set { SetValue(IsButtonDoneVisibileProperty, value); }
+        }
+
+        public static readonly DependencyProperty IsButtonDoneVisibileProperty =
+            DependencyProperty.Register("IsButtonDoneVisibile", typeof(Visibility), typeof(EngineerViewWindow), new PropertyMetadata(null));
 
         public BO.Engineer? CurrentEngineer
 
@@ -52,8 +61,7 @@ namespace PL
         public static readonly DependencyProperty CurrentTaskProperty =
             DependencyProperty.Register("CurrentTask", typeof(BO.Task), typeof(EngineerViewWindow), new PropertyMetadata(null));
         public EngineerViewWindow(int id)
-        {
-            DataContext = this;
+        { 
             CurrentEngineer= s_bl.Engineer.Read(id)!;
             CurrentTask = null;
             IsButtonVisibile=Visibility.Hidden;
@@ -63,23 +71,20 @@ namespace PL
             {
                 CurrentTask = s_bl.Task.Read(CurrentEngineer.Task.Id);
                 IsButtonVisibile = Visibility.Hidden;
+                IsButtonDoneVisibile = Visibility.Visible;
             }
            
             else
             {
                 CurrentTask = null;
                 IsButtonVisibile = Visibility.Visible;
+                IsButtonDoneVisibile = Visibility.Hidden;
 
             }
             InitializeComponent();
         }
 
-        private void FinishTaskButton_Click(object sender, RoutedEventArgs e)
-        {
-            CurrentTask!.CompleteDate = DateTime.Now;
-            s_bl.Task.Update(CurrentTask);
-
-        }
+    
 
 
         private void AssignTask_Click(object sender, RoutedEventArgs e)
@@ -102,6 +107,17 @@ namespace PL
                 this.Close();
             }
 
+        }
+
+        private void DoneTask_Click(object sender, RoutedEventArgs e)
+        {
+            CurrentTask!.CompleteDate = s_bl.Clock;
+            s_bl.Task.Update(CurrentTask);
+            CurrentEngineer!.Task = null;
+            s_bl.Engineer.Update(CurrentEngineer);
+            IsButtonDoneVisibile = Visibility.Hidden;
+            this.Close();
+            
         }
     }
 }

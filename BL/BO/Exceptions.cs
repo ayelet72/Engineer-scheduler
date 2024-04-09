@@ -20,22 +20,22 @@ public class BlAlreadyExistsException : Exception
     }
 }
 
-    [Serializable]
-    public class BlDoesNotExistException : Exception
+[Serializable]
+public class BlDoesNotExistException : Exception
+{
+
+    public BlDoesNotExistException(string? message) : base(message)
     {
-        
-        public BlDoesNotExistException(string? message) : base(message)
-        {
-        }
-
-        public BlDoesNotExistException(string? message, Exception? innerException) : base(message, innerException)
-        {
-        }
-
-        protected BlDoesNotExistException(SerializationInfo info, StreamingContext context) : base(info, context)
-        {
-        }
     }
+
+    public BlDoesNotExistException(string? message, Exception? innerException) : base(message, innerException)
+    {
+    }
+
+    protected BlDoesNotExistException(SerializationInfo info, StreamingContext context) : base(info, context)
+    {
+    }
+}
 [Serializable]
 public class BlIsScheduled : Exception
 {
@@ -70,23 +70,23 @@ public class BlCannotBeDeletedException : Exception
     {
     }
 }
-    [Serializable]
-    public class BlInvalidDataException : Exception
+[Serializable]
+public class BlInvalidDataException : Exception
+{
+
+
+    public BlInvalidDataException(string? message) : base(message)
     {
-      
-
-        public BlInvalidDataException(string? message) : base(message)
-        {
-        }
-
-        public BlInvalidDataException(string? message, Exception? innerException) : base(message, innerException)
-        {
-        }
-
-        protected BlInvalidDataException(SerializationInfo info, StreamingContext context) : base(info, context)
-        {
-        }
     }
+
+    public BlInvalidDataException(string? message, Exception? innerException) : base(message, innerException)
+    {
+    }
+
+    protected BlInvalidDataException(SerializationInfo info, StreamingContext context) : base(info, context)
+    {
+    }
+}
 
 [Serializable]
 public class BlInvalidDateException : Exception
@@ -104,21 +104,21 @@ public class BlInvalidDateException : Exception
     {
     }
 }
-    [Serializable]
-    public class BlNotAllTasksAreScheduled : Exception
+[Serializable]
+public class BlNotAllTasksAreScheduled : Exception
+{
+
+
+    public BlNotAllTasksAreScheduled(string? message) : base(message)
     {
-       
-
-        public BlNotAllTasksAreScheduled(string? message) : base(message)
-        {
-        }
-
-        public BlNotAllTasksAreScheduled(string? message, Exception? innerException) : base(message, innerException)
-        {
-        }
-
-        protected BlNotAllTasksAreScheduled(SerializationInfo info, StreamingContext context) : base(info, context)
-        {
-        }
     }
+
+    public BlNotAllTasksAreScheduled(string? message, Exception? innerException) : base(message, innerException)
+    {
+    }
+
+    protected BlNotAllTasksAreScheduled(SerializationInfo info, StreamingContext context) : base(info, context)
+    {
+    }
+}
 

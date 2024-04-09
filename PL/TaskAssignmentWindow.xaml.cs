@@ -74,6 +74,8 @@ namespace PL
                 MessageBox.Show(ex.Message, "project didn't schedule yet", MessageBoxButton.OK, MessageBoxImage.Exclamation);
                 this.Close();
             }
+            this.Close();
+            
             
         }
     }

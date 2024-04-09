@@ -229,6 +229,7 @@ internal class TaskImplementation : ITask
                         Deliverables = boTask.Deliverables,
                         StartDate = Tools.CheckStartDate(boTask),
                         CompleteDate = Tools.CheckCompleteDate(boTask),
+                        
                     });
                 }
 

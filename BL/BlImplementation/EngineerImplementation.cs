@@ -108,19 +108,22 @@ internal class EngineerImplementation : IEngineer
                         );
                     }
                 }
-                  
-                // if the manager or the engineer didn't assign a task for the engineer keep the original active.
-                _dal.Engineer.Update(new DO.Engineer()
+                else
                 {
+                    // if the manager or the engineer didn't assign a task or finish for the engineer keep the original active.
+                    _dal.Engineer.Update(new DO.Engineer()
+                    {
 
-                    ID = boEngineer.Id,
-                    Name = boEngineer.Name,
-                    EMail = boEngineer.Email,
-                    Level = (DO.EngineerExperience)boEngineer.Level, 
-                    Cost = boEngineer.Cost,
-                    Active = _dal.Engineer.Read(boEngineer.Id)!.Active
+                        ID = boEngineer.Id,
+                        Name = boEngineer.Name,
+                        EMail = boEngineer.Email,
+                        Level = (DO.EngineerExperience)boEngineer.Level,
+                        Cost = boEngineer.Cost,
+                        Active = false
+                    }
+                    ) ;
                 }
-                );
+             
             }
             catch (DO.DalNotExistsException ex)
             {

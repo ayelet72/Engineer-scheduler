@@ -82,7 +82,7 @@ namespace PL
 
         private void btnGant_Click(object sender, RoutedEventArgs e)
         {
-
+            new GantWindow().Show();
         }
 
         private void SetStartDateProject_Click(object sender, RoutedEventArgs e)

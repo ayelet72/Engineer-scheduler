@@ -54,14 +54,14 @@ namespace BO
                         Alias = dependsOn.Alias,
                         Status = CalcStatus(dependsOn.Id),
                         Description = dependsOn.Description
-                        
+
                     };
                 })
                 .ToList();
         }
         public static BO.EngineerInTask? CreateEngineerInTask(int id)
         {
-            
+
             DO.Task? temp = _dal.Task.Read(id);
             if (temp != null && temp.EngineerId.HasValue)
             {
@@ -84,7 +84,7 @@ namespace BO
             IEnumerable<BO.Task> tasks = bl.Task.ReadAll();
             bool hasDependency = tasks.Any(item => item.Dependencies?.Any(dep => dep.Id == id) == true);
             return hasDependency;
-           
+
         }
 
         public static void AddDependency(int id, int dependentOnTask)
@@ -98,7 +98,7 @@ namespace BO
             )
             );
         }
-    
+
         public static DateTime? CheckStartDate(BO.Task boTask)
         {
             if (boTask.ScheduledDate > boTask.StartDate)
@@ -113,7 +113,7 @@ namespace BO
         }
 
         public static string ToStringProperty<T>(this T obj, string str = "")
-            //a help method to manage the toString func as property
+        //a help method to manage the toString func as property
         {
 
             foreach (PropertyInfo item in obj!.GetType().GetProperties())
@@ -139,12 +139,12 @@ namespace BO
                 }
             }
             return str;
-        
+
         }
 
         public static DateTime? CheckCompleteDate(Task boTask)
         {
-            if (boTask.StartDate > boTask.CompleteDate || boTask.CompleteDate > bl.EndProject)
+            if (boTask.StartDate > boTask.CompleteDate)
                 throw new BO.BlInvalidDateException($"CompleteDate isn't in the correct span time");
             if (boTask.Dependencies != null)
             {
@@ -157,7 +157,7 @@ namespace BO
             return boTask.CompleteDate;
         }
 
-       
+
         public static TimeSpan? SetRequiredEffortTime(Task boTask)
         // Calculate the possible RequierdEffortTime
         {
@@ -180,7 +180,7 @@ namespace BO
         static IEnumerable<BO.Task> OrderByUnassingedTasks(List<BO.Task> tasks)
         // A function that sorting by tasks not assigned an engineer
         {
-            return tasks.OrderBy(t => t.Engineer==null);
+            return tasks.OrderBy(t => t.Engineer == null);
         }
     }
 }

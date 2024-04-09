@@ -7,8 +7,9 @@
         mc:Ignorable="d"
         Title="EngineerViewWindow" Height="450" Width="800"
         DataContext="{Binding RelativeSource={RelativeSource Mode=Self}}" >
-    <Grid>
+    <Grid DataContext="{Binding RelativeSource={RelativeSource AncestorType=Window}}">
         <TextBox Text="{Binding CurrentTask ,Mode=OneWay}" IsReadOnly="False" />
         <Button Content="assignment task" Visibility="{Binding IsButtonVisibile, Mode=TwoWay}" Click="AssignTask_Click" Margin="282,357,282,0"/>
+        <Button Content="Done" Visibility="{Binding IsButtonDoneVisibile, Mode=TwoWay}" Click="DoneTask_Click" Margin="32,307,624,69"/>
     </Grid>
 </Window>

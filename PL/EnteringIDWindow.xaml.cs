@@ -69,12 +69,10 @@ namespace PL
             EngineerID += e.Text;
         }
 
-        //private void PasswordBox_PasswordChanged(object sender, RoutedEventArgs e)
-        //{
-        //    PasswordBox passwordBox = (PasswordBox)sender;
-        //    string engineerId = passwordBox.Password;
-
-        //}
+        private void PasswordBox_PasswordChanged(object sender, RoutedEventArgs e)
+        {
+            EngineerID = (sender as PasswordBox).Password;
+        }
 
 
     }

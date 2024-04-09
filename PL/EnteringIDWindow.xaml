@@ -9,7 +9,7 @@
     <Grid>
         <StackPanel Margin="10">
             <TextBlock Text="Please enter the Engineer ID:"/>
-            <PasswordBox Margin="0,5" PreviewTextInput="PasswordBox_PreviewTextInput" />
+            <PasswordBox Margin="0,5" PasswordChanged="PasswordBox_PasswordChanged"/>
             <Button Content="Submit"  Click="SubmitButton_Click" Margin="0,10"/>
         </StackPanel>
     </Grid>

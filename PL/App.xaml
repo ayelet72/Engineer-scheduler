@@ -9,7 +9,10 @@
         <local:EngineersCollection x:Key="EngineersCollectionKey"/>
         <local:ConvertIdToContent x:Key="ConvertIdToContentKey"/>
         <local:IdToEnabledConverter x:Key="IdToEnabledConverterKey"/>
-        <!--<local:TaskDetailsConverter x:Key="TaskDetailsConverterKey"/>-->
+        <local:EffotTimeToWidthConverter x:Key="EffotTimeToWidthConverterKey"/>
+        <local:StartDateToMarginConverter x:Key="StartDateToMarginConverterKey"/>
+        <local:ColorConverter x:Key="ColorConverterKey"/>
+       
         
         <Style x:Key="ButtonMain"
            TargetType="Button">

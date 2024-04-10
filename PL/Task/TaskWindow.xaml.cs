@@ -78,12 +78,17 @@ namespace PL.Task
         public static readonly DependencyProperty SelectedEngineerProperty =
          DependencyProperty.Register("SelectedEngineer", typeof(BO.Engineer), typeof(TaskWindow));
 
-        public TaskWindow(int id = 0 )
+        public TaskWindow(int id = 0)
         {
-           List<BO.Task> temp = s_bl.Task.ReadAll().ToList();
-            UpDependencies = temp.Select(item => new SelectTask{ task = item, IsSelected=false }).ToList();
+            List<BO.Task> temp = s_bl.Task.ReadAll().ToList();
+            UpDependencies = temp.Select(item => new SelectTask { task = item, IsSelected = false }).ToList();
             SelectedEngineer = null;
-            Enable = true;
+            if (s_bl.StartProject == DateTime.MinValue)
+                Enable = true;
+            else
+                Enable = false;
+
+
 
             try
             {
@@ -91,7 +96,7 @@ namespace PL.Task
 
                 CurrentTask = (id != 0) ? s_bl.Task.Read(id)! : new BO.Task() { Id = 0, Description = " ", Alias = " ", Complexity = BO.EngineerExperience.None, Remarks = " ", RequiredEffortTime = null, Engineer = null, Deliverables = " " };
                 //SelectedEngineer= (CurrentTask.Engineer!=null) ? s_bl.Engineer.Read(CurrentTask.Engineer.Id)! : new BO.Engineer() { Id = 0, Name = " ", Email = " ", Level = BO.EngineerExperience.None };
-                if (id != 0 && CurrentTask.Dependencies!=null)
+                if (id != 0 && CurrentTask.Dependencies != null)
                 {
                     foreach (var dependency in CurrentTask.Dependencies)
                     {
@@ -103,7 +108,7 @@ namespace PL.Task
                     }
                 }
             }
-           
+
             catch (BO.BlDoesNotExistException ex)
             {
                 CurrentTask = null;
@@ -118,7 +123,7 @@ namespace PL.Task
 
             InitializeComponent();
         }
-        public TaskWindow(int id = 0, BO.Engineer? engineer=null)
+        public TaskWindow(int id = 0, BO.Engineer? engineer = null)
         {
 
             SelectedEngineer = engineer!;
@@ -128,7 +133,7 @@ namespace PL.Task
                 // if id isn't a deafult create a new task . else, find the exsit engineer with the same id (Read Method)
 
                 CurrentTask = (id != 0) ? s_bl.Task.Read(id)! : new BO.Task() { Id = 0, Description = " ", Alias = " ", Complexity = BO.EngineerExperience.None, Remarks = " ", RequiredEffortTime = null, Engineer = null, Deliverables = " " };
-              
+
             }
 
             catch (BO.BlDoesNotExistException ex)
@@ -161,12 +166,12 @@ namespace PL.Task
                 })
                 .ToList();
             }
-            
+
             if ((sender as Button)!.Content.ToString() == "Add")
             {
                 try
                 {
-                    
+
                     int? id = s_bl.Task.Create(CurrentTask!);
                     MessageBox.Show($"Task {id} was successfully added!", "Success", MessageBoxButton.OK, MessageBoxImage.Exclamation);
                     this.Close();
@@ -187,7 +192,7 @@ namespace PL.Task
                         SelectedEngineer.Task = new BO.TaskInEngineer { Id = CurrentTask.Id, Alias = CurrentTask.Alias };
                         s_bl.Engineer.Update(SelectedEngineer);
                     }
-                        
+
                     s_bl.Task.Update(CurrentTask!);
                     MessageBox.Show($"Task {CurrentTask!.Id} was successfully Update!", "Success", MessageBoxButton.OK, MessageBoxImage.Exclamation);
                     this.Close();
@@ -202,25 +207,25 @@ namespace PL.Task
 
         private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            
+
             if (sender is ComboBox comboBox)
             {
                 if (comboBox.SelectedItem != null)
                 {
                     SelectedEngineer = (BO.Engineer)comboBox.SelectedItem;
                 }
- 
+
             }
         }
-     
+
 
 
 
     }
-    
-   
+
+
 }
-    
+
 
 
 

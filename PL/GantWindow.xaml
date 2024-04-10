@@ -7,18 +7,20 @@
         mc:Ignorable="d"
         Title="GantWindow" Height="450" Width="800"
         DataContext="{Binding RelativeSource={RelativeSource Mode=Self}}">
-    <Grid Background="Beige">
-        <ItemsControl ItemsSource="{Binding GanttList}">
-            <ItemsControl.ItemTemplate>
-                <DataTemplate>
-                    <Grid Margin="1" HorizontalAlignment="Left">
-                        <TextBlock Text="{Binding Alias}" Width="100" Background="Green" HorizontalAlignment="Left"/>
-                        <Rectangle Fill="{Binding Status, Converter= {StaticResource ColorConverterKey}}" Width="{Binding RequiredEffortTime, Converter={StaticResource EffotTimeToWidthConverterKey}}" Height="20"
+    <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+        <Grid Background="Beige">
+            <ItemsControl ItemsSource="{Binding GanttList}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Margin="1" HorizontalAlignment="Left">
+                            <TextBlock Text="{Binding Alias}" Width="100" Background="Green" HorizontalAlignment="Left"/>
+                            <Rectangle Fill="{Binding Status, Converter= {StaticResource ColorConverterKey}}" Width="{Binding RequiredEffortTime, Converter={StaticResource EffotTimeToWidthConverterKey}}" Height="20"
                                    Margin="{Binding ScheduledDate, Converter={StaticResource StartDateToMarginConverterKey}}"
                                    StrokeThickness="1" Stroke="Black"/>
-                    </Grid>
-                </DataTemplate>
-            </ItemsControl.ItemTemplate>
-        </ItemsControl>
-    </Grid>
+                        </Grid>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </Grid>
+    </ScrollViewer>
 </Window>

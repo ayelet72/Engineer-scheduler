@@ -44,11 +44,11 @@ namespace PL
         {
             InitializeComponent();
         }
-        public TaskAssignmentWindow(int id=0)
+        public TaskAssignmentWindow(int id = 0)
         {
             CurrentEngineer = s_bl.Engineer.Read(id);
             TaskList = s_bl.Task.ReadAll(item => (item.EngineerId == null && item.Complexity <= (DO.EngineerExperience)CurrentEngineer!.Level));
-            TaskList = TaskList.Where(task => (task.Dependencies == null || task.Dependencies!.All(dep => s_bl.Task.Read(dep.Id).CompleteDate != null)) && task.ScheduledDate<= s_bl.Clock);
+            TaskList = TaskList.Where(task => (task.Dependencies == null || task.Dependencies!.All(dep => s_bl.Task.Read(dep.Id).CompleteDate != null)) && task.ScheduledDate <= s_bl.Clock);
             ;
             InitializeComponent();
         }
@@ -70,13 +70,13 @@ namespace PL
             }
             catch (BO.BlIsScheduled ex)
             {
-               
+
                 MessageBox.Show(ex.Message, "project didn't schedule yet", MessageBoxButton.OK, MessageBoxImage.Exclamation);
                 this.Close();
             }
             this.Close();
-            
-            
+
+
         }
     }
 }

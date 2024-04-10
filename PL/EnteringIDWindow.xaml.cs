@@ -21,7 +21,7 @@ namespace PL
     /// </summary>
     public partial class EnteringIDWindow : Window
     {
-       
+
         public static readonly DependencyProperty EngineerIDProperty =
         DependencyProperty.Register("EngineerID", typeof(string), typeof(EnteringIDWindow), new FrameworkPropertyMetadata(string.Empty, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
 
@@ -30,13 +30,13 @@ namespace PL
             get { return (string)GetValue(EngineerIDProperty); }
             set { SetValue(EngineerIDProperty, value); }
         }
-        
+
         public EnteringIDWindow()
         {
             InitializeComponent();
             DataContext = this;
-            
-           
+
+
         }
 
         static readonly BlApi.IBl s_bl = BlApi.Factory.Get();
@@ -71,7 +71,7 @@ namespace PL
 
         private void PasswordBox_PasswordChanged(object sender, RoutedEventArgs e)
         {
-            EngineerID = (sender as PasswordBox).Password;
+            EngineerID = (sender as PasswordBox)!.Password;
         }
 
 

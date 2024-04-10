@@ -22,7 +22,7 @@ namespace PL.Task
     public partial class TaskListWindow : Window
     {
         static readonly BlApi.IBl s_bl = BlApi.Factory.Get();
-       
+
         public IEnumerable<BO.Task> TaskList
         {
             get { return (IEnumerable<BO.Task>)GetValue(TaskListProperty); }
@@ -54,35 +54,35 @@ namespace PL.Task
             TaskList = s_bl?.Task.ReadAll()!;
         }
 
-      
-        
-        
+
+
+
 
         private void btnAdd_Click(object sender, RoutedEventArgs e)
         {
-            
-                new TaskWindow(0).ShowDialog();
-                TaskList = s_bl.Task.ReadAll();
-  
+
+            new TaskWindow(0).ShowDialog();
+            TaskList = s_bl.Task.ReadAll();
+
         }
 
-    
+
 
         private void TaskList_DoubleClick(object sender, MouseButtonEventArgs e)
         {
-            
-                BO.Task? task = (sender as ListView)?.SelectedItem as BO.Task;
-                if (task != null)
-                {
-                    TaskWindow taskWindow = new TaskWindow(task.Id);
-                    taskWindow.ShowDialog();
-                    TaskList = s_bl.Task.ReadAll();
 
-                }
-            
+            BO.Task? task = (sender as ListView)?.SelectedItem as BO.Task;
+            if (task != null)
+            {
+                TaskWindow taskWindow = new TaskWindow(task.Id);
+                taskWindow.ShowDialog();
+                TaskList = s_bl.Task.ReadAll();
+
+            }
+
         }
 
-  
+
 
         private void cbSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -95,7 +95,7 @@ namespace PL.Task
 
         }
     }
-   
+
 
 
 }

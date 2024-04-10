@@ -5,11 +5,56 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL" xmlns:system="http://schemas.microsoft.com/winfx/2009/xaml"
         mc:Ignorable="d"
-        Title="EngineerViewWindow" Height="450" Width="800"
+        Title="EngineerViewWindow" Height="350" Width="300"
         DataContext="{Binding RelativeSource={RelativeSource Mode=Self}}" >
+
     <Grid DataContext="{Binding RelativeSource={RelativeSource AncestorType=Window}}">
-        <TextBox Text="{Binding CurrentTask ,Mode=OneWay}" IsReadOnly="False" />
-        <Button Content="assignment task" Visibility="{Binding IsButtonVisibile, Mode=TwoWay}" Click="AssignTask_Click" Margin="282,357,282,0"/>
-        <Button Content="Done" Visibility="{Binding IsButtonDoneVisibile, Mode=TwoWay}" Click="DoneTask_Click" Margin="32,307,624,69"/>
+        <Grid.Background>
+            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                <GradientStop Color="#FF77DB35"/>
+                <GradientStop Color="White" Offset="1"/>
+            </LinearGradientBrush>
+        </Grid.Background>
+
+        <Grid Visibility="{Binding IsButtonDoneVisibile}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Label Content="Id:" HorizontalAlignment="Left" Grid.Row="0"/>
+            <TextBlock Text="{Binding CurrentTask.Id}" Grid.Row="0" Margin="100,0,0,0"/>
+
+            <Label Content="Alias:" HorizontalAlignment="Left" Grid.Row="1"/>
+            <TextBlock Text="{Binding CurrentTask.Alias}"  Grid.Row="1"  Margin="100,0,0,0"/>
+
+            <Label Content="Description:" HorizontalAlignment="Left" Grid.Row="2"/>
+            <TextBlock Text="{Binding CurrentTask.Description}"  Grid.Row="2"  Margin="100,0,0,0" TextWrapping="Wrap"/>
+
+            <Label Content="Remarks:" HorizontalAlignment="Left" Grid.Row="3"/>
+            <TextBlock Text="{Binding CurrentTask.Remarks}" Grid.Row="3"  Margin="100,0,0,0" TextWrapping="Wrap"/>
+
+            <Label Content="Deliverables:"  Grid.Row="4"/>
+            <TextBlock Text="{Binding CurrentTask.Deliverables}" Grid.Row="4"  Margin="100,0,0,0" TextWrapping="Wrap"/>
+
+            <Label Content="Complexity:"  Grid.Row="5"/>
+            <TextBlock Text="{Binding CurrentTask.Complexity}" Grid.Row="5"  Margin="100,0,0,0"/>
+
+            <Label Content="Required&#xD;&#xA;Effort Time:" Grid.Row="6"/>
+            <TextBlock Text="{Binding CurrentTask.RequiredEffortTime}" Grid.Row="6"  Margin="100,0,0,0"/>
+
+            <Button Content="Done" Click="DoneTask_Click" Width="200" Height="75" Margin="5" Grid.Row="7" VerticalAlignment="Center" Style="{StaticResource CustomButtonStyle}"/>
+        </Grid>
+
+        <Grid Visibility="{Binding IsButtonVisibile}">
+            <TextBlock Text="No task assigned" VerticalAlignment="Top" HorizontalAlignment="Center"
+                       FontSize="20" FontWeight="SemiBold" FontStyle="Oblique"/>
+            <Button Content="assignment task" Click="AssignTask_Click" Width="200" Height="75" VerticalAlignment="Center" Margin="5" Style="{StaticResource CustomButtonStyle}"/>
+        </Grid>
     </Grid>
 </Window>

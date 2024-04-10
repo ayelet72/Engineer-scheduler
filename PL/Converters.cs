@@ -138,11 +138,11 @@ class ColorConverter : IValueConverter
         {
             
             if ((BO.Status)value == BO.Status.Scheduled) 
-                return Brushes.Red;
+                return Brushes.LightBlue;
             if ((BO.Status)value == BO.Status.OnTrack)
-                return Brushes.LightYellow;
-            if ((BO.Status)value == BO.Status.Scheduled)
-                return Brushes.LightSalmon;
+                return Brushes.LightPink;
+            if ((BO.Status)value == BO.Status.Done)
+                return Brushes.Green;
         }
         return 0;
     }

@@ -15,28 +15,29 @@ internal class EngineerImplementation : IEngineer
     public int Create(BO.Engineer boEngineer)
     // a function that creates an engineer
     {
-        
-        if (boEngineer.Id > 0 && boEngineer.Name != null&& boEngineer.Email!=null&& boEngineer.Cost>0)
+
+        if (boEngineer.Id > 0 && boEngineer.Name != null && boEngineer.Email != null && boEngineer.Cost > 0)
         {
-            try {
-                    int numId = _dal.Engineer.Create(new DO.Engineer()
-                    {
+            try
+            {
+                int numId = _dal.Engineer.Create(new DO.Engineer()
+                {
 
-                        ID = boEngineer.Id,
-                        Name = boEngineer.Name,
-                        EMail = boEngineer.Email,
-                        Level = (DO.EngineerExperience)boEngineer.Level,
-                        Cost = boEngineer.Cost
-                    }
-                    );
+                    ID = boEngineer.Id,
+                    Name = boEngineer.Name,
+                    EMail = boEngineer.Email,
+                    Level = (DO.EngineerExperience)boEngineer.Level,
+                    Cost = boEngineer.Cost
+                }
+                );
 
-                return numId;  
+                return numId;
             }
             catch (DO.DalExistsException ex)
             {
                 throw new BO.BlAlreadyExistsException($"Engineer with ID={boEngineer.Id} already exists", ex);
             }
-            
+
         }
         else
             throw new BO.BlInvalidDataException($"Engineer with ID={boEngineer.Id} invalid");
@@ -50,7 +51,7 @@ internal class EngineerImplementation : IEngineer
         DO.Engineer doEngineer = _dal.Engineer.Read(id)!;
 
         //Engineer that is active or already finish a task cannot be deleted
-        if (boEngineer.Task != null || doEngineer.Active==true)
+        if (boEngineer.Task != null || doEngineer.Active == true)
             throw new BO.BlCannotBeDeletedException($"Engineer with ID={boEngineer.Id} cannot be deleted");
 
         //delete engineer from the data base 
@@ -58,11 +59,11 @@ internal class EngineerImplementation : IEngineer
         {
             _dal.Engineer.Delete(id);
         }
-        catch(DO.DalNotExistsException ex)
+        catch (DO.DalNotExistsException ex)
         {
             throw new BlDoesNotExistException($"Engineer with id={id} isn't exsit", ex);
         }
-        
+
     }
     // a function that deletes the engineer
     public void Update(BO.Engineer boEngineer)
@@ -71,16 +72,17 @@ internal class EngineerImplementation : IEngineer
         if (_dal.Engineer.Read(boEngineer.Id) == null)
             throw new BO.BlDoesNotExistException($"Engineer with ID={boEngineer.Id} does Not exist");
 
-        if (boEngineer.Name != null && boEngineer.Email != null && boEngineer.Cost > 0 && 
-            (_dal.Engineer.Read(boEngineer.Id)!).Level<= (DO.EngineerExperience)boEngineer.Level && (int)boEngineer.Level<5)
-            
+        if (boEngineer.Name != null && boEngineer.Email != null && boEngineer.Cost > 0 &&
+            (_dal.Engineer.Read(boEngineer.Id)!).Level <= (DO.EngineerExperience)boEngineer.Level && (int)boEngineer.Level < 5)
+
         {
-            
-            
+
+
 
             //if there is an update in the Task of the Engineer, update the task only if it haven't done yet
-            try {
-                if(boEngineer.Task!=null)
+            try
+            {
+                if (boEngineer.Task != null)
                 {
                     DO.Task? task = _dal.Task.Read(boEngineer.Task.Id);
 
@@ -121,9 +123,9 @@ internal class EngineerImplementation : IEngineer
                         Cost = boEngineer.Cost,
                         Active = false
                     }
-                    ) ;
+                    );
                 }
-             
+
             }
             catch (DO.DalNotExistsException ex)
             {
@@ -131,7 +133,7 @@ internal class EngineerImplementation : IEngineer
             }
         }
         else
-            throw new BO.BlInvalidDataException($"Engineer with ID={boEngineer.Id} invalid");
+            throw new BO.BlInvalidDataException($"Cannot update engineer with ID={boEngineer.Id} ");
 
     }
     public BO.Engineer Read(int id)
@@ -141,7 +143,7 @@ internal class EngineerImplementation : IEngineer
         DO.Engineer? doEngineer = _dal.Engineer.Read(id);
         if (doEngineer == null)
             throw new BO.BlDoesNotExistException($"Engineer with ID={id} does Not exist");
-        if(doEngineer.Active==true)
+        if (doEngineer.Active == true)
         {
             DO.Task task = _dal.Task.ReadAll().FirstOrDefault(t => t.EngineerId == doEngineer.ID)!;
             return new BO.Engineer()
@@ -151,7 +153,7 @@ internal class EngineerImplementation : IEngineer
                 Email = doEngineer.EMail,
                 Level = (BO.EngineerExperience)doEngineer.Level,
                 Cost = doEngineer.Cost,
-                Task= new TaskInEngineer { Alias=task.Alias,Id=task.Id}
+                Task = new TaskInEngineer { Alias = task.Alias, Id = task.Id }
             };
         }
         else
@@ -165,7 +167,7 @@ internal class EngineerImplementation : IEngineer
                 Cost = doEngineer.Cost
             };
         }
-       
+
 
     }
     // a function that returns an IEnumerable engineers
@@ -177,7 +179,7 @@ internal class EngineerImplementation : IEngineer
             return (from item in _dal.Engineer.ReadAll()
                     select new BO.Engineer
                     {
-                        Id =item.ID,
+                        Id = item.ID,
                         Name = item.Name,
                         Email = item.EMail,
                         Level = (BO.EngineerExperience)item.Level,
@@ -215,10 +217,9 @@ internal class EngineerImplementation : IEngineer
 
     }
 
-      
+
 
 }
 
-    
 
-        
+

@@ -21,7 +21,7 @@ namespace PL.Engineer
     public partial class EngineerWindow : Window
     {
         static readonly BlApi.IBl s_bl = BlApi.Factory.Get();
-       
+
         public BO.Engineer? CurrentEngineer
 
         {
@@ -32,30 +32,23 @@ namespace PL.Engineer
         public static readonly DependencyProperty CurrentEngineerProperty =
             DependencyProperty.Register("CurrentEngineer", typeof(BO.Engineer), typeof(EngineerWindow), new PropertyMetadata(null));
 
-        
-        public  EngineerWindow(int id = 0)
+
+        public EngineerWindow(int id = 0)
         {
             InitializeComponent();
             try
             {
                 // if id isn't a deafult create a new engineer . else, find the exsit engineer with the same id (Read Method)
-
                 CurrentEngineer = (id != 0) ? s_bl.Engineer.Read(id)! : new BO.Engineer() { Id = 0, Name = " ", Email = " ", Level = BO.EngineerExperience.None };
             }
-            catch(BO.BlDoesNotExistException ex)
-            {
-                CurrentEngineer = null;
-                MessageBox.Show(ex.Message, "Fail", MessageBoxButton.OK, MessageBoxImage.Exclamation);
-                this.Close();
-            }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Fail", MessageBoxButton.OK, MessageBoxImage.Exclamation);
             }
         }
         private void btnAddUpdate_Click(object sender, RoutedEventArgs e)
         {
-            if((sender as Button)!.Content.ToString()=="Add")
+            if ((sender as Button)!.Content.ToString() == "Add")
             {
                 try
                 {
@@ -64,7 +57,7 @@ namespace PL.Engineer
                     MessageBox.Show($"Engineer {id} was successfully added!", "Success", MessageBoxButton.OK, MessageBoxImage.Exclamation);
                     this.Close();
                 }
-                catch(BO.BlAlreadyExistsException ex)
+                catch (Exception ex)
                 {
                     MessageBox.Show(ex.Message, "Operation Fail", MessageBoxButton.OK, MessageBoxImage.Exclamation);
                 }
@@ -73,11 +66,11 @@ namespace PL.Engineer
             {
                 try
                 {
-                     s_bl.Engineer.Update(CurrentEngineer!);
+                    s_bl.Engineer.Update(CurrentEngineer!);
                     MessageBox.Show($"Engineer {CurrentEngineer!.Id} was successfully Update!", "Success", MessageBoxButton.OK, MessageBoxImage.Exclamation);
                     this.Close();
                 }
-                catch (BO.BlAlreadyExistsException ex)
+                catch (Exception ex)
                 {
                     MessageBox.Show(ex.Message, "Operation Fail", MessageBoxButton.OK, MessageBoxImage.Exclamation);
                 }

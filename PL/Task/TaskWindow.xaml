@@ -6,8 +6,9 @@
         xmlns:local="clr-namespace:PL.Task"
         mc:Ignorable="d"
         Title="TaskWindow" Height="410" Width="563"
+        ResizeMode="CanMinimize"
        DataContext="{Binding RelativeSource={RelativeSource Mode=Self}}" >
-    <Grid Style="{StaticResource CustomGridBackgroundStyle}" Margin="0,-21,0,0" HorizontalAlignment="Center" Width="544" Height="421" VerticalAlignment="Top">
+    <Grid Style="{StaticResource CustomGridBackgroundStyle}" >
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition/>
@@ -37,15 +38,15 @@
             <TextBox Style="{StaticResource CustomTextBoxStyle}" Text="{Binding CurrentTask.Alias, Mode=TwoWay,NotifyOnValidationError=true,  ValidatesOnExceptions=true}" 
                      Grid.Column="1" IsEnabled="{Binding Enable}" Grid.Row="1" Margin="85,10,270,29"/>
 
-            <Label Content="Description:" Grid.Column="0" Grid.Row="2" Margin="3,2,306,27" Grid.ColumnSpan="2" RenderTransformOrigin="0.5,0.5"/>
+            <Label Content="Description:" Grid.Column="0" Grid.Row="2"  Grid.ColumnSpan="2" RenderTransformOrigin="0.5,0.5"/>
             <TextBox IsEnabled="{Binding Enable}" Style="{StaticResource CustomTextBoxStyle}" Text="{Binding CurrentTask.Description, Mode=TwoWay,NotifyOnValidationError=true,  ValidatesOnExceptions=true}" Grid.Column="1" Grid.Row="2" Margin="85,10,270,29"/>
 
 
 
-            <Label Content="Remarks:" Grid.Column="0" Grid.Row="3" Margin="3,2,306,27" Grid.ColumnSpan="2"/>
+            <Label Content="Remarks:" Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="2"/>
             <TextBox Style="{StaticResource CustomTextBoxStyle}" Text="{Binding CurrentTask.Remarks, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Column="1" Grid.Row="3" Margin="85,10,270,29"/>
 
-            <Label Content="Deliverables:" Grid.Column="0" Grid.Row="4" Margin="3,2,306,27" Grid.ColumnSpan="2"/>
+            <Label Content="Deliverables:" Grid.Column="0" Grid.Row="4"  Grid.ColumnSpan="2"/>
             <TextBox Style="{StaticResource CustomTextBoxStyle}" Text="{Binding CurrentTask.Deliverables, Mode=TwoWay,NotifyOnValidationError=true,  ValidatesOnExceptions=true}" Grid.Column="1" Grid.Row="3" Margin="83,79,273,40" Grid.RowSpan="2"/>
 
             <Label Content="Complexity:" Grid.Column="0" Grid.Row="1" Margin="240,3,69,25" Grid.ColumnSpan="2" RenderTransformOrigin="0.505,1.019"/>
@@ -60,7 +61,7 @@
             <TextBox Style="{StaticResource CustomTextBoxStyle}" Text="{Binding SelectedEngineer.Name, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" IsEnabled="False"  Grid.Column="1" Margin="333,80,22,41" Grid.RowSpan="2" Grid.Row="1"/>
 
             <Label Content="Dependencies:" Grid.Column="0" Grid.Row="3" Margin="240,1,69,26" Grid.ColumnSpan="2" RenderTransformOrigin="0.505,1.019"/>
-            <ListBox ItemsSource="{Binding UpDependencies}" IsEnabled="{Binding Enable}" Grid.Column="1" Grid.Row="2" Margin="334,75,22,27" Grid.RowSpan="2" >
+            <ListBox ItemsSource="{Binding UpDependencies}" IsEnabled="{Binding Enable}" Grid.Column="1" Grid.Row="2" Margin="334,75,22,27" Grid.RowSpan="3" Height="100" >
                 <ListBox.ItemTemplate>
                     <DataTemplate>
 
@@ -72,25 +73,11 @@
         </Grid>
 
 
-        <Button FontSize="20" Grid.Row="1" Margin="128,376,128,0"
+        <Button FontSize="20" Grid.Row="1" VerticalAlignment="Bottom" Margin="5,0,5,10"
                 Style="{StaticResource CustomButtonStyle}"
                 Content="{Binding CurrentTask.Id , Mode=OneTime, Converter={StaticResource ConvertIdToContentKey}}"
-                Click="btnAddUpdateClick" RenderTransformOrigin="0.5,0.5" Height="31" VerticalAlignment="Top" Grid.RowSpan="2"/>
+                Click="btnAddUpdateClick" RenderTransformOrigin="0.5,0.5" Height="31" Grid.RowSpan="2"/>
 
     </Grid>
 </Window>
-    
-<!--<Label Content="Engineer" Grid.Column="1" Grid.Row="1" Margin="248,80,51,69" Grid.RowSpan="3"/>
-           <ComboBox ItemsSource="{Binding Engineers}" Grid.Column="1" Grid.Row="1" Margin="333,74,22,50" Grid.RowSpan="2" SelectionChanged="ComboBox_SelectionChanged">
-               <ComboBox.ItemTemplate>
-                   <DataTemplate>
-                       <StackPanel Orientation="Horizontal">
-                           <TextBlock Text="{Binding Name}"/>
-                           <TextBlock Text=" : "/>
-                           
 
-                           <TextBlock Text="{Binding Id}"/>
-                       </StackPanel>
-                   </DataTemplate>
-               </ComboBox.ItemTemplate>
-           </ComboBox>-->

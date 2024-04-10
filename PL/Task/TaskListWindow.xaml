@@ -37,6 +37,7 @@
                     <GridViewColumn Header="Task Description" DisplayMemberBinding="{Binding Description}" />
                     <GridViewColumn Header="Task Scheduled Date" DisplayMemberBinding="{Binding ScheduledDate, TargetNullValue='not scheduled'}" />
                     <GridViewColumn Header="Task Complexity" DisplayMemberBinding="{Binding Complexity}" />
+                    <GridViewColumn Header="Task Status" DisplayMemberBinding="{Binding Status}" />
                     <GridViewColumn Header="Task`s enginner" DisplayMemberBinding="{Binding Engineer, TargetNullValue=none }"/>
                 </GridView>
             </ListView.View>

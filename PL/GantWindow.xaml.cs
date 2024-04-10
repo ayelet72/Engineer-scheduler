@@ -24,4 +24,4 @@ public partial class GantWindow : Window
         GanttList = s_bl.Task.ReadAll();
         InitializeComponent();
     }
-}x
+}

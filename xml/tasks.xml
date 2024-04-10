@@ -279,5 +279,6 @@
     <DeadlineDate xsi:nil="true" />
     <CompleteDate xsi:nil="true" />
     <RequiredEffortTime>P12D</RequiredEffortTime>
+    <Remarks>lalala</Remarks>
   </Task>
 </ArrayOfTask>

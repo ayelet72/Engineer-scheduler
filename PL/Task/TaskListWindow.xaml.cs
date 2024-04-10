@@ -52,6 +52,7 @@ namespace PL.Task
                 IsButtonVisibile = Visibility.Visible;
             InitializeComponent();
             TaskList = s_bl?.Task.ReadAll()!;
+            TaskList = TaskList.OrderBy(task => task.Id);
         }
 
 
@@ -77,6 +78,8 @@ namespace PL.Task
                 TaskWindow taskWindow = new TaskWindow(task.Id);
                 taskWindow.ShowDialog();
                 TaskList = s_bl.Task.ReadAll();
+                TaskList = TaskList.OrderBy(task => task.Id);
+
 
             }
 

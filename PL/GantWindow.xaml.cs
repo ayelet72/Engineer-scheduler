@@ -22,6 +22,7 @@ public partial class GantWindow : Window
     public GantWindow()
     {
         GanttList = s_bl.Task.ReadAll();
+        GanttList = GanttList.OrderBy(task => task.Id);
         InitializeComponent();
     }
 }

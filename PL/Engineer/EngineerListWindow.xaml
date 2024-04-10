@@ -36,7 +36,6 @@
                     <GridViewColumn Header="Engineer name" DisplayMemberBinding="{Binding Name}"/>
                     <GridViewColumn Header="Engineer level" DisplayMemberBinding="{Binding Level}"/>
                     <GridViewColumn Header="Engineer cost" DisplayMemberBinding="{Binding Cost}"/>
-                    <GridViewColumn Header="Task in Engineer" DisplayMemberBinding="{Binding Task.Alias}"/>
                 </GridView>
             </ListView.View>
         </ListView>

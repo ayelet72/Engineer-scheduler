@@ -47,8 +47,10 @@
 
             <Label Content="Required&#xD;&#xA;Effort Time:" Grid.Row="6"/>
             <TextBlock Text="{Binding CurrentTask.RequiredEffortTime}" Grid.Row="6"  Margin="100,0,0,0"/>
+            <Label Content="Start Date:" Grid.Row="7"/>
+            <TextBlock Text="{Binding CurrentTask.StartDate}" Grid.Row="7"  Margin="100,0,0,0"/>
 
-            <Button Content="Done" Click="DoneTask_Click" Width="200" Height="75" Margin="5" Grid.Row="7" VerticalAlignment="Center" Style="{StaticResource CustomButtonStyle}"/>
+            <Button Content="Done" Click="DoneTask_Click" Height="26" Margin="75,48,75,0" Grid.Row="7" VerticalAlignment="Top" Style="{StaticResource CustomButtonStyle}"/>
         </Grid>
 
         <Grid Visibility="{Binding IsButtonVisibile}">
